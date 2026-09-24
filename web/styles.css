@@ -116,3 +116,5 @@ footer { display: flex; justify-content: space-between; gap: 20px; color: var(--
   .section-heading { margin-top: 32px; }
   footer { display: grid; }
 }
+/* Pastikan atribut hidden selalu menang, apa pun class display lain di elemen itu. */
+[hidden] { display: none !important; }
