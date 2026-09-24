@@ -1,3 +1,4 @@
+import json
 import tempfile
 import unittest
 from pathlib import Path
@@ -95,6 +96,29 @@ class AgricultureTrackerTests(unittest.TestCase):
             tracker.ringkasan(path, lines.append)
         self.assertIn("Rp8.000/kg", "\n".join(lines))
         self.assertIn("rata-rata Rp7.500/kg", "\n".join(lines))
+
+    def test_publish_report_writes_json_for_website(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "prices.csv"
+            output = Path(directory) / "harga-panen-report.json"
+            tracker.append_record(
+                path,
+                kabupaten="Gresik",
+                kecamatan="Menganti",
+                desa_kelurahan="Bringkang",
+                komoditas="GABAH",
+                kualitas="GKP Panen (KA 25%)",
+                harga_per_kg=7850,
+                tanggal="2026-09-24",
+            )
+            lines = []
+            tracker.publish_report(path, output, output_fn=lines.append)
+            self.assertTrue(output.exists())
+            payload = json.loads(output.read_text(encoding="utf-8"))
+        self.assertEqual(len(payload["records"]), 1)
+        self.assertEqual(payload["records"][0]["hargaPerKg"], 7850)
+        self.assertEqual(payload["ringkasan"][0]["komoditas"], "GABAH")
+        self.assertIn(str(output), lines[0])
 
 
 if __name__ == "__main__":
