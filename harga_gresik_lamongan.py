@@ -23,6 +23,7 @@ from zoneinfo import ZoneInfo
 ROOT = Path(__file__).resolve().parent
 DEFAULT_FILE = ROOT / "data" / "harga_gresik_lamongan.csv"
 ADMINISTRATIVE_FILE = ROOT / "data" / "administrative-areas.json"
+DEFAULT_REPORT_FILE = ROOT / "data" / "harga-panen-report.json"
 FIELDS = [
     "Tanggal",
     "Kabupaten",
@@ -432,6 +433,71 @@ def ringkasan(path: Path, output_fn: Callable[[str], None] = print) -> None:
         )
 
 
+def build_report(path: Path) -> dict[str, object]:
+    """Susun laporan JSON harga panen untuk ditampilkan di website (terpisah dari sembako)."""
+    records = read_records(path)
+
+    grouped: dict[tuple[str, str], list[dict[str, str]]] = defaultdict(list)
+    for record in records:
+        grouped[(record["Komoditas"], record["Kualitas"])].append(record)
+
+    ringkasan_list: list[dict[str, object]] = []
+    for (komoditas, kualitas), group in grouped.items():
+        latest_date = max(record["Tanggal"] for record in group)
+        latest = next(
+            record for record in reversed(group) if record["Tanggal"] == latest_date
+        )
+        prices = [int(record["Harga_per_Kg"]) for record in group]
+        ringkasan_list.append(
+            {
+                "komoditas": komoditas,
+                "kualitas": kualitas,
+                "hargaTerakhir": int(latest["Harga_per_Kg"]),
+                "tanggalTerakhir": latest["Tanggal"],
+                "lokasiTerakhir": latest["Lokasi"],
+                "kabupaten": latest["Kabupaten"],
+                "rataRata": sum(prices) // len(prices),
+                "jumlahCatatan": len(prices),
+            }
+        )
+    ringkasan_list.sort(key=lambda item: (item["komoditas"], item["kualitas"]))
+
+    record_list = [
+        {
+            "tanggal": record["Tanggal"],
+            "kabupaten": record["Kabupaten"],
+            "kecamatan": record["Kecamatan"],
+            "desaKelurahan": record["Desa_Kelurahan"],
+            "lokasi": record["Lokasi"],
+            "komoditas": record["Komoditas"],
+            "kualitas": record["Kualitas"],
+            "hargaPerKg": int(record["Harga_per_Kg"]),
+            "catatan": record["Catatan"],
+        }
+        for record in sorted(records, key=lambda r: r["Tanggal"], reverse=True)
+    ]
+
+    return {
+        "generatedAt": datetime.now(ZoneInfo("Asia/Jakarta")).isoformat(),
+        "records": record_list,
+        "ringkasan": ringkasan_list,
+    }
+
+
+def publish_report(
+    path: Path,
+    output_path: Path = DEFAULT_REPORT_FILE,
+    output_fn: Callable[[str], None] = print,
+) -> Path:
+    report = build_report(path)
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    output_path.write_text(
+        json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8"
+    )
+    output_fn(f">> Laporan harga panen ditulis ke {output_path} ({len(report['records'])} catatan).")
+    return output_path
+
+
 def menu(
     path: Path,
     input_fn: Callable[[str], str] = input,
@@ -439,7 +505,10 @@ def menu(
 ) -> None:
     init_file(path)
     while True:
-        output_fn("\n1. Tambah Harga  2. Lihat Semua  3. Ringkasan  4. Keluar")
+        output_fn(
+            "\n1. Tambah Harga  2. Lihat Semua  3. Ringkasan  "
+            "4. Terbitkan ke Website  5. Keluar"
+        )
         pilihan = input_fn("Pilih: ").strip()
         if pilihan == "1":
             tambah_harga(path, input_fn, output_fn)
@@ -448,10 +517,12 @@ def menu(
         elif pilihan == "3":
             ringkasan(path, output_fn)
         elif pilihan == "4":
+            publish_report(path, output_fn=output_fn)
+        elif pilihan == "5":
             output_fn("Selesai.")
             return
         else:
-            output_fn("Pilihan tidak valid. Gunakan 1, 2, 3, atau 4.")
+            output_fn("Pilihan tidak valid. Gunakan 1, 2, 3, 4, atau 5.")
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -466,9 +537,14 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "command",
         nargs="?",
-        choices=("menu", "tambah", "lihat", "ringkasan"),
+        choices=("menu", "tambah", "lihat", "ringkasan", "publish"),
         default="menu",
         help="Aksi yang dijalankan; default membuka menu interaktif.",
+    )
+    parser.add_argument(
+        "--output",
+        default=str(DEFAULT_REPORT_FILE),
+        help="Lokasi file JSON hasil 'publish' (dibaca oleh website).",
     )
     return parser
 
@@ -484,6 +560,8 @@ def main() -> int:
         lihat_harga(path)
     elif args.command == "ringkasan":
         ringkasan(path)
+    elif args.command == "publish":
+        publish_report(path, resolve_file(args.output))
     return 0
 
 
