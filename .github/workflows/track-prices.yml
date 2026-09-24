@@ -38,12 +38,19 @@ jobs:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
 
+      - name: Terbitkan laporan harga panen
+        run: |
+          if [ -f data/harga_gresik_lamongan.csv ]; then
+            python harga_gresik_lamongan.py publish
+          fi
+
       - name: Simpan riwayat ke repository
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add data/price-history.csv data/latest-price-report.json
-          git diff --cached --quiet || git commit -m "Update harga sembako"
+          [ -f data/harga-panen-report.json ] && git add data/harga-panen-report.json
+          git diff --cached --quiet || git commit -m "Update harga sembako dan panen"
           git push
 
       - name: Siapkan GitHub Pages
@@ -55,6 +62,7 @@ jobs:
           mkdir -p _site/data
           cp -R web/. _site/
           cp data/latest-price-report.json _site/data/latest-price-report.json
+          [ -f data/harga-panen-report.json ] && cp data/harga-panen-report.json _site/data/harga-panen-report.json
           touch _site/.nojekyll
 
       - name: Unggah artefak Pages
