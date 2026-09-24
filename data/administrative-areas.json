@@ -1,0 +1,5271 @@
+{
+  "version": 2,
+  "source": "https://wilayah.web.id",
+  "source_note": "Sumber: Kepmendagri No 300.2.2-2138 Tahun 2025.",
+  "kabupaten": [
+    {
+      "kode": "3525",
+      "slug": "gresik",
+      "nama": "Kabupaten Gresik",
+      "kecamatan": [
+        {
+          "kode": "352501",
+          "nama": "Dukun",
+          "desa_kelurahan": [
+            {
+              "kode": "3525012001",
+              "nama": "Sawo",
+              "jenis": "desa",
+              "kode_pos": "61155"
+            },
+            {
+              "kode": "3525012002",
+              "nama": "Karangcangkring",
+              "jenis": "desa",
+              "kode_pos": "61155"
+            },
+            {
+              "kode": "3525012003",
+              "nama": "Gedongkedo'an",
+              "jenis": "desa",
+              "kode_pos": "nan"
+            },
+            {
+              "kode": "3525012004",
+              "nama": "Bulangan",
+              "jenis": "desa",
+              "kode_pos": "61155"
+            },
+            {
+              "kode": "3525012005",
+              "nama": "Wonokerto",
+              "jenis": "desa",
+              "kode_pos": "61155"
+            },
+            {
+              "kode": "3525012006",
+              "nama": "Bangeran",
+              "jenis": "desa",
+              "kode_pos": "61155"
+            },
+            {
+              "kode": "3525012007",
+              "nama": "Lowayu",
+              "jenis": "desa",
+              "kode_pos": "61155"
+            },
+            {
+              "kode": "3525012008",
+              "nama": "Petiyin Tunggal",
+              "jenis": "desa",
+              "kode_pos": "61155"
+            },
+            {
+              "kode": "3525012009",
+              "nama": "Tirem Enggal",
+              "jenis": "desa",
+              "kode_pos": "61155"
+            },
+            {
+              "kode": "3525012010",
+              "nama": "Tebuwung",
+              "jenis": "desa",
+              "kode_pos": "61155"
+            },
+            {
+              "kode": "3525012011",
+              "nama": "Dukuh Kembar",
+              "jenis": "desa",
+              "kode_pos": "61155"
+            },
+            {
+              "kode": "3525012012",
+              "nama": "Madumulyorejo",
+              "jenis": "desa",
+              "kode_pos": "61155"
+            },
+            {
+              "kode": "3525012013",
+              "nama": "Mentaras",
+              "jenis": "desa",
+              "kode_pos": "61155"
+            },
+            {
+              "kode": "3525012014",
+              "nama": "Baron",
+              "jenis": "desa",
+              "kode_pos": "61155"
+            },
+            {
+              "kode": "3525012015",
+              "nama": "Jrebeng",
+              "jenis": "desa",
+              "kode_pos": "61155"
+            },
+            {
+              "kode": "3525012016",
+              "nama": "Mojopetung",
+              "jenis": "desa",
+              "kode_pos": "61155"
+            },
+            {
+              "kode": "3525012017",
+              "nama": "Sekargadung",
+              "jenis": "desa",
+              "kode_pos": "61155"
+            },
+            {
+              "kode": "3525012018",
+              "nama": "Ima\"an",
+              "jenis": "desa",
+              "kode_pos": "61155"
+            },
+            {
+              "kode": "3525012019",
+              "nama": "Babakbawo",
+              "jenis": "desa",
+              "kode_pos": "61155"
+            },
+            {
+              "kode": "3525012020",
+              "nama": "Babaksari",
+              "jenis": "desa",
+              "kode_pos": "61155"
+            },
+            {
+              "kode": "3525012021",
+              "nama": "Sambogunung",
+              "jenis": "desa",
+              "kode_pos": "61155"
+            },
+            {
+              "kode": "3525012022",
+              "nama": "Sembungan Kidul",
+              "jenis": "desa",
+              "kode_pos": "61155"
+            },
+            {
+              "kode": "3525012023",
+              "nama": "Sembunganyar",
+              "jenis": "desa",
+              "kode_pos": "61155"
+            },
+            {
+              "kode": "3525012024",
+              "nama": "Kalirejo",
+              "jenis": "desa",
+              "kode_pos": "61155"
+            },
+            {
+              "kode": "3525012025",
+              "nama": "Padang Bandung",
+              "jenis": "desa",
+              "kode_pos": "61155"
+            },
+            {
+              "kode": "3525012026",
+              "nama": "Dukunanyar",
+              "jenis": "desa",
+              "kode_pos": "61155"
+            }
+          ]
+        },
+        {
+          "kode": "352502",
+          "nama": "Balongpanggang",
+          "desa_kelurahan": [
+            {
+              "kode": "3525022001",
+              "nama": "Jombangdelik",
+              "jenis": "desa",
+              "kode_pos": "61173"
+            },
+            {
+              "kode": "3525022002",
+              "nama": "Brangkal",
+              "jenis": "desa",
+              "kode_pos": "61173"
+            },
+            {
+              "kode": "3525022003",
+              "nama": "Ngampel",
+              "jenis": "desa",
+              "kode_pos": "61173"
+            },
+            {
+              "kode": "3525022004",
+              "nama": "Bandungsekaran",
+              "jenis": "desa",
+              "kode_pos": "61173"
+            },
+            {
+              "kode": "3525022005",
+              "nama": "Babatan",
+              "jenis": "desa",
+              "kode_pos": "61173"
+            },
+            {
+              "kode": "3525022006",
+              "nama": "Tanahlandean",
+              "jenis": "desa",
+              "kode_pos": "61173"
+            },
+            {
+              "kode": "3525022007",
+              "nama": "Kedungsumber",
+              "jenis": "desa",
+              "kode_pos": "61173"
+            },
+            {
+              "kode": "3525022008",
+              "nama": "Wonorejo",
+              "jenis": "desa",
+              "kode_pos": "61173"
+            },
+            {
+              "kode": "3525022009",
+              "nama": "Dapet",
+              "jenis": "desa",
+              "kode_pos": "61173"
+            },
+            {
+              "kode": "3525022010",
+              "nama": "Dohoagung",
+              "jenis": "desa",
+              "kode_pos": "61173"
+            },
+            {
+              "kode": "3525022011",
+              "nama": "Mojogede",
+              "jenis": "desa",
+              "kode_pos": "61173"
+            },
+            {
+              "kode": "3525022012",
+              "nama": "Tenggor",
+              "jenis": "desa",
+              "kode_pos": "61173"
+            },
+            {
+              "kode": "3525022013",
+              "nama": "Wahas",
+              "jenis": "desa",
+              "kode_pos": "61173"
+            },
+            {
+              "kode": "3525022014",
+              "nama": "Kedungpring",
+              "jenis": "desa",
+              "kode_pos": "61173"
+            },
+            {
+              "kode": "3525022015",
+              "nama": "Sekarputih",
+              "jenis": "desa",
+              "kode_pos": "61173"
+            },
+            {
+              "kode": "3525022016",
+              "nama": "Pinggir",
+              "jenis": "desa",
+              "kode_pos": "61173"
+            },
+            {
+              "kode": "3525022017",
+              "nama": "Karangsemanding",
+              "jenis": "desa",
+              "kode_pos": "61173"
+            },
+            {
+              "kode": "3525022018",
+              "nama": "Pacuh",
+              "jenis": "desa",
+              "kode_pos": "61173"
+            },
+            {
+              "kode": "3525022019",
+              "nama": "Balongpanggang",
+              "jenis": "desa",
+              "kode_pos": "61173"
+            },
+            {
+              "kode": "3525022020",
+              "nama": "Wotansari",
+              "jenis": "desa",
+              "kode_pos": "61173"
+            },
+            {
+              "kode": "3525022021",
+              "nama": "Pucung",
+              "jenis": "desa",
+              "kode_pos": "61173"
+            },
+            {
+              "kode": "3525022022",
+              "nama": "Klotok",
+              "jenis": "desa",
+              "kode_pos": "61173"
+            },
+            {
+              "kode": "3525022023",
+              "nama": "Ngasin",
+              "jenis": "desa",
+              "kode_pos": "61173"
+            },
+            {
+              "kode": "3525022024",
+              "nama": "Banjaragung",
+              "jenis": "desa",
+              "kode_pos": "61173"
+            },
+            {
+              "kode": "3525022025",
+              "nama": "Ganggang",
+              "jenis": "desa",
+              "kode_pos": "61173"
+            }
+          ]
+        },
+        {
+          "kode": "352503",
+          "nama": "Panceng",
+          "desa_kelurahan": [
+            {
+              "kode": "3525032001",
+              "nama": "Pantenan",
+              "jenis": "desa",
+              "kode_pos": "61156"
+            },
+            {
+              "kode": "3525032002",
+              "nama": "Sumurber",
+              "jenis": "desa",
+              "kode_pos": "61156"
+            },
+            {
+              "kode": "3525032003",
+              "nama": "Siwalan",
+              "jenis": "desa",
+              "kode_pos": "61156"
+            },
+            {
+              "kode": "3525032004",
+              "nama": "Ketanen",
+              "jenis": "desa",
+              "kode_pos": "61156"
+            },
+            {
+              "kode": "3525032005",
+              "nama": "Banyutengah",
+              "jenis": "desa",
+              "kode_pos": "61156"
+            },
+            {
+              "kode": "3525032006",
+              "nama": "Serah",
+              "jenis": "desa",
+              "kode_pos": "61156"
+            },
+            {
+              "kode": "3525032007",
+              "nama": "Surowiti",
+              "jenis": "desa",
+              "kode_pos": "61156"
+            },
+            {
+              "kode": "3525032008",
+              "nama": "Prupuh",
+              "jenis": "desa",
+              "kode_pos": "61156"
+            },
+            {
+              "kode": "3525032009",
+              "nama": "Campurejo",
+              "jenis": "desa",
+              "kode_pos": "61156"
+            },
+            {
+              "kode": "3525032010",
+              "nama": "Sukodono",
+              "jenis": "desa",
+              "kode_pos": "61156"
+            },
+            {
+              "kode": "3525032011",
+              "nama": "Dalegan",
+              "jenis": "desa",
+              "kode_pos": "61156"
+            },
+            {
+              "kode": "3525032012",
+              "nama": "Petung",
+              "jenis": "desa",
+              "kode_pos": "61156"
+            },
+            {
+              "kode": "3525032013",
+              "nama": "Wotan",
+              "jenis": "desa",
+              "kode_pos": "61156"
+            },
+            {
+              "kode": "3525032014",
+              "nama": "Doudo",
+              "jenis": "desa",
+              "kode_pos": "61156"
+            }
+          ]
+        },
+        {
+          "kode": "352504",
+          "nama": "Benjeng",
+          "desa_kelurahan": [
+            {
+              "kode": "3525042001",
+              "nama": "Karangankidul",
+              "jenis": "desa",
+              "kode_pos": "61172"
+            },
+            {
+              "kode": "3525042002",
+              "nama": "Sedapur Klagen",
+              "jenis": "desa",
+              "kode_pos": "61172"
+            },
+            {
+              "kode": "3525042003",
+              "nama": "Deliksumber",
+              "jenis": "desa",
+              "kode_pos": "61172"
+            },
+            {
+              "kode": "3525042004",
+              "nama": "Lundo",
+              "jenis": "desa",
+              "kode_pos": "61172"
+            },
+            {
+              "kode": "3525042005",
+              "nama": "Kalipadang",
+              "jenis": "desa",
+              "kode_pos": "61172"
+            },
+            {
+              "kode": "3525042006",
+              "nama": "Kedungrukem",
+              "jenis": "desa",
+              "kode_pos": "61172"
+            },
+            {
+              "kode": "3525042007",
+              "nama": "Balungtunjung",
+              "jenis": "desa",
+              "kode_pos": "61172"
+            },
+            {
+              "kode": "3525042008",
+              "nama": "Munggugebang",
+              "jenis": "desa",
+              "kode_pos": "61172"
+            },
+            {
+              "kode": "3525042009",
+              "nama": "Balongmojo",
+              "jenis": "desa",
+              "kode_pos": "61172"
+            },
+            {
+              "kode": "3525042010",
+              "nama": "Bulangkulon",
+              "jenis": "desa",
+              "kode_pos": "61172"
+            },
+            {
+              "kode": "3525042011",
+              "nama": "Banter",
+              "jenis": "desa",
+              "kode_pos": "61172"
+            },
+            {
+              "kode": "3525042012",
+              "nama": "Sirnoboyo",
+              "jenis": "desa",
+              "kode_pos": "61172"
+            },
+            {
+              "kode": "3525042013",
+              "nama": "Munggugianti",
+              "jenis": "desa",
+              "kode_pos": "61172"
+            },
+            {
+              "kode": "3525042014",
+              "nama": "Klampok",
+              "jenis": "desa",
+              "kode_pos": "61172"
+            },
+            {
+              "kode": "3525042015",
+              "nama": "Metatu",
+              "jenis": "desa",
+              "kode_pos": "61172"
+            },
+            {
+              "kode": "3525042016",
+              "nama": "Bengkelolor",
+              "jenis": "desa",
+              "kode_pos": "61172"
+            },
+            {
+              "kode": "3525042017",
+              "nama": "Gurangploso",
+              "jenis": "desa",
+              "kode_pos": "61172"
+            },
+            {
+              "kode": "3525042018",
+              "nama": "Kedungsekar",
+              "jenis": "desa",
+              "kode_pos": "61172"
+            },
+            {
+              "kode": "3525042019",
+              "nama": "Dermo",
+              "jenis": "desa",
+              "kode_pos": "61172"
+            },
+            {
+              "kode": "3525042020",
+              "nama": "Jogodalu",
+              "jenis": "desa",
+              "kode_pos": "61172"
+            },
+            {
+              "kode": "3525042021",
+              "nama": "Jatirembe",
+              "jenis": "desa",
+              "kode_pos": "61172"
+            },
+            {
+              "kode": "3525042022",
+              "nama": "Bulurejo",
+              "jenis": "desa",
+              "kode_pos": "61172"
+            },
+            {
+              "kode": "3525042023",
+              "nama": "Punduttrate",
+              "jenis": "desa",
+              "kode_pos": "61172"
+            }
+          ]
+        },
+        {
+          "kode": "352505",
+          "nama": "Duduksampeyan",
+          "desa_kelurahan": [
+            {
+              "kode": "3525052001",
+              "nama": "Panjunan",
+              "jenis": "desa",
+              "kode_pos": "61162"
+            },
+            {
+              "kode": "3525052002",
+              "nama": "Kandangan",
+              "jenis": "desa",
+              "kode_pos": "61162"
+            },
+            {
+              "kode": "3525052003",
+              "nama": "Pandanan",
+              "jenis": "desa",
+              "kode_pos": "61162"
+            },
+            {
+              "kode": "3525052004",
+              "nama": "Tumapel",
+              "jenis": "desa",
+              "kode_pos": "61162"
+            },
+            {
+              "kode": "3525052005",
+              "nama": "Tambakrejo",
+              "jenis": "desa",
+              "kode_pos": "61162"
+            },
+            {
+              "kode": "3525052006",
+              "nama": "Glanggang",
+              "jenis": "desa",
+              "kode_pos": "61162"
+            },
+            {
+              "kode": "3525052007",
+              "nama": "Palebon",
+              "jenis": "desa",
+              "kode_pos": "61162"
+            },
+            {
+              "kode": "3525052008",
+              "nama": "Setrohadi",
+              "jenis": "desa",
+              "kode_pos": "61162"
+            },
+            {
+              "kode": "3525052009",
+              "nama": "Bendungan",
+              "jenis": "desa",
+              "kode_pos": "61162"
+            },
+            {
+              "kode": "3525052010",
+              "nama": "Sumengko",
+              "jenis": "desa",
+              "kode_pos": "61162"
+            },
+            {
+              "kode": "3525052011",
+              "nama": "Wadak Lor",
+              "jenis": "desa",
+              "kode_pos": "61162"
+            },
+            {
+              "kode": "3525052012",
+              "nama": "Wadak Kidul",
+              "jenis": "desa",
+              "kode_pos": "61162"
+            },
+            {
+              "kode": "3525052013",
+              "nama": "Petisbenem",
+              "jenis": "desa",
+              "kode_pos": "61162"
+            },
+            {
+              "kode": "3525052014",
+              "nama": "Duduksampeyan",
+              "jenis": "desa",
+              "kode_pos": "61162"
+            },
+            {
+              "kode": "3525052015",
+              "nama": "Gredek",
+              "jenis": "desa",
+              "kode_pos": "61162"
+            },
+            {
+              "kode": "3525052016",
+              "nama": "Kramat",
+              "jenis": "desa",
+              "kode_pos": "61162"
+            },
+            {
+              "kode": "3525052017",
+              "nama": "Sumari",
+              "jenis": "desa",
+              "kode_pos": "61162"
+            },
+            {
+              "kode": "3525052018",
+              "nama": "Samirplapan",
+              "jenis": "desa",
+              "kode_pos": "61162"
+            },
+            {
+              "kode": "3525052019",
+              "nama": "Kawistowindu",
+              "jenis": "desa",
+              "kode_pos": "61162"
+            },
+            {
+              "kode": "3525052020",
+              "nama": "Kemudi",
+              "jenis": "desa",
+              "kode_pos": "61162"
+            },
+            {
+              "kode": "3525052021",
+              "nama": "Tebaloan",
+              "jenis": "desa",
+              "kode_pos": "61162"
+            },
+            {
+              "kode": "3525052022",
+              "nama": "Tirem",
+              "jenis": "desa",
+              "kode_pos": "61162"
+            },
+            {
+              "kode": "3525052023",
+              "nama": "Ambeng - ambeng Watangrejo",
+              "jenis": "desa",
+              "kode_pos": "61162"
+            }
+          ]
+        },
+        {
+          "kode": "352506",
+          "nama": "Wringinanom",
+          "desa_kelurahan": [
+            {
+              "kode": "3525062001",
+              "nama": "Kepuhklagen",
+              "jenis": "desa",
+              "kode_pos": "61176"
+            },
+            {
+              "kode": "3525062002",
+              "nama": "Sumbergede",
+              "jenis": "desa",
+              "kode_pos": "61176"
+            },
+            {
+              "kode": "3525062003",
+              "nama": "Mondoluku",
+              "jenis": "desa",
+              "kode_pos": "61176"
+            },
+            {
+              "kode": "3525062004",
+              "nama": "Kedunganyar",
+              "jenis": "desa",
+              "kode_pos": "61176"
+            },
+            {
+              "kode": "3525062005",
+              "nama": "Sumberwaru",
+              "jenis": "desa",
+              "kode_pos": "61176"
+            },
+            {
+              "kode": "3525062006",
+              "nama": "Kesambenkulon",
+              "jenis": "desa",
+              "kode_pos": "61176"
+            },
+            {
+              "kode": "3525062007",
+              "nama": "Sumberame",
+              "jenis": "desa",
+              "kode_pos": "61176"
+            },
+            {
+              "kode": "3525062008",
+              "nama": "Sembung",
+              "jenis": "desa",
+              "kode_pos": "61176"
+            },
+            {
+              "kode": "3525062009",
+              "nama": "Sooko",
+              "jenis": "desa",
+              "kode_pos": "61176"
+            },
+            {
+              "kode": "3525062010",
+              "nama": "Wringinanom",
+              "jenis": "desa",
+              "kode_pos": "61176"
+            },
+            {
+              "kode": "3525062011",
+              "nama": "Pedagangan",
+              "jenis": "desa",
+              "kode_pos": "61176"
+            },
+            {
+              "kode": "3525062012",
+              "nama": "Lebanisuko",
+              "jenis": "desa",
+              "kode_pos": "61176"
+            },
+            {
+              "kode": "3525062013",
+              "nama": "Lebaniwaras",
+              "jenis": "desa",
+              "kode_pos": "61176"
+            },
+            {
+              "kode": "3525062014",
+              "nama": "Watestanjung",
+              "jenis": "desa",
+              "kode_pos": "61176"
+            },
+            {
+              "kode": "3525062015",
+              "nama": "Sumengko",
+              "jenis": "desa",
+              "kode_pos": "61176"
+            },
+            {
+              "kode": "3525062016",
+              "nama": "Pasinanlemahputih",
+              "jenis": "desa",
+              "kode_pos": "61176"
+            }
+          ]
+        },
+        {
+          "kode": "352507",
+          "nama": "Ujungpangkah",
+          "desa_kelurahan": [
+            {
+              "kode": "3525072001",
+              "nama": "Pangkahkulon",
+              "jenis": "desa",
+              "kode_pos": "61154"
+            },
+            {
+              "kode": "3525072002",
+              "nama": "Cangaan",
+              "jenis": "desa",
+              "kode_pos": "61154"
+            },
+            {
+              "kode": "3525072003",
+              "nama": "Ngemboh",
+              "jenis": "desa",
+              "kode_pos": "61154"
+            },
+            {
+              "kode": "3525072004",
+              "nama": "Sekapuk",
+              "jenis": "desa",
+              "kode_pos": "61154"
+            },
+            {
+              "kode": "3525072005",
+              "nama": "Gosari",
+              "jenis": "desa",
+              "kode_pos": "61154"
+            },
+            {
+              "kode": "3525072006",
+              "nama": "Banyuurip",
+              "jenis": "desa",
+              "kode_pos": "61154"
+            },
+            {
+              "kode": "3525072007",
+              "nama": "Kebonagung",
+              "jenis": "desa",
+              "kode_pos": "61154"
+            },
+            {
+              "kode": "3525072008",
+              "nama": "Pangkahwetan",
+              "jenis": "desa",
+              "kode_pos": "61154"
+            },
+            {
+              "kode": "3525072009",
+              "nama": "Bolo",
+              "jenis": "desa",
+              "kode_pos": "61154"
+            },
+            {
+              "kode": "3525072010",
+              "nama": "Glatik",
+              "jenis": "desa",
+              "kode_pos": "61154"
+            },
+            {
+              "kode": "3525072011",
+              "nama": "Karangrejo",
+              "jenis": "desa",
+              "kode_pos": "61154"
+            },
+            {
+              "kode": "3525072012",
+              "nama": "Ketapanglor",
+              "jenis": "desa",
+              "kode_pos": "61154"
+            },
+            {
+              "kode": "3525072013",
+              "nama": "Tanjangawan",
+              "jenis": "desa",
+              "kode_pos": "61154"
+            }
+          ]
+        },
+        {
+          "kode": "352508",
+          "nama": "Kedamean",
+          "desa_kelurahan": [
+            {
+              "kode": "3525082001",
+              "nama": "Mojowuku",
+              "jenis": "desa",
+              "kode_pos": "61175"
+            },
+            {
+              "kode": "3525082002",
+              "nama": "Glindah",
+              "jenis": "desa",
+              "kode_pos": "61175"
+            },
+            {
+              "kode": "3525082003",
+              "nama": "Sidoraharjo",
+              "jenis": "desa",
+              "kode_pos": "61175"
+            },
+            {
+              "kode": "3525082004",
+              "nama": "Tulung",
+              "jenis": "desa",
+              "kode_pos": "61175"
+            },
+            {
+              "kode": "3525082005",
+              "nama": "Cermen",
+              "jenis": "desa",
+              "kode_pos": "61175"
+            },
+            {
+              "kode": "3525082006",
+              "nama": "Lampah",
+              "jenis": "desa",
+              "kode_pos": "61175"
+            },
+            {
+              "kode": "3525082007",
+              "nama": "Slempit",
+              "jenis": "desa",
+              "kode_pos": "61175"
+            },
+            {
+              "kode": "3525082008",
+              "nama": "Turirejo",
+              "jenis": "desa",
+              "kode_pos": "61175"
+            },
+            {
+              "kode": "3525082009",
+              "nama": "Belahanrejo",
+              "jenis": "desa",
+              "kode_pos": "61175"
+            },
+            {
+              "kode": "3525082010",
+              "nama": "Menunggal",
+              "jenis": "desa",
+              "kode_pos": "61175"
+            },
+            {
+              "kode": "3525082011",
+              "nama": "Tanjung",
+              "jenis": "desa",
+              "kode_pos": "61175"
+            },
+            {
+              "kode": "3525082012",
+              "nama": "Katimoho",
+              "jenis": "desa",
+              "kode_pos": "61175"
+            },
+            {
+              "kode": "3525082013",
+              "nama": "Banyuurip",
+              "jenis": "desa",
+              "kode_pos": "61175"
+            },
+            {
+              "kode": "3525082014",
+              "nama": "Kedamean",
+              "jenis": "desa",
+              "kode_pos": "61175"
+            },
+            {
+              "kode": "3525082015",
+              "nama": "Ngepung",
+              "jenis": "desa",
+              "kode_pos": "61175"
+            }
+          ]
+        },
+        {
+          "kode": "352509",
+          "nama": "Sidayu",
+          "desa_kelurahan": [
+            {
+              "kode": "3525092001",
+              "nama": "Sukorejo",
+              "jenis": "desa",
+              "kode_pos": "61153"
+            },
+            {
+              "kode": "3525092002",
+              "nama": "Gedangan",
+              "jenis": "desa",
+              "kode_pos": "61153"
+            },
+            {
+              "kode": "3525092003",
+              "nama": "Wadeng",
+              "jenis": "desa",
+              "kode_pos": "61153"
+            },
+            {
+              "kode": "3525092004",
+              "nama": "Lasem",
+              "jenis": "desa",
+              "kode_pos": "61153"
+            },
+            {
+              "kode": "3525092005",
+              "nama": "Kertosono",
+              "jenis": "desa",
+              "kode_pos": "61153"
+            },
+            {
+              "kode": "3525092006",
+              "nama": "Sambipondok",
+              "jenis": "desa",
+              "kode_pos": "61153"
+            },
+            {
+              "kode": "3525092007",
+              "nama": "Raci Kulon",
+              "jenis": "desa",
+              "kode_pos": "61153"
+            },
+            {
+              "kode": "3525092008",
+              "nama": "Golokan",
+              "jenis": "desa",
+              "kode_pos": "61153"
+            },
+            {
+              "kode": "3525092009",
+              "nama": "Raci Tengah",
+              "jenis": "desa",
+              "kode_pos": "61153"
+            },
+            {
+              "kode": "3525092010",
+              "nama": "Purwodadi",
+              "jenis": "desa",
+              "kode_pos": "61153"
+            },
+            {
+              "kode": "3525092011",
+              "nama": "Sidomulyo",
+              "jenis": "desa",
+              "kode_pos": "61153"
+            },
+            {
+              "kode": "3525092012",
+              "nama": "Srowo",
+              "jenis": "desa",
+              "kode_pos": "61153"
+            },
+            {
+              "kode": "3525092013",
+              "nama": "Kauman",
+              "jenis": "desa",
+              "kode_pos": "61153"
+            },
+            {
+              "kode": "3525092014",
+              "nama": "Bunderan",
+              "jenis": "desa",
+              "kode_pos": "61153"
+            },
+            {
+              "kode": "3525092015",
+              "nama": "Asempapak",
+              "jenis": "desa",
+              "kode_pos": "61153"
+            },
+            {
+              "kode": "3525092016",
+              "nama": "Mriyunan",
+              "jenis": "desa",
+              "kode_pos": "61153"
+            },
+            {
+              "kode": "3525092017",
+              "nama": "Mojoasem",
+              "jenis": "desa",
+              "kode_pos": "61153"
+            },
+            {
+              "kode": "3525092018",
+              "nama": "Sedagaran",
+              "jenis": "desa",
+              "kode_pos": "61153"
+            },
+            {
+              "kode": "3525092019",
+              "nama": "Ngawen",
+              "jenis": "desa",
+              "kode_pos": "61153"
+            },
+            {
+              "kode": "3525092020",
+              "nama": "Pengulu",
+              "jenis": "desa",
+              "kode_pos": "61153"
+            },
+            {
+              "kode": "3525092021",
+              "nama": "Randuboto",
+              "jenis": "desa",
+              "kode_pos": "61153"
+            }
+          ]
+        },
+        {
+          "kode": "352510",
+          "nama": "Manyar",
+          "desa_kelurahan": [
+            {
+              "kode": "3525102001",
+              "nama": "Tanggulrejo",
+              "jenis": "desa",
+              "kode_pos": "61151"
+            },
+            {
+              "kode": "3525102002",
+              "nama": "Morobakung",
+              "jenis": "desa",
+              "kode_pos": "61151"
+            },
+            {
+              "kode": "3525102003",
+              "nama": "Pejangganan",
+              "jenis": "desa",
+              "kode_pos": "61151"
+            },
+            {
+              "kode": "3525102004",
+              "nama": "Gumeno",
+              "jenis": "desa",
+              "kode_pos": "61151"
+            },
+            {
+              "kode": "3525102005",
+              "nama": "Sumberejo",
+              "jenis": "desa",
+              "kode_pos": "61151"
+            },
+            {
+              "kode": "3525102006",
+              "nama": "Ngampel",
+              "jenis": "desa",
+              "kode_pos": "61151"
+            },
+            {
+              "kode": "3525102007",
+              "nama": "Betoyokauman",
+              "jenis": "desa",
+              "kode_pos": "61151"
+            },
+            {
+              "kode": "3525102008",
+              "nama": "Sembayat",
+              "jenis": "desa",
+              "kode_pos": "61151"
+            },
+            {
+              "kode": "3525102009",
+              "nama": "Betoyoguci",
+              "jenis": "desa",
+              "kode_pos": "61151"
+            },
+            {
+              "kode": "3525102010",
+              "nama": "Leran",
+              "jenis": "desa",
+              "kode_pos": "61151"
+            },
+            {
+              "kode": "3525102011",
+              "nama": "Tebalo",
+              "jenis": "desa",
+              "kode_pos": "61151"
+            },
+            {
+              "kode": "3525102012",
+              "nama": "Karangrejo",
+              "jenis": "desa",
+              "kode_pos": "61151"
+            },
+            {
+              "kode": "3525102013",
+              "nama": "Banyuwangi",
+              "jenis": "desa",
+              "kode_pos": "61151"
+            },
+            {
+              "kode": "3525102014",
+              "nama": "Manyarejo",
+              "jenis": "desa",
+              "kode_pos": "61151"
+            },
+            {
+              "kode": "3525102015",
+              "nama": "Manyar Sidomukti",
+              "jenis": "desa",
+              "kode_pos": "61151"
+            },
+            {
+              "kode": "3525102016",
+              "nama": "Manyar Sidorukun",
+              "jenis": "desa",
+              "kode_pos": "61151"
+            },
+            {
+              "kode": "3525102017",
+              "nama": "Banjarsari",
+              "jenis": "desa",
+              "kode_pos": "61151"
+            },
+            {
+              "kode": "3525102018",
+              "nama": "Suci",
+              "jenis": "desa",
+              "kode_pos": "61151"
+            },
+            {
+              "kode": "3525102019",
+              "nama": "Paganden",
+              "jenis": "desa",
+              "kode_pos": "61151"
+            },
+            {
+              "kode": "3525102020",
+              "nama": "Pongangan",
+              "jenis": "desa",
+              "kode_pos": "61151"
+            },
+            {
+              "kode": "3525102021",
+              "nama": "Sukomulyo",
+              "jenis": "desa",
+              "kode_pos": "61151"
+            },
+            {
+              "kode": "3525102022",
+              "nama": "Yosowilangun",
+              "jenis": "desa",
+              "kode_pos": "61151"
+            },
+            {
+              "kode": "3525102023",
+              "nama": "Roomo",
+              "jenis": "desa",
+              "kode_pos": "61151"
+            }
+          ]
+        },
+        {
+          "kode": "352511",
+          "nama": "Cerme",
+          "desa_kelurahan": [
+            {
+              "kode": "3525112001",
+              "nama": "Dadapkuning",
+              "jenis": "desa",
+              "kode_pos": "61171"
+            },
+            {
+              "kode": "3525112002",
+              "nama": "Lengkong",
+              "jenis": "desa",
+              "kode_pos": "61171"
+            },
+            {
+              "kode": "3525112003",
+              "nama": "Kandangan",
+              "jenis": "desa",
+              "kode_pos": "61171"
+            },
+            {
+              "kode": "3525112004",
+              "nama": "Dooro",
+              "jenis": "desa",
+              "kode_pos": "61171"
+            },
+            {
+              "kode": "3525112005",
+              "nama": "Dampaan",
+              "jenis": "desa",
+              "kode_pos": "61171"
+            },
+            {
+              "kode": "3525112006",
+              "nama": "Ngembung",
+              "jenis": "desa",
+              "kode_pos": "61171"
+            },
+            {
+              "kode": "3525112007",
+              "nama": "Sukoanyar",
+              "jenis": "desa",
+              "kode_pos": "61171"
+            },
+            {
+              "kode": "3525112008",
+              "nama": "Gedangkulud",
+              "jenis": "desa",
+              "kode_pos": "61171"
+            },
+            {
+              "kode": "3525112009",
+              "nama": "Wedani",
+              "jenis": "desa",
+              "kode_pos": "61171"
+            },
+            {
+              "kode": "3525112010",
+              "nama": "Dungus",
+              "jenis": "desa",
+              "kode_pos": "61171"
+            },
+            {
+              "kode": "3525112011",
+              "nama": "Guranganyar",
+              "jenis": "desa",
+              "kode_pos": "61171"
+            },
+            {
+              "kode": "3525112012",
+              "nama": "Kambingan",
+              "jenis": "desa",
+              "kode_pos": "61171"
+            },
+            {
+              "kode": "3525112013",
+              "nama": "Morowudi",
+              "jenis": "desa",
+              "kode_pos": "61171"
+            },
+            {
+              "kode": "3525112014",
+              "nama": "Betiting",
+              "jenis": "desa",
+              "kode_pos": "61171"
+            },
+            {
+              "kode": "3525112015",
+              "nama": "Ngabetan",
+              "jenis": "desa",
+              "kode_pos": "61171"
+            },
+            {
+              "kode": "3525112016",
+              "nama": "Padeg",
+              "jenis": "desa",
+              "kode_pos": "61171"
+            },
+            {
+              "kode": "3525112017",
+              "nama": "Iker - iker Geger",
+              "jenis": "desa",
+              "kode_pos": "61171"
+            },
+            {
+              "kode": "3525112018",
+              "nama": "Semampir",
+              "jenis": "desa",
+              "kode_pos": "61171"
+            },
+            {
+              "kode": "3525112019",
+              "nama": "Cagakagung",
+              "jenis": "desa",
+              "kode_pos": "61171"
+            },
+            {
+              "kode": "3525112020",
+              "nama": "Cerme Kidul",
+              "jenis": "desa",
+              "kode_pos": "61171"
+            },
+            {
+              "kode": "3525112021",
+              "nama": "Cerme Lor",
+              "jenis": "desa",
+              "kode_pos": "61171"
+            },
+            {
+              "kode": "3525112022",
+              "nama": "Pandu",
+              "jenis": "desa",
+              "kode_pos": "61171"
+            },
+            {
+              "kode": "3525112023",
+              "nama": "Banjarsari",
+              "jenis": "desa",
+              "kode_pos": "61171"
+            },
+            {
+              "kode": "3525112024",
+              "nama": "Tambakberas",
+              "jenis": "desa",
+              "kode_pos": "61171"
+            },
+            {
+              "kode": "3525112025",
+              "nama": "Jono",
+              "jenis": "desa",
+              "kode_pos": "61171"
+            }
+          ]
+        },
+        {
+          "kode": "352512",
+          "nama": "Bungah",
+          "desa_kelurahan": [
+            {
+              "kode": "3525122001",
+              "nama": "Sidomukti",
+              "jenis": "desa",
+              "kode_pos": "61152"
+            },
+            {
+              "kode": "3525122002",
+              "nama": "Mojopurogede",
+              "jenis": "desa",
+              "kode_pos": "61152"
+            },
+            {
+              "kode": "3525122003",
+              "nama": "Mojopurowetan",
+              "jenis": "desa",
+              "kode_pos": "61152"
+            },
+            {
+              "kode": "3525122004",
+              "nama": "Melirang",
+              "jenis": "desa",
+              "kode_pos": "61152"
+            },
+            {
+              "kode": "3525122005",
+              "nama": "Sidorejo",
+              "jenis": "desa",
+              "kode_pos": "61152"
+            },
+            {
+              "kode": "3525122006",
+              "nama": "Raciwetan",
+              "jenis": "desa",
+              "kode_pos": "61152"
+            },
+            {
+              "kode": "3525122007",
+              "nama": "Masangan",
+              "jenis": "desa",
+              "kode_pos": "61152"
+            },
+            {
+              "kode": "3525122008",
+              "nama": "Sidokumpul",
+              "jenis": "desa",
+              "kode_pos": "61152"
+            },
+            {
+              "kode": "3525122009",
+              "nama": "Pegundan",
+              "jenis": "desa",
+              "kode_pos": "61152"
+            },
+            {
+              "kode": "3525122010",
+              "nama": "Sukowati",
+              "jenis": "desa",
+              "kode_pos": "61152"
+            },
+            {
+              "kode": "3525122011",
+              "nama": "Abar- abir",
+              "jenis": "desa",
+              "kode_pos": "61152"
+            },
+            {
+              "kode": "3525122012",
+              "nama": "Bungah",
+              "jenis": "desa",
+              "kode_pos": "61152"
+            },
+            {
+              "kode": "3525122013",
+              "nama": "Kemangi",
+              "jenis": "desa",
+              "kode_pos": "61152"
+            },
+            {
+              "kode": "3525122014",
+              "nama": "Kisik",
+              "jenis": "desa",
+              "kode_pos": "61152"
+            },
+            {
+              "kode": "3525122015",
+              "nama": "Gumeng",
+              "jenis": "desa",
+              "kode_pos": "61152"
+            },
+            {
+              "kode": "3525122016",
+              "nama": "Sukorejo",
+              "jenis": "desa",
+              "kode_pos": "61152"
+            },
+            {
+              "kode": "3525122017",
+              "nama": "Indrodelik",
+              "jenis": "desa",
+              "kode_pos": "61152"
+            },
+            {
+              "kode": "3525122018",
+              "nama": "Bedanten",
+              "jenis": "desa",
+              "kode_pos": "61152"
+            },
+            {
+              "kode": "3525122019",
+              "nama": "Sungonlegowo",
+              "jenis": "desa",
+              "kode_pos": "61152"
+            },
+            {
+              "kode": "3525122020",
+              "nama": "Tanjung Widoro",
+              "jenis": "desa",
+              "kode_pos": "61152"
+            },
+            {
+              "kode": "3525122021",
+              "nama": "Watuagung",
+              "jenis": "desa",
+              "kode_pos": "61152"
+            },
+            {
+              "kode": "3525122022",
+              "nama": "Kramat",
+              "jenis": "desa",
+              "kode_pos": "61152"
+            }
+          ]
+        },
+        {
+          "kode": "352513",
+          "nama": "Menganti",
+          "desa_kelurahan": [
+            {
+              "kode": "3525132001",
+              "nama": "Beton",
+              "jenis": "desa",
+              "kode_pos": "61174"
+            },
+            {
+              "kode": "3525132002",
+              "nama": "Pranti",
+              "jenis": "desa",
+              "kode_pos": "61174"
+            },
+            {
+              "kode": "3525132003",
+              "nama": "Gadingwatu",
+              "jenis": "desa",
+              "kode_pos": "61174"
+            },
+            {
+              "kode": "3525132004",
+              "nama": "Bringkang",
+              "jenis": "desa",
+              "kode_pos": "61174"
+            },
+            {
+              "kode": "3525132005",
+              "nama": "Boteng",
+              "jenis": "desa",
+              "kode_pos": "61174"
+            },
+            {
+              "kode": "3525132006",
+              "nama": "Putatlor",
+              "jenis": "desa",
+              "kode_pos": "61174"
+            },
+            {
+              "kode": "3525132007",
+              "nama": "Domas",
+              "jenis": "desa",
+              "kode_pos": "61174"
+            },
+            {
+              "kode": "3525132008",
+              "nama": "Mojotengah",
+              "jenis": "desa",
+              "kode_pos": "61174"
+            },
+            {
+              "kode": "3525132009",
+              "nama": "Boboh",
+              "jenis": "desa",
+              "kode_pos": "61174"
+            },
+            {
+              "kode": "3525132010",
+              "nama": "Sidojangkung",
+              "jenis": "desa",
+              "kode_pos": "61174"
+            },
+            {
+              "kode": "3525132011",
+              "nama": "Hendrosari",
+              "jenis": "desa",
+              "kode_pos": "61174"
+            },
+            {
+              "kode": "3525132012",
+              "nama": "Pelemwatu",
+              "jenis": "desa",
+              "kode_pos": "61174"
+            },
+            {
+              "kode": "3525132013",
+              "nama": "Menganti",
+              "jenis": "desa",
+              "kode_pos": "61174"
+            },
+            {
+              "kode": "3525132014",
+              "nama": "Hulaan",
+              "jenis": "desa",
+              "kode_pos": "61174"
+            },
+            {
+              "kode": "3525132015",
+              "nama": "Kepatihan",
+              "jenis": "desa",
+              "kode_pos": "61174"
+            },
+            {
+              "kode": "3525132016",
+              "nama": "Gempolkurung",
+              "jenis": "desa",
+              "kode_pos": "61174"
+            },
+            {
+              "kode": "3525132017",
+              "nama": "Drancang",
+              "jenis": "desa",
+              "kode_pos": "61174"
+            },
+            {
+              "kode": "3525132018",
+              "nama": "Sidowungu",
+              "jenis": "desa",
+              "kode_pos": "61174"
+            },
+            {
+              "kode": "3525132019",
+              "nama": "Randupadangan",
+              "jenis": "desa",
+              "kode_pos": "61174"
+            },
+            {
+              "kode": "3525132020",
+              "nama": "Setro",
+              "jenis": "desa",
+              "kode_pos": "61174"
+            },
+            {
+              "kode": "3525132021",
+              "nama": "Pengalangan",
+              "jenis": "desa",
+              "kode_pos": "61174"
+            },
+            {
+              "kode": "3525132022",
+              "nama": "Laban",
+              "jenis": "desa",
+              "kode_pos": "61174"
+            }
+          ]
+        },
+        {
+          "kode": "352514",
+          "nama": "Kebomas",
+          "desa_kelurahan": [
+            {
+              "kode": "3525141006",
+              "nama": "Gulomantung",
+              "jenis": "kelurahan",
+              "kode_pos": "61124"
+            },
+            {
+              "kode": "3525141008",
+              "nama": "Sidomukti",
+              "jenis": "kelurahan",
+              "kode_pos": "61124"
+            },
+            {
+              "kode": "3525141010",
+              "nama": "Kebomas",
+              "jenis": "kelurahan",
+              "kode_pos": "61121"
+            },
+            {
+              "kode": "3525141011",
+              "nama": "Kawis Anyar",
+              "jenis": "kelurahan",
+              "kode_pos": "61121"
+            },
+            {
+              "kode": "3525141012",
+              "nama": "Ngargosari",
+              "jenis": "kelurahan",
+              "kode_pos": "61124"
+            },
+            {
+              "kode": "3525141014",
+              "nama": "Gending",
+              "jenis": "kelurahan",
+              "kode_pos": "61123"
+            },
+            {
+              "kode": "3525141015",
+              "nama": "Sidomoro",
+              "jenis": "kelurahan",
+              "kode_pos": "61122"
+            },
+            {
+              "kode": "3525141016",
+              "nama": "Tenggulunan",
+              "jenis": "kelurahan",
+              "kode_pos": "61124"
+            },
+            {
+              "kode": "3525141017",
+              "nama": "Singosari",
+              "jenis": "kelurahan",
+              "kode_pos": "61122"
+            },
+            {
+              "kode": "3525141019",
+              "nama": "Indro",
+              "jenis": "kelurahan",
+              "kode_pos": "61124"
+            },
+            {
+              "kode": "3525142001",
+              "nama": "Dahanrejo",
+              "jenis": "desa",
+              "kode_pos": "61124"
+            },
+            {
+              "kode": "3525142002",
+              "nama": "Kembangan",
+              "jenis": "desa",
+              "kode_pos": "61124"
+            },
+            {
+              "kode": "3525142003",
+              "nama": "Kedayang",
+              "jenis": "desa",
+              "kode_pos": "61124"
+            },
+            {
+              "kode": "3525142004",
+              "nama": "Randuagung",
+              "jenis": "desa",
+              "kode_pos": "61121"
+            },
+            {
+              "kode": "3525142005",
+              "nama": "Klangonan",
+              "jenis": "desa",
+              "kode_pos": "61124"
+            },
+            {
+              "kode": "3525142007",
+              "nama": "Sukorejo",
+              "jenis": "desa",
+              "kode_pos": "61124"
+            },
+            {
+              "kode": "3525142009",
+              "nama": "Giri",
+              "jenis": "desa",
+              "kode_pos": "61124"
+            },
+            {
+              "kode": "3525142013",
+              "nama": "Segoromadu",
+              "jenis": "desa",
+              "kode_pos": "61123"
+            },
+            {
+              "kode": "3525142018",
+              "nama": "Karangkiring",
+              "jenis": "desa",
+              "kode_pos": "61124"
+            },
+            {
+              "kode": "3525142020",
+              "nama": "Prambangan",
+              "jenis": "desa",
+              "kode_pos": "61124"
+            },
+            {
+              "kode": "3525142021",
+              "nama": "Sekarkurung",
+              "jenis": "desa",
+              "kode_pos": "61124"
+            }
+          ]
+        },
+        {
+          "kode": "352515",
+          "nama": "Driyorejo",
+          "desa_kelurahan": [
+            {
+              "kode": "3525152001",
+              "nama": "Karangandong",
+              "jenis": "desa",
+              "kode_pos": "61177"
+            },
+            {
+              "kode": "3525152002",
+              "nama": "Banjaran",
+              "jenis": "desa",
+              "kode_pos": "61177"
+            },
+            {
+              "kode": "3525152003",
+              "nama": "Krikilan",
+              "jenis": "desa",
+              "kode_pos": "61177"
+            },
+            {
+              "kode": "3525152004",
+              "nama": "Mojosari Rejo",
+              "jenis": "desa",
+              "kode_pos": "61177"
+            },
+            {
+              "kode": "3525152005",
+              "nama": "Tanjungan",
+              "jenis": "desa",
+              "kode_pos": "61177"
+            },
+            {
+              "kode": "3525152006",
+              "nama": "Anom",
+              "jenis": "desa",
+              "kode_pos": "61177"
+            },
+            {
+              "kode": "3525152007",
+              "nama": "Sumput",
+              "jenis": "desa",
+              "kode_pos": "61177"
+            },
+            {
+              "kode": "3525152008",
+              "nama": "Kesamben Wetan",
+              "jenis": "desa",
+              "kode_pos": "61177"
+            },
+            {
+              "kode": "3525152009",
+              "nama": "Randegansari",
+              "jenis": "desa",
+              "kode_pos": "61177"
+            },
+            {
+              "kode": "3525152010",
+              "nama": "Tenaru",
+              "jenis": "desa",
+              "kode_pos": "61177"
+            },
+            {
+              "kode": "3525152011",
+              "nama": "Driyorejo",
+              "jenis": "desa",
+              "kode_pos": "61177"
+            },
+            {
+              "kode": "3525152012",
+              "nama": "Petiken",
+              "jenis": "desa",
+              "kode_pos": "61177"
+            },
+            {
+              "kode": "3525152013",
+              "nama": "Cangkir",
+              "jenis": "desa",
+              "kode_pos": "61177"
+            },
+            {
+              "kode": "3525152014",
+              "nama": "Gadung",
+              "jenis": "desa",
+              "kode_pos": "61177"
+            },
+            {
+              "kode": "3525152015",
+              "nama": "Mulung",
+              "jenis": "desa",
+              "kode_pos": "61177"
+            },
+            {
+              "kode": "3525152016",
+              "nama": "Bambe",
+              "jenis": "desa",
+              "kode_pos": "61177"
+            }
+          ]
+        },
+        {
+          "kode": "352516",
+          "nama": "Gresik",
+          "desa_kelurahan": [
+            {
+              "kode": "3525161001",
+              "nama": "Ngipik",
+              "jenis": "kelurahan",
+              "kode_pos": "61119"
+            },
+            {
+              "kode": "3525161002",
+              "nama": "Tlogo Pojok",
+              "jenis": "kelurahan",
+              "kode_pos": "61118"
+            },
+            {
+              "kode": "3525161003",
+              "nama": "Karang Turi",
+              "jenis": "kelurahan",
+              "kode_pos": "61118"
+            },
+            {
+              "kode": "3525161004",
+              "nama": "Tlogo Patut",
+              "jenis": "kelurahan",
+              "kode_pos": "61111"
+            },
+            {
+              "kode": "3525161005",
+              "nama": "Sukorame",
+              "jenis": "kelurahan",
+              "kode_pos": "61119"
+            },
+            {
+              "kode": "3525161006",
+              "nama": "Lumpur",
+              "jenis": "kelurahan",
+              "kode_pos": "61117"
+            },
+            {
+              "kode": "3525161007",
+              "nama": "Karang Poh",
+              "jenis": "kelurahan",
+              "kode_pos": "61116"
+            },
+            {
+              "kode": "3525161008",
+              "nama": "Trate",
+              "jenis": "kelurahan",
+              "kode_pos": "61114"
+            },
+            {
+              "kode": "3525161010",
+              "nama": "Sido Kumpul",
+              "jenis": "kelurahan",
+              "kode_pos": "61111"
+            },
+            {
+              "kode": "3525161011",
+              "nama": "Bedilan",
+              "jenis": "kelurahan",
+              "kode_pos": "61114"
+            },
+            {
+              "kode": "3525161012",
+              "nama": "Sukodono",
+              "jenis": "kelurahan",
+              "kode_pos": "61116"
+            },
+            {
+              "kode": "3525161013",
+              "nama": "Kemuteran",
+              "jenis": "kelurahan",
+              "kode_pos": "61115"
+            },
+            {
+              "kode": "3525161014",
+              "nama": "Pekelingan",
+              "jenis": "kelurahan",
+              "kode_pos": "61115"
+            },
+            {
+              "kode": "3525161015",
+              "nama": "Kroman",
+              "jenis": "kelurahan",
+              "kode_pos": "61116"
+            },
+            {
+              "kode": "3525161016",
+              "nama": "Kebungson",
+              "jenis": "kelurahan",
+              "kode_pos": "61115"
+            },
+            {
+              "kode": "3525161017",
+              "nama": "Pekauman",
+              "jenis": "kelurahan",
+              "kode_pos": "61114"
+            },
+            {
+              "kode": "3525162009",
+              "nama": "Tlogobendung",
+              "jenis": "desa",
+              "kode_pos": "61113"
+            },
+            {
+              "kode": "3525162018",
+              "nama": "Gapuro Sukolilo",
+              "jenis": "desa",
+              "kode_pos": "61119"
+            },
+            {
+              "kode": "3525162019",
+              "nama": "Pulopancikan",
+              "jenis": "desa",
+              "kode_pos": "61113"
+            },
+            {
+              "kode": "3525162020",
+              "nama": "Kramatinggil",
+              "jenis": "desa",
+              "kode_pos": "61119"
+            },
+            {
+              "kode": "3525162021",
+              "nama": "Sidorukun",
+              "jenis": "desa",
+              "kode_pos": "61112"
+            }
+          ]
+        },
+        {
+          "kode": "352517",
+          "nama": "Sangkapura",
+          "desa_kelurahan": [
+            {
+              "kode": "3525172001",
+              "nama": "Dekatagung",
+              "jenis": "desa",
+              "kode_pos": "61181"
+            },
+            {
+              "kode": "3525172002",
+              "nama": "Kumalasa",
+              "jenis": "desa",
+              "kode_pos": "61181"
+            },
+            {
+              "kode": "3525172003",
+              "nama": "Suwari",
+              "jenis": "desa",
+              "kode_pos": "61181"
+            },
+            {
+              "kode": "3525172004",
+              "nama": "Pudakitbarat",
+              "jenis": "desa",
+              "kode_pos": "61181"
+            },
+            {
+              "kode": "3525172005",
+              "nama": "Pudakittimur",
+              "jenis": "desa",
+              "kode_pos": "61181"
+            },
+            {
+              "kode": "3525172006",
+              "nama": "Lebak",
+              "jenis": "desa",
+              "kode_pos": "61181"
+            },
+            {
+              "kode": "3525172007",
+              "nama": "Bululanjang",
+              "jenis": "desa",
+              "kode_pos": "61181"
+            },
+            {
+              "kode": "3525172008",
+              "nama": "Patarselamat",
+              "jenis": "desa",
+              "kode_pos": "61181"
+            },
+            {
+              "kode": "3525172009",
+              "nama": "Kotakusuma",
+              "jenis": "desa",
+              "kode_pos": "61181"
+            },
+            {
+              "kode": "3525172010",
+              "nama": "Sungaiteluk",
+              "jenis": "desa",
+              "kode_pos": "61181"
+            },
+            {
+              "kode": "3525172011",
+              "nama": "Gunungteguh",
+              "jenis": "desa",
+              "kode_pos": "61181"
+            },
+            {
+              "kode": "3525172012",
+              "nama": "Sawahmulya",
+              "jenis": "desa",
+              "kode_pos": "61181"
+            },
+            {
+              "kode": "3525172013",
+              "nama": "Sungairujing",
+              "jenis": "desa",
+              "kode_pos": "61181"
+            },
+            {
+              "kode": "3525172014",
+              "nama": "Balikterus",
+              "jenis": "desa",
+              "kode_pos": "61181"
+            },
+            {
+              "kode": "3525172015",
+              "nama": "Kebontelukdalam",
+              "jenis": "desa",
+              "kode_pos": "61181"
+            },
+            {
+              "kode": "3525172016",
+              "nama": "Sidogedungbatu",
+              "jenis": "desa",
+              "kode_pos": "61181"
+            },
+            {
+              "kode": "3525172017",
+              "nama": "Daun",
+              "jenis": "desa",
+              "kode_pos": "61181"
+            }
+          ]
+        },
+        {
+          "kode": "352518",
+          "nama": "Tambak",
+          "desa_kelurahan": [
+            {
+              "kode": "3525182001",
+              "nama": "Gelam",
+              "jenis": "desa",
+              "kode_pos": "61182"
+            },
+            {
+              "kode": "3525182002",
+              "nama": "Sukaoneng",
+              "jenis": "desa",
+              "kode_pos": "61182"
+            },
+            {
+              "kode": "3525182003",
+              "nama": "Sukalela",
+              "jenis": "desa",
+              "kode_pos": "61182"
+            },
+            {
+              "kode": "3525182004",
+              "nama": "Pekalongan",
+              "jenis": "desa",
+              "kode_pos": "61182"
+            },
+            {
+              "kode": "3525182005",
+              "nama": "Tambak",
+              "jenis": "desa",
+              "kode_pos": "61182"
+            },
+            {
+              "kode": "3525182006",
+              "nama": "Telukjatidawang",
+              "jenis": "desa",
+              "kode_pos": "61182"
+            },
+            {
+              "kode": "3525182007",
+              "nama": "Klumpanggubug",
+              "jenis": "desa",
+              "kode_pos": "61182"
+            },
+            {
+              "kode": "3525182008",
+              "nama": "Grejeg",
+              "jenis": "desa",
+              "kode_pos": "61182"
+            },
+            {
+              "kode": "3525182009",
+              "nama": "Tanjungori",
+              "jenis": "desa",
+              "kode_pos": "61182"
+            },
+            {
+              "kode": "3525182010",
+              "nama": "Peromaan",
+              "jenis": "desa",
+              "kode_pos": "61182"
+            },
+            {
+              "kode": "3525182011",
+              "nama": "Diponggo",
+              "jenis": "desa",
+              "kode_pos": "61182"
+            },
+            {
+              "kode": "3525182012",
+              "nama": "Kepuhteluk",
+              "jenis": "desa",
+              "kode_pos": "61182"
+            },
+            {
+              "kode": "3525182013",
+              "nama": "Kepuhlegundi",
+              "jenis": "desa",
+              "kode_pos": "61182"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kode": "3524",
+      "slug": "lamongan",
+      "nama": "Kabupaten Lamongan",
+      "kecamatan": [
+        {
+          "kode": "352401",
+          "nama": "Sukorame",
+          "desa_kelurahan": [
+            {
+              "kode": "3524012001",
+              "nama": "Sembung",
+              "jenis": "desa",
+              "kode_pos": "62276"
+            },
+            {
+              "kode": "3524012002",
+              "nama": "Banggle",
+              "jenis": "desa",
+              "kode_pos": "62276"
+            },
+            {
+              "kode": "3524012003",
+              "nama": "Kedungkumpul",
+              "jenis": "desa",
+              "kode_pos": "62276"
+            },
+            {
+              "kode": "3524012004",
+              "nama": "Sukorame",
+              "jenis": "desa",
+              "kode_pos": "62276"
+            },
+            {
+              "kode": "3524012005",
+              "nama": "Mragel",
+              "jenis": "desa",
+              "kode_pos": "62276"
+            },
+            {
+              "kode": "3524012006",
+              "nama": "Kedungrejo",
+              "jenis": "desa",
+              "kode_pos": "62276"
+            },
+            {
+              "kode": "3524012007",
+              "nama": "Sewor",
+              "jenis": "desa",
+              "kode_pos": "62276"
+            },
+            {
+              "kode": "3524012008",
+              "nama": "Wedoro",
+              "jenis": "desa",
+              "kode_pos": "62276"
+            },
+            {
+              "kode": "3524012009",
+              "nama": "Pendowokumpul",
+              "jenis": "desa",
+              "kode_pos": "62276"
+            }
+          ]
+        },
+        {
+          "kode": "352402",
+          "nama": "Bluluk",
+          "desa_kelurahan": [
+            {
+              "kode": "3524022001",
+              "nama": "Talunrejo",
+              "jenis": "desa",
+              "kode_pos": "62274"
+            },
+            {
+              "kode": "3524022002",
+              "nama": "Banjargondang",
+              "jenis": "desa",
+              "kode_pos": "62274"
+            },
+            {
+              "kode": "3524022003",
+              "nama": "Bluluk",
+              "jenis": "desa",
+              "kode_pos": "62274"
+            },
+            {
+              "kode": "3524022004",
+              "nama": "Cangkring",
+              "jenis": "desa",
+              "kode_pos": "62274"
+            },
+            {
+              "kode": "3524022005",
+              "nama": "Bronjong",
+              "jenis": "desa",
+              "kode_pos": "62274"
+            },
+            {
+              "kode": "3524022006",
+              "nama": "Songowareng",
+              "jenis": "desa",
+              "kode_pos": "62274"
+            },
+            {
+              "kode": "3524022007",
+              "nama": "Kuwurejo",
+              "jenis": "desa",
+              "kode_pos": "62274"
+            },
+            {
+              "kode": "3524022008",
+              "nama": "Sumberbanjar",
+              "jenis": "desa",
+              "kode_pos": "62274"
+            },
+            {
+              "kode": "3524022009",
+              "nama": "Primpen",
+              "jenis": "desa",
+              "kode_pos": "62274"
+            }
+          ]
+        },
+        {
+          "kode": "352403",
+          "nama": "Modo",
+          "desa_kelurahan": [
+            {
+              "kode": "3524032001",
+              "nama": "Jegreg",
+              "jenis": "desa",
+              "kode_pos": "62275"
+            },
+            {
+              "kode": "3524032002",
+              "nama": "Kedungpengaron",
+              "jenis": "desa",
+              "kode_pos": "62275"
+            },
+            {
+              "kode": "3524032003",
+              "nama": "Sumberagung",
+              "jenis": "desa",
+              "kode_pos": "62275"
+            },
+            {
+              "kode": "3524032004",
+              "nama": "Kedunglerep",
+              "jenis": "desa",
+              "kode_pos": "62275"
+            },
+            {
+              "kode": "3524032005",
+              "nama": "Jatipayak",
+              "jenis": "desa",
+              "kode_pos": "62275"
+            },
+            {
+              "kode": "3524032006",
+              "nama": "Kedungwaras",
+              "jenis": "desa",
+              "kode_pos": "62275"
+            },
+            {
+              "kode": "3524032007",
+              "nama": "Sidomulyo",
+              "jenis": "desa",
+              "kode_pos": "62275"
+            },
+            {
+              "kode": "3524032008",
+              "nama": "Sambangrejo",
+              "jenis": "desa",
+              "kode_pos": "62275"
+            },
+            {
+              "kode": "3524032009",
+              "nama": "Medalem",
+              "jenis": "desa",
+              "kode_pos": "62275"
+            },
+            {
+              "kode": "3524032010",
+              "nama": "Sidodowo",
+              "jenis": "desa",
+              "kode_pos": "62275"
+            },
+            {
+              "kode": "3524032011",
+              "nama": "Mojorejo",
+              "jenis": "desa",
+              "kode_pos": "62275"
+            },
+            {
+              "kode": "3524032012",
+              "nama": "Sambungrejo",
+              "jenis": "desa",
+              "kode_pos": "62275"
+            },
+            {
+              "kode": "3524032013",
+              "nama": "Kedungrejo",
+              "jenis": "desa",
+              "kode_pos": "62275"
+            },
+            {
+              "kode": "3524032014",
+              "nama": "Kacangan",
+              "jenis": "desa",
+              "kode_pos": "62275"
+            },
+            {
+              "kode": "3524032015",
+              "nama": "Nguwok",
+              "jenis": "desa",
+              "kode_pos": "62275"
+            },
+            {
+              "kode": "3524032016",
+              "nama": "Pule",
+              "jenis": "desa",
+              "kode_pos": "62275"
+            },
+            {
+              "kode": "3524032017",
+              "nama": "Yungyang",
+              "jenis": "desa",
+              "kode_pos": "62275"
+            }
+          ]
+        },
+        {
+          "kode": "352404",
+          "nama": "Ngimbang",
+          "desa_kelurahan": [
+            {
+              "kode": "3524042001",
+              "nama": "Kedungmentawar",
+              "jenis": "desa",
+              "kode_pos": "62273"
+            },
+            {
+              "kode": "3524042002",
+              "nama": "Cerme",
+              "jenis": "desa",
+              "kode_pos": "62273"
+            },
+            {
+              "kode": "3524042003",
+              "nama": "Gebangangkrik",
+              "jenis": "desa",
+              "kode_pos": "62273"
+            },
+            {
+              "kode": "3524042004",
+              "nama": "Ngasemlemahbang",
+              "jenis": "desa",
+              "kode_pos": "62273"
+            },
+            {
+              "kode": "3524042005",
+              "nama": "Slaharwotan",
+              "jenis": "desa",
+              "kode_pos": "62273"
+            },
+            {
+              "kode": "3524042006",
+              "nama": "Ganggangtingan",
+              "jenis": "desa",
+              "kode_pos": "62273"
+            },
+            {
+              "kode": "3524042007",
+              "nama": "Jejel",
+              "jenis": "desa",
+              "kode_pos": "62273"
+            },
+            {
+              "kode": "3524042008",
+              "nama": "Purwokerto",
+              "jenis": "desa",
+              "kode_pos": "62273"
+            },
+            {
+              "kode": "3524042009",
+              "nama": "Kakatpenjalin",
+              "jenis": "desa",
+              "kode_pos": "62273"
+            },
+            {
+              "kode": "3524042010",
+              "nama": "Tlemang",
+              "jenis": "desa",
+              "kode_pos": "62273"
+            },
+            {
+              "kode": "3524042011",
+              "nama": "Mendogo",
+              "jenis": "desa",
+              "kode_pos": "62273"
+            },
+            {
+              "kode": "3524042012",
+              "nama": "Lawak",
+              "jenis": "desa",
+              "kode_pos": "62273"
+            },
+            {
+              "kode": "3524042013",
+              "nama": "Drujugurit",
+              "jenis": "desa",
+              "kode_pos": "62273"
+            },
+            {
+              "kode": "3524042014",
+              "nama": "Girik",
+              "jenis": "desa",
+              "kode_pos": "62273"
+            },
+            {
+              "kode": "3524042015",
+              "nama": "Munungrejo",
+              "jenis": "desa",
+              "kode_pos": "62273"
+            },
+            {
+              "kode": "3524042016",
+              "nama": "Ngimbang",
+              "jenis": "desa",
+              "kode_pos": "62273"
+            },
+            {
+              "kode": "3524042017",
+              "nama": "Durikedungjero",
+              "jenis": "desa",
+              "kode_pos": "62273"
+            },
+            {
+              "kode": "3524042018",
+              "nama": "Lamongrejo",
+              "jenis": "desa",
+              "kode_pos": "62273"
+            },
+            {
+              "kode": "3524042019",
+              "nama": "Sendangrejo",
+              "jenis": "desa",
+              "kode_pos": "62273"
+            }
+          ]
+        },
+        {
+          "kode": "352405",
+          "nama": "Babat",
+          "desa_kelurahan": [
+            {
+              "kode": "3524051001",
+              "nama": "Banaran",
+              "jenis": "kelurahan",
+              "kode_pos": "62271"
+            },
+            {
+              "kode": "3524051003",
+              "nama": "Babat",
+              "jenis": "kelurahan",
+              "kode_pos": "62271"
+            },
+            {
+              "kode": "3524052002",
+              "nama": "Karangkembang",
+              "jenis": "desa",
+              "kode_pos": "62271"
+            },
+            {
+              "kode": "3524052004",
+              "nama": "Pucakwangi",
+              "jenis": "desa",
+              "kode_pos": "62271"
+            },
+            {
+              "kode": "3524052005",
+              "nama": "Sogo",
+              "jenis": "desa",
+              "kode_pos": "62271"
+            },
+            {
+              "kode": "3524052006",
+              "nama": "Bedahan",
+              "jenis": "desa",
+              "kode_pos": "62271"
+            },
+            {
+              "kode": "3524052007",
+              "nama": "Truni",
+              "jenis": "desa",
+              "kode_pos": "62271"
+            },
+            {
+              "kode": "3524052008",
+              "nama": "Gendongkulon",
+              "jenis": "desa",
+              "kode_pos": "62271"
+            },
+            {
+              "kode": "3524052009",
+              "nama": "Plaosan",
+              "jenis": "desa",
+              "kode_pos": "62271"
+            },
+            {
+              "kode": "3524052010",
+              "nama": "Trepan",
+              "jenis": "desa",
+              "kode_pos": "62271"
+            },
+            {
+              "kode": "3524052011",
+              "nama": "Kuripan",
+              "jenis": "desa",
+              "kode_pos": "62271"
+            },
+            {
+              "kode": "3524052012",
+              "nama": "Kebalanpelang",
+              "jenis": "desa",
+              "kode_pos": "62271"
+            },
+            {
+              "kode": "3524052013",
+              "nama": "Sumurgenuk",
+              "jenis": "desa",
+              "kode_pos": "62271"
+            },
+            {
+              "kode": "3524052014",
+              "nama": "Gembong",
+              "jenis": "desa",
+              "kode_pos": "62271"
+            },
+            {
+              "kode": "3524052015",
+              "nama": "Bulumargi",
+              "jenis": "desa",
+              "kode_pos": "62271"
+            },
+            {
+              "kode": "3524052016",
+              "nama": "Datinawong",
+              "jenis": "desa",
+              "kode_pos": "62271"
+            },
+            {
+              "kode": "3524052017",
+              "nama": "Kebalandono",
+              "jenis": "desa",
+              "kode_pos": "62271"
+            },
+            {
+              "kode": "3524052018",
+              "nama": "Patihan",
+              "jenis": "desa",
+              "kode_pos": "62271"
+            },
+            {
+              "kode": "3524052019",
+              "nama": "Moropelang",
+              "jenis": "desa",
+              "kode_pos": "62271"
+            },
+            {
+              "kode": "3524052020",
+              "nama": "Keyongan",
+              "jenis": "desa",
+              "kode_pos": "62271"
+            },
+            {
+              "kode": "3524052021",
+              "nama": "Sambangan",
+              "jenis": "desa",
+              "kode_pos": "62271"
+            },
+            {
+              "kode": "3524052022",
+              "nama": "Tritunggal",
+              "jenis": "desa",
+              "kode_pos": "62271"
+            },
+            {
+              "kode": "3524052023",
+              "nama": "Kebonagung",
+              "jenis": "desa",
+              "kode_pos": "62271"
+            }
+          ]
+        },
+        {
+          "kode": "352406",
+          "nama": "Kedungpring",
+          "desa_kelurahan": [
+            {
+              "kode": "3524062001",
+              "nama": "Dradahblumbang",
+              "jenis": "desa",
+              "kode_pos": "62272"
+            },
+            {
+              "kode": "3524062002",
+              "nama": "Kalen",
+              "jenis": "desa",
+              "kode_pos": "62272"
+            },
+            {
+              "kode": "3524062003",
+              "nama": "Mojodadi",
+              "jenis": "desa",
+              "kode_pos": "62272"
+            },
+            {
+              "kode": "3524062004",
+              "nama": "Gunungrejo",
+              "jenis": "desa",
+              "kode_pos": "62272"
+            },
+            {
+              "kode": "3524062005",
+              "nama": "Warungring",
+              "jenis": "desa",
+              "kode_pos": "62272"
+            },
+            {
+              "kode": "3524062006",
+              "nama": "Jatidrojog",
+              "jenis": "desa",
+              "kode_pos": "62272"
+            },
+            {
+              "kode": "3524062007",
+              "nama": "Kradenanrejo",
+              "jenis": "desa",
+              "kode_pos": "62272"
+            },
+            {
+              "kode": "3524062008",
+              "nama": "Kandangrejo",
+              "jenis": "desa",
+              "kode_pos": "62272"
+            },
+            {
+              "kode": "3524062009",
+              "nama": "Kedungpring",
+              "jenis": "desa",
+              "kode_pos": "62272"
+            },
+            {
+              "kode": "3524062010",
+              "nama": "Tlanak",
+              "jenis": "desa",
+              "kode_pos": "62272"
+            },
+            {
+              "kode": "3524062011",
+              "nama": "Sukomalo",
+              "jenis": "desa",
+              "kode_pos": "62272"
+            },
+            {
+              "kode": "3524062012",
+              "nama": "Mlati",
+              "jenis": "desa",
+              "kode_pos": "62272"
+            },
+            {
+              "kode": "3524062013",
+              "nama": "Karangcangkring",
+              "jenis": "desa",
+              "kode_pos": "62272"
+            },
+            {
+              "kode": "3524062014",
+              "nama": "Mekanderejo",
+              "jenis": "desa",
+              "kode_pos": "62272"
+            },
+            {
+              "kode": "3524062015",
+              "nama": "Banjarejo",
+              "jenis": "desa",
+              "kode_pos": "62272"
+            },
+            {
+              "kode": "3524062016",
+              "nama": "Sidobangun",
+              "jenis": "desa",
+              "kode_pos": "62272"
+            },
+            {
+              "kode": "3524062017",
+              "nama": "Blawirejo",
+              "jenis": "desa",
+              "kode_pos": "62272"
+            },
+            {
+              "kode": "3524062018",
+              "nama": "Maindu",
+              "jenis": "desa",
+              "kode_pos": "62272"
+            },
+            {
+              "kode": "3524062019",
+              "nama": "Tenggerejo",
+              "jenis": "desa",
+              "kode_pos": "62272"
+            },
+            {
+              "kode": "3524062020",
+              "nama": "Majenang",
+              "jenis": "desa",
+              "kode_pos": "62272"
+            },
+            {
+              "kode": "3524062021",
+              "nama": "Sidomlangean",
+              "jenis": "desa",
+              "kode_pos": "62272"
+            },
+            {
+              "kode": "3524062022",
+              "nama": "Nglebur",
+              "jenis": "desa",
+              "kode_pos": "62272"
+            },
+            {
+              "kode": "3524062023",
+              "nama": "Sumengko",
+              "jenis": "desa",
+              "kode_pos": "62272"
+            }
+          ]
+        },
+        {
+          "kode": "352407",
+          "nama": "Brondong",
+          "desa_kelurahan": [
+            {
+              "kode": "3524071010",
+              "nama": "Brondong",
+              "jenis": "kelurahan",
+              "kode_pos": "62263"
+            },
+            {
+              "kode": "3524072001",
+              "nama": "Lohgung",
+              "jenis": "desa",
+              "kode_pos": "62263"
+            },
+            {
+              "kode": "3524072002",
+              "nama": "Labuhan",
+              "jenis": "desa",
+              "kode_pos": "62263"
+            },
+            {
+              "kode": "3524072003",
+              "nama": "Sidomukti",
+              "jenis": "desa",
+              "kode_pos": "62263"
+            },
+            {
+              "kode": "3524072004",
+              "nama": "Brengkok",
+              "jenis": "desa",
+              "kode_pos": "62263"
+            },
+            {
+              "kode": "3524072005",
+              "nama": "Tlogoretno",
+              "jenis": "desa",
+              "kode_pos": "62263"
+            },
+            {
+              "kode": "3524072006",
+              "nama": "Sendangharjo",
+              "jenis": "desa",
+              "kode_pos": "62263"
+            },
+            {
+              "kode": "3524072007",
+              "nama": "Lembor",
+              "jenis": "desa",
+              "kode_pos": "62263"
+            },
+            {
+              "kode": "3524072008",
+              "nama": "Sedayulawas",
+              "jenis": "desa",
+              "kode_pos": "62263"
+            },
+            {
+              "kode": "3524072009",
+              "nama": "Sumberagung",
+              "jenis": "desa",
+              "kode_pos": "62263"
+            }
+          ]
+        },
+        {
+          "kode": "352408",
+          "nama": "Laren",
+          "desa_kelurahan": [
+            {
+              "kode": "3524082001",
+              "nama": "Dateng",
+              "jenis": "desa",
+              "kode_pos": "62262"
+            },
+            {
+              "kode": "3524082002",
+              "nama": "Jabung",
+              "jenis": "desa",
+              "kode_pos": "62262"
+            },
+            {
+              "kode": "3524082003",
+              "nama": "Keduyung",
+              "jenis": "desa",
+              "kode_pos": "62262"
+            },
+            {
+              "kode": "3524082004",
+              "nama": "Centini",
+              "jenis": "desa",
+              "kode_pos": "62262"
+            },
+            {
+              "kode": "3524082005",
+              "nama": "Durikulon",
+              "jenis": "desa",
+              "kode_pos": "62262"
+            },
+            {
+              "kode": "3524082006",
+              "nama": "Pesanggrahan",
+              "jenis": "desa",
+              "kode_pos": "62262"
+            },
+            {
+              "kode": "3524082007",
+              "nama": "Gelap",
+              "jenis": "desa",
+              "kode_pos": "62262"
+            },
+            {
+              "kode": "3524082008",
+              "nama": "Mojoasem",
+              "jenis": "desa",
+              "kode_pos": "62262"
+            },
+            {
+              "kode": "3524082009",
+              "nama": "Siser",
+              "jenis": "desa",
+              "kode_pos": "62262"
+            },
+            {
+              "kode": "3524082010",
+              "nama": "Bulutigo",
+              "jenis": "desa",
+              "kode_pos": "62262"
+            },
+            {
+              "kode": "3524082011",
+              "nama": "Pelangwot",
+              "jenis": "desa",
+              "kode_pos": "62262"
+            },
+            {
+              "kode": "3524082012",
+              "nama": "Laren",
+              "jenis": "desa",
+              "kode_pos": "62262"
+            },
+            {
+              "kode": "3524082013",
+              "nama": "Gampangsejati",
+              "jenis": "desa",
+              "kode_pos": "62262"
+            },
+            {
+              "kode": "3524082014",
+              "nama": "Tamanprijeg",
+              "jenis": "desa",
+              "kode_pos": "62262"
+            },
+            {
+              "kode": "3524082015",
+              "nama": "Karangtawar",
+              "jenis": "desa",
+              "kode_pos": "62262"
+            },
+            {
+              "kode": "3524082016",
+              "nama": "Tejoasri",
+              "jenis": "desa",
+              "kode_pos": "62262"
+            },
+            {
+              "kode": "3524082017",
+              "nama": "Godog",
+              "jenis": "desa",
+              "kode_pos": "62262"
+            },
+            {
+              "kode": "3524082018",
+              "nama": "Bulubrangsi",
+              "jenis": "desa",
+              "kode_pos": "62262"
+            },
+            {
+              "kode": "3524082019",
+              "nama": "Karangwungulor",
+              "jenis": "desa",
+              "kode_pos": "62262"
+            },
+            {
+              "kode": "3524082020",
+              "nama": "Brangsi",
+              "jenis": "desa",
+              "kode_pos": "62262"
+            }
+          ]
+        },
+        {
+          "kode": "352409",
+          "nama": "Sekaran",
+          "desa_kelurahan": [
+            {
+              "kode": "3524092001",
+              "nama": "Besur",
+              "jenis": "desa",
+              "kode_pos": "62260"
+            },
+            {
+              "kode": "3524092002",
+              "nama": "Titik",
+              "jenis": "desa",
+              "kode_pos": "62260"
+            },
+            {
+              "kode": "3524092003",
+              "nama": "Kendal",
+              "jenis": "desa",
+              "kode_pos": "62260"
+            },
+            {
+              "kode": "3524092004",
+              "nama": "Keting",
+              "jenis": "desa",
+              "kode_pos": "62260"
+            },
+            {
+              "kode": "3524092005",
+              "nama": "Ngarum",
+              "jenis": "desa",
+              "kode_pos": "62260"
+            },
+            {
+              "kode": "3524092006",
+              "nama": "Kebalankulon",
+              "jenis": "desa",
+              "kode_pos": "62260"
+            },
+            {
+              "kode": "3524092007",
+              "nama": "Kudikan",
+              "jenis": "desa",
+              "kode_pos": "62260"
+            },
+            {
+              "kode": "3524092008",
+              "nama": "Jugo",
+              "jenis": "desa",
+              "kode_pos": "62260"
+            },
+            {
+              "kode": "3524092009",
+              "nama": "Manyar",
+              "jenis": "desa",
+              "kode_pos": "62260"
+            },
+            {
+              "kode": "3524092010",
+              "nama": "Trosono",
+              "jenis": "desa",
+              "kode_pos": "62260"
+            },
+            {
+              "kode": "3524092011",
+              "nama": "Latek",
+              "jenis": "desa",
+              "kode_pos": "62260"
+            },
+            {
+              "kode": "3524092012",
+              "nama": "Miru",
+              "jenis": "desa",
+              "kode_pos": "62260"
+            },
+            {
+              "kode": "3524092013",
+              "nama": "Sekaran",
+              "jenis": "desa",
+              "kode_pos": "62260"
+            },
+            {
+              "kode": "3524092014",
+              "nama": "Moro",
+              "jenis": "desa",
+              "kode_pos": "62260"
+            },
+            {
+              "kode": "3524092015",
+              "nama": "Karang",
+              "jenis": "desa",
+              "kode_pos": "62260"
+            },
+            {
+              "kode": "3524092016",
+              "nama": "Kembangan",
+              "jenis": "desa",
+              "kode_pos": "62260"
+            },
+            {
+              "kode": "3524092017",
+              "nama": "Siman",
+              "jenis": "desa",
+              "kode_pos": "62260"
+            },
+            {
+              "kode": "3524092018",
+              "nama": "Bulutengger",
+              "jenis": "desa",
+              "kode_pos": "62260"
+            },
+            {
+              "kode": "3524092019",
+              "nama": "Porodeso",
+              "jenis": "desa",
+              "kode_pos": "62260"
+            },
+            {
+              "kode": "3524092020",
+              "nama": "Bugel",
+              "jenis": "desa",
+              "kode_pos": "62260"
+            },
+            {
+              "kode": "3524092021",
+              "nama": "Sungegeneng",
+              "jenis": "desa",
+              "kode_pos": "62260"
+            }
+          ]
+        },
+        {
+          "kode": "352410",
+          "nama": "Maduran",
+          "desa_kelurahan": [
+            {
+              "kode": "3524102001",
+              "nama": "Duriwetan",
+              "jenis": "desa",
+              "kode_pos": "62261"
+            },
+            {
+              "kode": "3524102002",
+              "nama": "Taji",
+              "jenis": "desa",
+              "kode_pos": "62261"
+            },
+            {
+              "kode": "3524102003",
+              "nama": "Brumbun",
+              "jenis": "desa",
+              "kode_pos": "62261"
+            },
+            {
+              "kode": "3524102004",
+              "nama": "Siwuran",
+              "jenis": "desa",
+              "kode_pos": "62261"
+            },
+            {
+              "kode": "3524102005",
+              "nama": "Klagensrampat",
+              "jenis": "desa",
+              "kode_pos": "62261"
+            },
+            {
+              "kode": "3524102006",
+              "nama": "Pangean",
+              "jenis": "desa",
+              "kode_pos": "62261"
+            },
+            {
+              "kode": "3524102007",
+              "nama": "Maduran",
+              "jenis": "desa",
+              "kode_pos": "62261"
+            },
+            {
+              "kode": "3524102008",
+              "nama": "Jangkungsomo",
+              "jenis": "desa",
+              "kode_pos": "62261"
+            },
+            {
+              "kode": "3524102009",
+              "nama": "Parengan",
+              "jenis": "desa",
+              "kode_pos": "62261"
+            },
+            {
+              "kode": "3524102010",
+              "nama": "Pangkatrejo",
+              "jenis": "desa",
+              "kode_pos": "62261"
+            },
+            {
+              "kode": "3524102011",
+              "nama": "Kanugrahan",
+              "jenis": "desa",
+              "kode_pos": "62261"
+            },
+            {
+              "kode": "3524102012",
+              "nama": "Gumantuk",
+              "jenis": "desa",
+              "kode_pos": "62261"
+            },
+            {
+              "kode": "3524102013",
+              "nama": "Ngayung",
+              "jenis": "desa",
+              "kode_pos": "62261"
+            },
+            {
+              "kode": "3524102014",
+              "nama": "Pringgoboyo",
+              "jenis": "desa",
+              "kode_pos": "62261"
+            },
+            {
+              "kode": "3524102015",
+              "nama": "Gedangan",
+              "jenis": "desa",
+              "kode_pos": "62261"
+            },
+            {
+              "kode": "3524102016",
+              "nama": "Turi",
+              "jenis": "desa",
+              "kode_pos": "62261"
+            },
+            {
+              "kode": "3524102017",
+              "nama": "Blumbang",
+              "jenis": "desa",
+              "kode_pos": "62261"
+            }
+          ]
+        },
+        {
+          "kode": "352411",
+          "nama": "Sambeng",
+          "desa_kelurahan": [
+            {
+              "kode": "3524112001",
+              "nama": "Sidokumpul",
+              "jenis": "desa",
+              "kode_pos": "62284"
+            },
+            {
+              "kode": "3524112002",
+              "nama": "Pasarlegi",
+              "jenis": "desa",
+              "kode_pos": "62284"
+            },
+            {
+              "kode": "3524112003",
+              "nama": "Semampirejo",
+              "jenis": "desa",
+              "kode_pos": "62284"
+            },
+            {
+              "kode": "3524112004",
+              "nama": "Wateswinangun",
+              "jenis": "desa",
+              "kode_pos": "62284"
+            },
+            {
+              "kode": "3524112005",
+              "nama": "Sumbersari",
+              "jenis": "desa",
+              "kode_pos": "62284"
+            },
+            {
+              "kode": "3524112006",
+              "nama": "Pataan",
+              "jenis": "desa",
+              "kode_pos": "62284"
+            },
+            {
+              "kode": "3524112007",
+              "nama": "Tenggiring",
+              "jenis": "desa",
+              "kode_pos": "62284"
+            },
+            {
+              "kode": "3524112008",
+              "nama": "Garung",
+              "jenis": "desa",
+              "kode_pos": "62284"
+            },
+            {
+              "kode": "3524112009",
+              "nama": "Wonorejo",
+              "jenis": "desa",
+              "kode_pos": "62284"
+            },
+            {
+              "kode": "3524112010",
+              "nama": "Ardirejo",
+              "jenis": "desa",
+              "kode_pos": "62284"
+            },
+            {
+              "kode": "3524112011",
+              "nama": "Sekidang",
+              "jenis": "desa",
+              "kode_pos": "62284"
+            },
+            {
+              "kode": "3524112012",
+              "nama": "Kedungwangi",
+              "jenis": "desa",
+              "kode_pos": "62284"
+            },
+            {
+              "kode": "3524112013",
+              "nama": "Jatipandak",
+              "jenis": "desa",
+              "kode_pos": "62284"
+            },
+            {
+              "kode": "3524112014",
+              "nama": "Candisari",
+              "jenis": "desa",
+              "kode_pos": "62284"
+            },
+            {
+              "kode": "3524112015",
+              "nama": "Nogojatisari",
+              "jenis": "desa",
+              "kode_pos": "62284"
+            },
+            {
+              "kode": "3524112016",
+              "nama": "Pamotan",
+              "jenis": "desa",
+              "kode_pos": "62284"
+            },
+            {
+              "kode": "3524112017",
+              "nama": "Wudi",
+              "jenis": "desa",
+              "kode_pos": "62284"
+            },
+            {
+              "kode": "3524112018",
+              "nama": "Barurejo",
+              "jenis": "desa",
+              "kode_pos": "62284"
+            },
+            {
+              "kode": "3524112019",
+              "nama": "Kedungbanjar",
+              "jenis": "desa",
+              "kode_pos": "62284"
+            },
+            {
+              "kode": "3524112020",
+              "nama": "Gempolmanis",
+              "jenis": "desa",
+              "kode_pos": "62284"
+            },
+            {
+              "kode": "3524112021",
+              "nama": "Selorejo",
+              "jenis": "desa",
+              "kode_pos": "62284"
+            },
+            {
+              "kode": "3524112022",
+              "nama": "Kreteranggon",
+              "jenis": "desa",
+              "kode_pos": "62284"
+            }
+          ]
+        },
+        {
+          "kode": "352412",
+          "nama": "Sugio",
+          "desa_kelurahan": [
+            {
+              "kode": "3524122001",
+              "nama": "Sidobogem",
+              "jenis": "desa",
+              "kode_pos": "62256"
+            },
+            {
+              "kode": "3524122002",
+              "nama": "Kalitengah",
+              "jenis": "desa",
+              "kode_pos": "62256"
+            },
+            {
+              "kode": "3524122003",
+              "nama": "Kedungdadi",
+              "jenis": "desa",
+              "kode_pos": "62256"
+            },
+            {
+              "kode": "3524122004",
+              "nama": "Sidorejo",
+              "jenis": "desa",
+              "kode_pos": "62256"
+            },
+            {
+              "kode": "3524122005",
+              "nama": "Kedungbanjar",
+              "jenis": "desa",
+              "kode_pos": "62256"
+            },
+            {
+              "kode": "3524122006",
+              "nama": "Bedingin",
+              "jenis": "desa",
+              "kode_pos": "62256"
+            },
+            {
+              "kode": "3524122007",
+              "nama": "Bakalrejo",
+              "jenis": "desa",
+              "kode_pos": "62256"
+            },
+            {
+              "kode": "3524122008",
+              "nama": "Gondanglor",
+              "jenis": "desa",
+              "kode_pos": "62256"
+            },
+            {
+              "kode": "3524122009",
+              "nama": "Pangkatrejo",
+              "jenis": "desa",
+              "kode_pos": "62256"
+            },
+            {
+              "kode": "3524122010",
+              "nama": "Karangsambigalih",
+              "jenis": "desa",
+              "kode_pos": "62256"
+            },
+            {
+              "kode": "3524122011",
+              "nama": "Supenuh",
+              "jenis": "desa",
+              "kode_pos": "62256"
+            },
+            {
+              "kode": "3524122012",
+              "nama": "Lebakadi",
+              "jenis": "desa",
+              "kode_pos": "62256"
+            },
+            {
+              "kode": "3524122013",
+              "nama": "Deketagung",
+              "jenis": "desa",
+              "kode_pos": "62256"
+            },
+            {
+              "kode": "3524122014",
+              "nama": "Jubellor",
+              "jenis": "desa",
+              "kode_pos": "62256"
+            },
+            {
+              "kode": "3524122015",
+              "nama": "Sugio",
+              "jenis": "desa",
+              "kode_pos": "62256"
+            },
+            {
+              "kode": "3524122016",
+              "nama": "Daliwangun",
+              "jenis": "desa",
+              "kode_pos": "62256"
+            },
+            {
+              "kode": "3524122017",
+              "nama": "Jubelkidul",
+              "jenis": "desa",
+              "kode_pos": "62256"
+            },
+            {
+              "kode": "3524122018",
+              "nama": "Lawanganagung",
+              "jenis": "desa",
+              "kode_pos": "62256"
+            },
+            {
+              "kode": "3524122019",
+              "nama": "Kalipang",
+              "jenis": "desa",
+              "kode_pos": "62256"
+            },
+            {
+              "kode": "3524122020",
+              "nama": "German",
+              "jenis": "desa",
+              "kode_pos": "62256"
+            },
+            {
+              "kode": "3524122021",
+              "nama": "Sekarbagus",
+              "jenis": "desa",
+              "kode_pos": "62256"
+            }
+          ]
+        },
+        {
+          "kode": "352413",
+          "nama": "Pucuk",
+          "desa_kelurahan": [
+            {
+              "kode": "3524132001",
+              "nama": "Pucuk",
+              "jenis": "desa",
+              "kode_pos": "62257"
+            },
+            {
+              "kode": "3524132002",
+              "nama": "Gempolpading",
+              "jenis": "desa",
+              "kode_pos": "62257"
+            },
+            {
+              "kode": "3524132003",
+              "nama": "Kesambi",
+              "jenis": "desa",
+              "kode_pos": "62257"
+            },
+            {
+              "kode": "3524132004",
+              "nama": "Plososetro",
+              "jenis": "desa",
+              "kode_pos": "62257"
+            },
+            {
+              "kode": "3524132005",
+              "nama": "Wanar",
+              "jenis": "desa",
+              "kode_pos": "62257"
+            },
+            {
+              "kode": "3524132006",
+              "nama": "Karangtinggil",
+              "jenis": "desa",
+              "kode_pos": "62257"
+            },
+            {
+              "kode": "3524132007",
+              "nama": "Warukulon",
+              "jenis": "desa",
+              "kode_pos": "62257"
+            },
+            {
+              "kode": "3524132008",
+              "nama": "Waruwetan",
+              "jenis": "desa",
+              "kode_pos": "62257"
+            },
+            {
+              "kode": "3524132009",
+              "nama": "Kedali",
+              "jenis": "desa",
+              "kode_pos": "62257"
+            },
+            {
+              "kode": "3524132010",
+              "nama": "Paji",
+              "jenis": "desa",
+              "kode_pos": "62257"
+            },
+            {
+              "kode": "3524132011",
+              "nama": "Sumberjo",
+              "jenis": "desa",
+              "kode_pos": "62257"
+            },
+            {
+              "kode": "3524132012",
+              "nama": "Cungkup",
+              "jenis": "desa",
+              "kode_pos": "62257"
+            },
+            {
+              "kode": "3524132013",
+              "nama": "Bugoharjo",
+              "jenis": "desa",
+              "kode_pos": "62257"
+            },
+            {
+              "kode": "3524132014",
+              "nama": "Ngambeg",
+              "jenis": "desa",
+              "kode_pos": "62257"
+            },
+            {
+              "kode": "3524132015",
+              "nama": "Babatkumpul",
+              "jenis": "desa",
+              "kode_pos": "62257"
+            },
+            {
+              "kode": "3524132016",
+              "nama": "Tanggungan",
+              "jenis": "desa",
+              "kode_pos": "62257"
+            },
+            {
+              "kode": "3524132017",
+              "nama": "Padenganploso",
+              "jenis": "desa",
+              "kode_pos": "62257"
+            }
+          ]
+        },
+        {
+          "kode": "352414",
+          "nama": "Paciran",
+          "desa_kelurahan": [
+            {
+              "kode": "3524141001",
+              "nama": "Blimbing",
+              "jenis": "kelurahan",
+              "kode_pos": "62264"
+            },
+            {
+              "kode": "3524142002",
+              "nama": "Kandangsemangkon",
+              "jenis": "desa",
+              "kode_pos": "62264"
+            },
+            {
+              "kode": "3524142003",
+              "nama": "Paciran",
+              "jenis": "desa",
+              "kode_pos": "62264"
+            },
+            {
+              "kode": "3524142004",
+              "nama": "Sumurgayam",
+              "jenis": "desa",
+              "kode_pos": "62264"
+            },
+            {
+              "kode": "3524142005",
+              "nama": "Sendangagung",
+              "jenis": "desa",
+              "kode_pos": "62264"
+            },
+            {
+              "kode": "3524142006",
+              "nama": "Sendangduwur",
+              "jenis": "desa",
+              "kode_pos": "62264"
+            },
+            {
+              "kode": "3524142007",
+              "nama": "Tunggul",
+              "jenis": "desa",
+              "kode_pos": "62264"
+            },
+            {
+              "kode": "3524142008",
+              "nama": "Kranji",
+              "jenis": "desa",
+              "kode_pos": "62264"
+            },
+            {
+              "kode": "3524142009",
+              "nama": "Drajat",
+              "jenis": "desa",
+              "kode_pos": "62264"
+            },
+            {
+              "kode": "3524142010",
+              "nama": "Banjarwati",
+              "jenis": "desa",
+              "kode_pos": "62264"
+            },
+            {
+              "kode": "3524142011",
+              "nama": "Kemantren",
+              "jenis": "desa",
+              "kode_pos": "62264"
+            },
+            {
+              "kode": "3524142012",
+              "nama": "Sidokelar",
+              "jenis": "desa",
+              "kode_pos": "62264"
+            },
+            {
+              "kode": "3524142013",
+              "nama": "Tlogosadang",
+              "jenis": "desa",
+              "kode_pos": "62264"
+            },
+            {
+              "kode": "3524142014",
+              "nama": "Paloh",
+              "jenis": "desa",
+              "kode_pos": "62264"
+            },
+            {
+              "kode": "3524142015",
+              "nama": "Weru",
+              "jenis": "desa",
+              "kode_pos": "62264"
+            },
+            {
+              "kode": "3524142016",
+              "nama": "Sidokumpul",
+              "jenis": "desa",
+              "kode_pos": "62264"
+            },
+            {
+              "kode": "3524142017",
+              "nama": "Warulor",
+              "jenis": "desa",
+              "kode_pos": "62264"
+            }
+          ]
+        },
+        {
+          "kode": "352415",
+          "nama": "Solokuro",
+          "desa_kelurahan": [
+            {
+              "kode": "3524152001",
+              "nama": "Dadapan",
+              "jenis": "desa",
+              "kode_pos": "62265"
+            },
+            {
+              "kode": "3524152002",
+              "nama": "Tebluru",
+              "jenis": "desa",
+              "kode_pos": "62265"
+            },
+            {
+              "kode": "3524152003",
+              "nama": "Sugihan",
+              "jenis": "desa",
+              "kode_pos": "62265"
+            },
+            {
+              "kode": "3524152004",
+              "nama": "Tenggulun",
+              "jenis": "desa",
+              "kode_pos": "62265"
+            },
+            {
+              "kode": "3524152005",
+              "nama": "Payaman",
+              "jenis": "desa",
+              "kode_pos": "62265"
+            },
+            {
+              "kode": "3524152006",
+              "nama": "Solokuro",
+              "jenis": "desa",
+              "kode_pos": "62265"
+            },
+            {
+              "kode": "3524152007",
+              "nama": "Takerharjo",
+              "jenis": "desa",
+              "kode_pos": "62265"
+            },
+            {
+              "kode": "3524152008",
+              "nama": "Dagan",
+              "jenis": "desa",
+              "kode_pos": "62265"
+            },
+            {
+              "kode": "3524152009",
+              "nama": "Banyubang",
+              "jenis": "desa",
+              "kode_pos": "62265"
+            },
+            {
+              "kode": "3524152010",
+              "nama": "Bluri",
+              "jenis": "desa",
+              "kode_pos": "62265"
+            }
+          ]
+        },
+        {
+          "kode": "352416",
+          "nama": "Mantup",
+          "desa_kelurahan": [
+            {
+              "kode": "3524162001",
+              "nama": "Sukobendu",
+              "jenis": "desa",
+              "kode_pos": "62283"
+            },
+            {
+              "kode": "3524162002",
+              "nama": "Tunggunjagir",
+              "jenis": "desa",
+              "kode_pos": "62283"
+            },
+            {
+              "kode": "3524162003",
+              "nama": "Sumberbendo",
+              "jenis": "desa",
+              "kode_pos": "62283"
+            },
+            {
+              "kode": "3524162004",
+              "nama": "Mantup",
+              "jenis": "desa",
+              "kode_pos": "62283"
+            },
+            {
+              "kode": "3524162005",
+              "nama": "Kedukbembem",
+              "jenis": "desa",
+              "kode_pos": "62283"
+            },
+            {
+              "kode": "3524162006",
+              "nama": "Sumberdadi",
+              "jenis": "desa",
+              "kode_pos": "62283"
+            },
+            {
+              "kode": "3524162007",
+              "nama": "Kedungsoko",
+              "jenis": "desa",
+              "kode_pos": "62283"
+            },
+            {
+              "kode": "3524162008",
+              "nama": "Tugu",
+              "jenis": "desa",
+              "kode_pos": "62283"
+            },
+            {
+              "kode": "3524162009",
+              "nama": "Sukosari",
+              "jenis": "desa",
+              "kode_pos": "62283"
+            },
+            {
+              "kode": "3524162010",
+              "nama": "Sumberagung",
+              "jenis": "desa",
+              "kode_pos": "62283"
+            },
+            {
+              "kode": "3524162011",
+              "nama": "Sidomulyo",
+              "jenis": "desa",
+              "kode_pos": "62283"
+            },
+            {
+              "kode": "3524162012",
+              "nama": "Mojosari",
+              "jenis": "desa",
+              "kode_pos": "62283"
+            },
+            {
+              "kode": "3524162013",
+              "nama": "Plabuhanrejo",
+              "jenis": "desa",
+              "kode_pos": "62283"
+            },
+            {
+              "kode": "3524162014",
+              "nama": "Sumberkerep",
+              "jenis": "desa",
+              "kode_pos": "62283"
+            },
+            {
+              "kode": "3524162015",
+              "nama": "Rumpuk",
+              "jenis": "desa",
+              "kode_pos": "62283"
+            }
+          ]
+        },
+        {
+          "kode": "352417",
+          "nama": "Sukodadi",
+          "desa_kelurahan": [
+            {
+              "kode": "3524172001",
+              "nama": "Siwalanrejo",
+              "jenis": "desa",
+              "kode_pos": "62253"
+            },
+            {
+              "kode": "3524172002",
+              "nama": "Kebonsari",
+              "jenis": "desa",
+              "kode_pos": "62253"
+            },
+            {
+              "kode": "3524172003",
+              "nama": "Sukolilo",
+              "jenis": "desa",
+              "kode_pos": "62253"
+            },
+            {
+              "kode": "3524172004",
+              "nama": "Pajangan",
+              "jenis": "desa",
+              "kode_pos": "62253"
+            },
+            {
+              "kode": "3524172005",
+              "nama": "Kadungrembug",
+              "jenis": "desa",
+              "kode_pos": "62253"
+            },
+            {
+              "kode": "3524172006",
+              "nama": "Sumberagung",
+              "jenis": "desa",
+              "kode_pos": "62253"
+            },
+            {
+              "kode": "3524172007",
+              "nama": "Sukodadi",
+              "jenis": "desa",
+              "kode_pos": "62253"
+            },
+            {
+              "kode": "3524172008",
+              "nama": "Sumberaji",
+              "jenis": "desa",
+              "kode_pos": "62253"
+            },
+            {
+              "kode": "3524172009",
+              "nama": "Menongo",
+              "jenis": "desa",
+              "kode_pos": "62253"
+            },
+            {
+              "kode": "3524172010",
+              "nama": "Madulegi",
+              "jenis": "desa",
+              "kode_pos": "62253"
+            },
+            {
+              "kode": "3524172011",
+              "nama": "Banjarejo",
+              "jenis": "desa",
+              "kode_pos": "62253"
+            },
+            {
+              "kode": "3524172012",
+              "nama": "Plumpang",
+              "jenis": "desa",
+              "kode_pos": "62253"
+            },
+            {
+              "kode": "3524172013",
+              "nama": "Bandungsari",
+              "jenis": "desa",
+              "kode_pos": "62253"
+            },
+            {
+              "kode": "3524172014",
+              "nama": "Sidogembul",
+              "jenis": "desa",
+              "kode_pos": "62253"
+            },
+            {
+              "kode": "3524172015",
+              "nama": "Balongtawun",
+              "jenis": "desa",
+              "kode_pos": "62253"
+            },
+            {
+              "kode": "3524172016",
+              "nama": "Gedangan",
+              "jenis": "desa",
+              "kode_pos": "62253"
+            },
+            {
+              "kode": "3524172017",
+              "nama": "Tlogorejo",
+              "jenis": "desa",
+              "kode_pos": "62253"
+            },
+            {
+              "kode": "3524172018",
+              "nama": "Baturono",
+              "jenis": "desa",
+              "kode_pos": "62253"
+            },
+            {
+              "kode": "3524172019",
+              "nama": "Surabayan",
+              "jenis": "desa",
+              "kode_pos": "62253"
+            },
+            {
+              "kode": "3524172020",
+              "nama": "Sugihrejo",
+              "jenis": "desa",
+              "kode_pos": "62253"
+            }
+          ]
+        },
+        {
+          "kode": "352418",
+          "nama": "Karanggeneng",
+          "desa_kelurahan": [
+            {
+              "kode": "3524182001",
+              "nama": "Bantengputih",
+              "jenis": "desa",
+              "kode_pos": "62254"
+            },
+            {
+              "kode": "3524182002",
+              "nama": "Karangrejo",
+              "jenis": "desa",
+              "kode_pos": "62254"
+            },
+            {
+              "kode": "3524182003",
+              "nama": "Latukan",
+              "jenis": "desa",
+              "kode_pos": "62254"
+            },
+            {
+              "kode": "3524182004",
+              "nama": "Guci",
+              "jenis": "desa",
+              "kode_pos": "62254"
+            },
+            {
+              "kode": "3524182005",
+              "nama": "Kaligerman",
+              "jenis": "desa",
+              "kode_pos": "62254"
+            },
+            {
+              "kode": "3524182006",
+              "nama": "Sungelebak",
+              "jenis": "desa",
+              "kode_pos": "62254"
+            },
+            {
+              "kode": "3524182007",
+              "nama": "Prijekngablak",
+              "jenis": "desa",
+              "kode_pos": "62254"
+            },
+            {
+              "kode": "3524182008",
+              "nama": "Tracal",
+              "jenis": "desa",
+              "kode_pos": "62254"
+            },
+            {
+              "kode": "3524182009",
+              "nama": "Sonoadi",
+              "jenis": "desa",
+              "kode_pos": "62254"
+            },
+            {
+              "kode": "3524182010",
+              "nama": "Kalanganyar",
+              "jenis": "desa",
+              "kode_pos": "62254"
+            },
+            {
+              "kode": "3524182011",
+              "nama": "Banjarmadu",
+              "jenis": "desa",
+              "kode_pos": "62254"
+            },
+            {
+              "kode": "3524182012",
+              "nama": "Kendalkemlagi",
+              "jenis": "desa",
+              "kode_pos": "62254"
+            },
+            {
+              "kode": "3524182013",
+              "nama": "Kawistolegi",
+              "jenis": "desa",
+              "kode_pos": "62254"
+            },
+            {
+              "kode": "3524182014",
+              "nama": "Jagran",
+              "jenis": "desa",
+              "kode_pos": "62254"
+            },
+            {
+              "kode": "3524182015",
+              "nama": "Karangwungu",
+              "jenis": "desa",
+              "kode_pos": "62254"
+            },
+            {
+              "kode": "3524182016",
+              "nama": "Sumberwudi",
+              "jenis": "desa",
+              "kode_pos": "62254"
+            },
+            {
+              "kode": "3524182017",
+              "nama": "Karanggeneng",
+              "jenis": "desa",
+              "kode_pos": "62254"
+            },
+            {
+              "kode": "3524182018",
+              "nama": "Mertani",
+              "jenis": "desa",
+              "kode_pos": "62254"
+            }
+          ]
+        },
+        {
+          "kode": "352419",
+          "nama": "Kembangbahu",
+          "desa_kelurahan": [
+            {
+              "kode": "3524192001",
+              "nama": "Tlogoagung",
+              "jenis": "desa",
+              "kode_pos": "62282"
+            },
+            {
+              "kode": "3524192002",
+              "nama": "Kedungmegarih",
+              "jenis": "desa",
+              "kode_pos": "62282"
+            },
+            {
+              "kode": "3524192003",
+              "nama": "Sidomukti",
+              "jenis": "desa",
+              "kode_pos": "62282"
+            },
+            {
+              "kode": "3524192004",
+              "nama": "Sukosongo",
+              "jenis": "desa",
+              "kode_pos": "62282"
+            },
+            {
+              "kode": "3524192005",
+              "nama": "Kaliwates",
+              "jenis": "desa",
+              "kode_pos": "62282"
+            },
+            {
+              "kode": "3524192006",
+              "nama": "Kedungasri",
+              "jenis": "desa",
+              "kode_pos": "62282"
+            },
+            {
+              "kode": "3524192007",
+              "nama": "Doyomulyo",
+              "jenis": "desa",
+              "kode_pos": "62282"
+            },
+            {
+              "kode": "3524192008",
+              "nama": "Kembangbahu",
+              "jenis": "desa",
+              "kode_pos": "62282"
+            },
+            {
+              "kode": "3524192009",
+              "nama": "Maor",
+              "jenis": "desa",
+              "kode_pos": "62282"
+            },
+            {
+              "kode": "3524192010",
+              "nama": "Moronyamplung",
+              "jenis": "desa",
+              "kode_pos": "62282"
+            },
+            {
+              "kode": "3524192011",
+              "nama": "Mangkujajar",
+              "jenis": "desa",
+              "kode_pos": "62282"
+            },
+            {
+              "kode": "3524192012",
+              "nama": "Puter",
+              "jenis": "desa",
+              "kode_pos": "62282"
+            },
+            {
+              "kode": "3524192013",
+              "nama": "Pelang",
+              "jenis": "desa",
+              "kode_pos": "62282"
+            },
+            {
+              "kode": "3524192014",
+              "nama": "Dumpiagung",
+              "jenis": "desa",
+              "kode_pos": "62282"
+            },
+            {
+              "kode": "3524192015",
+              "nama": "Randubener",
+              "jenis": "desa",
+              "kode_pos": "62282"
+            },
+            {
+              "kode": "3524192016",
+              "nama": "Lopang",
+              "jenis": "desa",
+              "kode_pos": "62282"
+            },
+            {
+              "kode": "3524192017",
+              "nama": "Gintungan",
+              "jenis": "desa",
+              "kode_pos": "62282"
+            },
+            {
+              "kode": "3524192018",
+              "nama": "Katemas",
+              "jenis": "desa",
+              "kode_pos": "62282"
+            }
+          ]
+        },
+        {
+          "kode": "352420",
+          "nama": "Kalitengah",
+          "desa_kelurahan": [
+            {
+              "kode": "3524202001",
+              "nama": "Pucangro",
+              "jenis": "desa",
+              "kode_pos": "62255"
+            },
+            {
+              "kode": "3524202002",
+              "nama": "Pucangtelu",
+              "jenis": "desa",
+              "kode_pos": "62255"
+            },
+            {
+              "kode": "3524202003",
+              "nama": "Somosari",
+              "jenis": "desa",
+              "kode_pos": "62255"
+            },
+            {
+              "kode": "3524202004",
+              "nama": "Jelakcatur",
+              "jenis": "desa",
+              "kode_pos": "62255"
+            },
+            {
+              "kode": "3524202005",
+              "nama": "Mungli",
+              "jenis": "desa",
+              "kode_pos": "62255"
+            },
+            {
+              "kode": "3524202006",
+              "nama": "Pengangsalan",
+              "jenis": "desa",
+              "kode_pos": "62255"
+            },
+            {
+              "kode": "3524202007",
+              "nama": "Dibee",
+              "jenis": "desa",
+              "kode_pos": "62255"
+            },
+            {
+              "kode": "3524202008",
+              "nama": "Butungan",
+              "jenis": "desa",
+              "kode_pos": "62255"
+            },
+            {
+              "kode": "3524202009",
+              "nama": "Lukrejo",
+              "jenis": "desa",
+              "kode_pos": "62255"
+            },
+            {
+              "kode": "3524202010",
+              "nama": "Tiwet",
+              "jenis": "desa",
+              "kode_pos": "62255"
+            },
+            {
+              "kode": "3524202011",
+              "nama": "Blajo",
+              "jenis": "desa",
+              "kode_pos": "62255"
+            },
+            {
+              "kode": "3524202012",
+              "nama": "Kalitengah",
+              "jenis": "desa",
+              "kode_pos": "62255"
+            },
+            {
+              "kode": "3524202013",
+              "nama": "Gambuhan",
+              "jenis": "desa",
+              "kode_pos": "62255"
+            },
+            {
+              "kode": "3524202014",
+              "nama": "Cluring",
+              "jenis": "desa",
+              "kode_pos": "62255"
+            },
+            {
+              "kode": "3524202015",
+              "nama": "Bojoasri",
+              "jenis": "desa",
+              "kode_pos": "62255"
+            },
+            {
+              "kode": "3524202016",
+              "nama": "Kediren",
+              "jenis": "desa",
+              "kode_pos": "62255"
+            },
+            {
+              "kode": "3524202017",
+              "nama": "Kuluran",
+              "jenis": "desa",
+              "kode_pos": "62255"
+            },
+            {
+              "kode": "3524202018",
+              "nama": "Canditunggal",
+              "jenis": "desa",
+              "kode_pos": "62255"
+            },
+            {
+              "kode": "3524202019",
+              "nama": "Sugihwaras",
+              "jenis": "desa",
+              "kode_pos": "62255"
+            },
+            {
+              "kode": "3524202020",
+              "nama": "Tunjungmekar",
+              "jenis": "desa",
+              "kode_pos": "62255"
+            }
+          ]
+        },
+        {
+          "kode": "352421",
+          "nama": "Turi",
+          "desa_kelurahan": [
+            {
+              "kode": "3524212001",
+              "nama": "Geger",
+              "jenis": "desa",
+              "kode_pos": "62252"
+            },
+            {
+              "kode": "3524212002",
+              "nama": "Badurame",
+              "jenis": "desa",
+              "kode_pos": "62252"
+            },
+            {
+              "kode": "3524212003",
+              "nama": "Karangwedoro",
+              "jenis": "desa",
+              "kode_pos": "62252"
+            },
+            {
+              "kode": "3524212004",
+              "nama": "Wangunrejo",
+              "jenis": "desa",
+              "kode_pos": "62252"
+            },
+            {
+              "kode": "3524212005",
+              "nama": "Putatkumpul",
+              "jenis": "desa",
+              "kode_pos": "62252"
+            },
+            {
+              "kode": "3524212006",
+              "nama": "Keben",
+              "jenis": "desa",
+              "kode_pos": "62252"
+            },
+            {
+              "kode": "3524212007",
+              "nama": "Sukoanyar",
+              "jenis": "desa",
+              "kode_pos": "62252"
+            },
+            {
+              "kode": "3524212008",
+              "nama": "Kemlagigede",
+              "jenis": "desa",
+              "kode_pos": "62252"
+            },
+            {
+              "kode": "3524212009",
+              "nama": "Turi",
+              "jenis": "desa",
+              "kode_pos": "62252"
+            },
+            {
+              "kode": "3524212010",
+              "nama": "Kemlagilor",
+              "jenis": "desa",
+              "kode_pos": "62252"
+            },
+            {
+              "kode": "3524212011",
+              "nama": "Sukorejo",
+              "jenis": "desa",
+              "kode_pos": "62252"
+            },
+            {
+              "kode": "3524212012",
+              "nama": "Tawangrejo",
+              "jenis": "desa",
+              "kode_pos": "62252"
+            },
+            {
+              "kode": "3524212013",
+              "nama": "Bambang",
+              "jenis": "desa",
+              "kode_pos": "62252"
+            },
+            {
+              "kode": "3524212014",
+              "nama": "Pomahanjanggan",
+              "jenis": "desa",
+              "kode_pos": "62252"
+            },
+            {
+              "kode": "3524212015",
+              "nama": "Tambakploso",
+              "jenis": "desa",
+              "kode_pos": "62252"
+            },
+            {
+              "kode": "3524212016",
+              "nama": "Balun",
+              "jenis": "desa",
+              "kode_pos": "62252"
+            },
+            {
+              "kode": "3524212017",
+              "nama": "Ngujungrejo",
+              "jenis": "desa",
+              "kode_pos": "62252"
+            },
+            {
+              "kode": "3524212018",
+              "nama": "Kepudibener",
+              "jenis": "desa",
+              "kode_pos": "62252"
+            },
+            {
+              "kode": "3524212019",
+              "nama": "Gedungboyountung",
+              "jenis": "desa",
+              "kode_pos": "62252"
+            }
+          ]
+        },
+        {
+          "kode": "352422",
+          "nama": "Lamongan",
+          "desa_kelurahan": [
+            {
+              "kode": "3524221012",
+              "nama": "Sukorejo",
+              "jenis": "kelurahan",
+              "kode_pos": "62215"
+            },
+            {
+              "kode": "3524221013",
+              "nama": "Sukomulyo",
+              "jenis": "kelurahan",
+              "kode_pos": "62216"
+            },
+            {
+              "kode": "3524221014",
+              "nama": "Sidoharjo",
+              "jenis": "kelurahan",
+              "kode_pos": "62217"
+            },
+            {
+              "kode": "3524221015",
+              "nama": "Tumenggungan",
+              "jenis": "kelurahan",
+              "kode_pos": "62214"
+            },
+            {
+              "kode": "3524221017",
+              "nama": "Sidokumpul",
+              "jenis": "kelurahan",
+              "kode_pos": "62213"
+            },
+            {
+              "kode": "3524221018",
+              "nama": "Tlogoanyar",
+              "jenis": "kelurahan",
+              "kode_pos": "62218"
+            },
+            {
+              "kode": "3524221019",
+              "nama": "Jetis",
+              "jenis": "kelurahan",
+              "kode_pos": "62211"
+            },
+            {
+              "kode": "3524221020",
+              "nama": "Banjarmendalan",
+              "jenis": "kelurahan",
+              "kode_pos": "62212"
+            },
+            {
+              "kode": "3524222001",
+              "nama": "Rancangkencono",
+              "jenis": "desa",
+              "kode_pos": "62218"
+            },
+            {
+              "kode": "3524222002",
+              "nama": "Karanglangit",
+              "jenis": "desa",
+              "kode_pos": "62218"
+            },
+            {
+              "kode": "3524222003",
+              "nama": "Pangkatrejo",
+              "jenis": "desa",
+              "kode_pos": "62218"
+            },
+            {
+              "kode": "3524222004",
+              "nama": "Kebet",
+              "jenis": "desa",
+              "kode_pos": "62218"
+            },
+            {
+              "kode": "3524222005",
+              "nama": "Sendangrejo",
+              "jenis": "desa",
+              "kode_pos": "62218"
+            },
+            {
+              "kode": "3524222006",
+              "nama": "Sumberjo",
+              "jenis": "desa",
+              "kode_pos": "62218"
+            },
+            {
+              "kode": "3524222007",
+              "nama": "Tanjung",
+              "jenis": "desa",
+              "kode_pos": "62218"
+            },
+            {
+              "kode": "3524222008",
+              "nama": "Plosowahyu",
+              "jenis": "desa",
+              "kode_pos": "62218"
+            },
+            {
+              "kode": "3524222009",
+              "nama": "Wajik",
+              "jenis": "desa",
+              "kode_pos": "62218"
+            },
+            {
+              "kode": "3524222010",
+              "nama": "Kramat",
+              "jenis": "desa",
+              "kode_pos": "62218"
+            },
+            {
+              "kode": "3524222011",
+              "nama": "Made",
+              "jenis": "desa",
+              "kode_pos": "62218"
+            },
+            {
+              "kode": "3524222016",
+              "nama": "Sidomukti",
+              "jenis": "desa",
+              "kode_pos": "62218"
+            }
+          ]
+        },
+        {
+          "kode": "352423",
+          "nama": "Tikung",
+          "desa_kelurahan": [
+            {
+              "kode": "3524232001",
+              "nama": "Wonokromo",
+              "jenis": "desa",
+              "kode_pos": "62280"
+            },
+            {
+              "kode": "3524232002",
+              "nama": "Soko",
+              "jenis": "desa",
+              "kode_pos": "62280"
+            },
+            {
+              "kode": "3524232003",
+              "nama": "Guminingrejo",
+              "jenis": "desa",
+              "kode_pos": "62280"
+            },
+            {
+              "kode": "3524232004",
+              "nama": "Bakalanpule",
+              "jenis": "desa",
+              "kode_pos": "62280"
+            },
+            {
+              "kode": "3524232005",
+              "nama": "Takeranklating",
+              "jenis": "desa",
+              "kode_pos": "62280"
+            },
+            {
+              "kode": "3524232006",
+              "nama": "Kelorarum",
+              "jenis": "desa",
+              "kode_pos": "62280"
+            },
+            {
+              "kode": "3524232007",
+              "nama": "Jotosanur",
+              "jenis": "desa",
+              "kode_pos": "62280"
+            },
+            {
+              "kode": "3524232008",
+              "nama": "Pengumbulanadi",
+              "jenis": "desa",
+              "kode_pos": "62280"
+            },
+            {
+              "kode": "3524232009",
+              "nama": "Jatirejo",
+              "jenis": "desa",
+              "kode_pos": "62280"
+            },
+            {
+              "kode": "3524232010",
+              "nama": "Dukuhagung",
+              "jenis": "desa",
+              "kode_pos": "62280"
+            },
+            {
+              "kode": "3524232011",
+              "nama": "Tambakrigadung",
+              "jenis": "desa",
+              "kode_pos": "62280"
+            },
+            {
+              "kode": "3524232012",
+              "nama": "Botoputih",
+              "jenis": "desa",
+              "kode_pos": "62280"
+            },
+            {
+              "kode": "3524232013",
+              "nama": "Balongwangi",
+              "jenis": "desa",
+              "kode_pos": "62280"
+            }
+          ]
+        },
+        {
+          "kode": "352424",
+          "nama": "Karangbinangun",
+          "desa_kelurahan": [
+            {
+              "kode": "3524242001",
+              "nama": "Waruk",
+              "jenis": "desa",
+              "kode_pos": "62293"
+            },
+            {
+              "kode": "3524242002",
+              "nama": "Sukorejo",
+              "jenis": "desa",
+              "kode_pos": "62293"
+            },
+            {
+              "kode": "3524242003",
+              "nama": "Karanganom",
+              "jenis": "desa",
+              "kode_pos": "62293"
+            },
+            {
+              "kode": "3524242004",
+              "nama": "Somowinangun",
+              "jenis": "desa",
+              "kode_pos": "62293"
+            },
+            {
+              "kode": "3524242005",
+              "nama": "Ketapangtelu",
+              "jenis": "desa",
+              "kode_pos": "62293"
+            },
+            {
+              "kode": "3524242006",
+              "nama": "Mayong",
+              "jenis": "desa",
+              "kode_pos": "62293"
+            },
+            {
+              "kode": "3524242007",
+              "nama": "Palangan",
+              "jenis": "desa",
+              "kode_pos": "62293"
+            },
+            {
+              "kode": "3524242008",
+              "nama": "Blawi",
+              "jenis": "desa",
+              "kode_pos": "62293"
+            },
+            {
+              "kode": "3524242009",
+              "nama": "Banjarejo",
+              "jenis": "desa",
+              "kode_pos": "62293"
+            },
+            {
+              "kode": "3524242010",
+              "nama": "Putatbangah",
+              "jenis": "desa",
+              "kode_pos": "62293"
+            },
+            {
+              "kode": "3524242011",
+              "nama": "Banyuurip",
+              "jenis": "desa",
+              "kode_pos": "62293"
+            },
+            {
+              "kode": "3524242012",
+              "nama": "Pendowolimo",
+              "jenis": "desa",
+              "kode_pos": "62293"
+            },
+            {
+              "kode": "3524242013",
+              "nama": "Baranggayam",
+              "jenis": "desa",
+              "kode_pos": "62293"
+            },
+            {
+              "kode": "3524242014",
+              "nama": "Watangpanjang",
+              "jenis": "desa",
+              "kode_pos": "62293"
+            },
+            {
+              "kode": "3524242015",
+              "nama": "Sambopinggir",
+              "jenis": "desa",
+              "kode_pos": "62293"
+            },
+            {
+              "kode": "3524242016",
+              "nama": "Priyoso",
+              "jenis": "desa",
+              "kode_pos": "62293"
+            },
+            {
+              "kode": "3524242017",
+              "nama": "Windu",
+              "jenis": "desa",
+              "kode_pos": "62293"
+            },
+            {
+              "kode": "3524242018",
+              "nama": "Bogobabadan",
+              "jenis": "desa",
+              "kode_pos": "62293"
+            },
+            {
+              "kode": "3524242019",
+              "nama": "Gawerejo",
+              "jenis": "desa",
+              "kode_pos": "62293"
+            },
+            {
+              "kode": "3524242020",
+              "nama": "Kuro",
+              "jenis": "desa",
+              "kode_pos": "62293"
+            },
+            {
+              "kode": "3524242021",
+              "nama": "Karangbinangun",
+              "jenis": "desa",
+              "kode_pos": "62293"
+            }
+          ]
+        },
+        {
+          "kode": "352425",
+          "nama": "Deket",
+          "desa_kelurahan": [
+            {
+              "kode": "3524252001",
+              "nama": "Sidorejo",
+              "jenis": "desa",
+              "kode_pos": "62291"
+            },
+            {
+              "kode": "3524252002",
+              "nama": "Dlanggu",
+              "jenis": "desa",
+              "kode_pos": "62291"
+            },
+            {
+              "kode": "3524252003",
+              "nama": "Laladan",
+              "jenis": "desa",
+              "kode_pos": "62291"
+            },
+            {
+              "kode": "3524252004",
+              "nama": "Deketkulon",
+              "jenis": "desa",
+              "kode_pos": "62291"
+            },
+            {
+              "kode": "3524252005",
+              "nama": "Deketwetan",
+              "jenis": "desa",
+              "kode_pos": "62291"
+            },
+            {
+              "kode": "3524252006",
+              "nama": "Sugihwaras",
+              "jenis": "desa",
+              "kode_pos": "62291"
+            },
+            {
+              "kode": "3524252007",
+              "nama": "Dinoyo",
+              "jenis": "desa",
+              "kode_pos": "62291"
+            },
+            {
+              "kode": "3524252008",
+              "nama": "Sidomulyo",
+              "jenis": "desa",
+              "kode_pos": "62291"
+            },
+            {
+              "kode": "3524252009",
+              "nama": "Rejosari",
+              "jenis": "desa",
+              "kode_pos": "62291"
+            },
+            {
+              "kode": "3524252010",
+              "nama": "Pandanpancur",
+              "jenis": "desa",
+              "kode_pos": "62291"
+            },
+            {
+              "kode": "3524252011",
+              "nama": "Sidobinangun",
+              "jenis": "desa",
+              "kode_pos": "62291"
+            },
+            {
+              "kode": "3524252012",
+              "nama": "Babatagung",
+              "jenis": "desa",
+              "kode_pos": "62291"
+            },
+            {
+              "kode": "3524252013",
+              "nama": "Tukkerto",
+              "jenis": "desa",
+              "kode_pos": "62291"
+            },
+            {
+              "kode": "3524252014",
+              "nama": "Weduni",
+              "jenis": "desa",
+              "kode_pos": "62291"
+            },
+            {
+              "kode": "3524252015",
+              "nama": "Rejotengah",
+              "jenis": "desa",
+              "kode_pos": "62291"
+            },
+            {
+              "kode": "3524252016",
+              "nama": "Srirande",
+              "jenis": "desa",
+              "kode_pos": "62291"
+            },
+            {
+              "kode": "3524252017",
+              "nama": "Plosobuden",
+              "jenis": "desa",
+              "kode_pos": "62291"
+            }
+          ]
+        },
+        {
+          "kode": "352426",
+          "nama": "Glagah",
+          "desa_kelurahan": [
+            {
+              "kode": "3524262001",
+              "nama": "Soko",
+              "jenis": "desa",
+              "kode_pos": "62292"
+            },
+            {
+              "kode": "3524262002",
+              "nama": "Morocalan",
+              "jenis": "desa",
+              "kode_pos": "62292"
+            },
+            {
+              "kode": "3524262003",
+              "nama": "Gempolpendowo",
+              "jenis": "desa",
+              "kode_pos": "62292"
+            },
+            {
+              "kode": "3524262004",
+              "nama": "Pasi",
+              "jenis": "desa",
+              "kode_pos": "62292"
+            },
+            {
+              "kode": "3524262005",
+              "nama": "Rayunggumuk",
+              "jenis": "desa",
+              "kode_pos": "62292"
+            },
+            {
+              "kode": "3524262006",
+              "nama": "Menganti",
+              "jenis": "desa",
+              "kode_pos": "62292"
+            },
+            {
+              "kode": "3524262007",
+              "nama": "Margoanyar",
+              "jenis": "desa",
+              "kode_pos": "62292"
+            },
+            {
+              "kode": "3524262008",
+              "nama": "Began",
+              "jenis": "desa",
+              "kode_pos": "62292"
+            },
+            {
+              "kode": "3524262009",
+              "nama": "Mendogo",
+              "jenis": "desa",
+              "kode_pos": "62292"
+            },
+            {
+              "kode": "3524262010",
+              "nama": "Kentong",
+              "jenis": "desa",
+              "kode_pos": "62292"
+            },
+            {
+              "kode": "3524262011",
+              "nama": "Sudangan",
+              "jenis": "desa",
+              "kode_pos": "62292"
+            },
+            {
+              "kode": "3524262012",
+              "nama": "Medang",
+              "jenis": "desa",
+              "kode_pos": "62292"
+            },
+            {
+              "kode": "3524262013",
+              "nama": "Duduklor",
+              "jenis": "desa",
+              "kode_pos": "62292"
+            },
+            {
+              "kode": "3524262014",
+              "nama": "Glagah",
+              "jenis": "desa",
+              "kode_pos": "62292"
+            },
+            {
+              "kode": "3524262015",
+              "nama": "Wangen",
+              "jenis": "desa",
+              "kode_pos": "62292"
+            },
+            {
+              "kode": "3524262016",
+              "nama": "Tanggungprigel",
+              "jenis": "desa",
+              "kode_pos": "62292"
+            },
+            {
+              "kode": "3524262017",
+              "nama": "Karangagung",
+              "jenis": "desa",
+              "kode_pos": "62292"
+            },
+            {
+              "kode": "3524262018",
+              "nama": "Bangkok",
+              "jenis": "desa",
+              "kode_pos": "62292"
+            },
+            {
+              "kode": "3524262019",
+              "nama": "Jatirenggo",
+              "jenis": "desa",
+              "kode_pos": "62292"
+            },
+            {
+              "kode": "3524262020",
+              "nama": "Bapuhbaru",
+              "jenis": "desa",
+              "kode_pos": "62292"
+            },
+            {
+              "kode": "3524262021",
+              "nama": "Bapuhbandung",
+              "jenis": "desa",
+              "kode_pos": "62292"
+            },
+            {
+              "kode": "3524262022",
+              "nama": "Meluntur",
+              "jenis": "desa",
+              "kode_pos": "62292"
+            },
+            {
+              "kode": "3524262023",
+              "nama": "Konang",
+              "jenis": "desa",
+              "kode_pos": "62292"
+            },
+            {
+              "kode": "3524262024",
+              "nama": "Dukuhtunggal",
+              "jenis": "desa",
+              "kode_pos": "62292"
+            },
+            {
+              "kode": "3524262025",
+              "nama": "Panggang",
+              "jenis": "desa",
+              "kode_pos": "62292"
+            },
+            {
+              "kode": "3524262026",
+              "nama": "Wonorejo",
+              "jenis": "desa",
+              "kode_pos": "62292"
+            },
+            {
+              "kode": "3524262027",
+              "nama": "Wedoro",
+              "jenis": "desa",
+              "kode_pos": "62292"
+            },
+            {
+              "kode": "3524262028",
+              "nama": "Karangturi",
+              "jenis": "desa",
+              "kode_pos": "62292"
+            },
+            {
+              "kode": "3524262029",
+              "nama": "Meluwur",
+              "jenis": "desa",
+              "kode_pos": "62292"
+            }
+          ]
+        },
+        {
+          "kode": "352427",
+          "nama": "Sarirejo",
+          "desa_kelurahan": [
+            {
+              "kode": "3524272001",
+              "nama": "Kedungkumpul",
+              "jenis": "desa",
+              "kode_pos": "62281"
+            },
+            {
+              "kode": "3524272002",
+              "nama": "Dermolemahbang",
+              "jenis": "desa",
+              "kode_pos": "62281"
+            },
+            {
+              "kode": "3524272003",
+              "nama": "Simbatan",
+              "jenis": "desa",
+              "kode_pos": "62281"
+            },
+            {
+              "kode": "3524272004",
+              "nama": "Sumberjo",
+              "jenis": "desa",
+              "kode_pos": "62281"
+            },
+            {
+              "kode": "3524272005",
+              "nama": "Canggah",
+              "jenis": "desa",
+              "kode_pos": "62281"
+            },
+            {
+              "kode": "3524272006",
+              "nama": "Beru",
+              "jenis": "desa",
+              "kode_pos": "62281"
+            },
+            {
+              "kode": "3524272007",
+              "nama": "Tambakmenjangan",
+              "jenis": "desa",
+              "kode_pos": "62281"
+            },
+            {
+              "kode": "3524272008",
+              "nama": "Gempoltukmloko",
+              "jenis": "desa",
+              "kode_pos": "62281"
+            },
+            {
+              "kode": "3524272009",
+              "nama": "Sarirejo",
+              "jenis": "desa",
+              "kode_pos": "62281"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
