@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "status": "unavailable",
+  "source": "Panel Harga Badan Pangan",
+  "sources": [
+    {
+      "name": "Panel Harga Badan Pangan",
+      "url": "https://panelharga.badanpangan.go.id",
+      "role": "Harga gabah dan beras tingkat petani"
+    },
+    {
+      "name": "SISKAPERBAPO Jawa Timur",
+      "url": "https://siskaperbapo.indagjatim.com/display/show",
+      "role": "Harga konsumen dan pasar Jawa Timur"
+    },
+    {
+      "name": "PIHPS Nasional · Bank Indonesia",
+      "url": "https://www.bi.go.id/hargapangan",
+      "role": "Harga rata-rata dan perubahan antar daerah"
+    }
+  ],
+  "fetchedAt": null,
+  "lastSuccessfulFetch": null,
+  "records": [],
+  "errors": [
+    "https://panelharga.badanpangan.go.id/api/harga/harian-provinsi?provinsi_id=11: respons bukan JSON (text/html)",
+    "https://panelharga.badanpangan.go.id/api/harga/pasar-modern?provinsi_id=11: respons bukan JSON (text/html)"
+  ],
+  "lastAttemptAt": "2026-09-24T08:14:54+00:00"
+}
