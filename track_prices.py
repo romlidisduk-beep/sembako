@@ -1,3 +1,353 @@
+#!/usr/bin/env python3
+"""Pelacak harga sembako Gresik-Lamongan.
+
+Dependensi: Python standard library saja.
+Sumber harga pasar: SISKAPERBAPO Jawa Timur.
+"""
+
+from __future__ import annotations
+
+import argparse
+import csv
+import html
+import json
+import math
+import os
+import re
+import sys
+import time
+from collections import defaultdict
+from dataclasses import dataclass
+from datetime import datetime, timedelta
+from pathlib import Path
+from typing import Any
+from urllib.error import HTTPError, URLError
+from urllib.parse import urlencode
+from urllib.request import Request, urlopen
+from zoneinfo import ZoneInfo
+
+
+SOURCE_BASE = "https://siskaperbapo.indagjatim.com"
+ROOT = Path(__file__).resolve().parent
+DATA_DIR = ROOT / "data"
+DEFAULT_HISTORY = DATA_DIR / "price-history.csv"
+DEFAULT_REPORT = DATA_DIR / "latest-price-report.json"
+DEFAULT_RETAIL = DATA_DIR / "retail-prices.csv"
+
+AREAS: dict[str, dict[str, str]] = {
+    "gresik": {"label": "Kabupaten Gresik", "keycode": "gresikkab"},
+    "lamongan": {"label": "Kabupaten Lamongan", "keycode": "lamongankab"},
+}
+
+# --- Referensi nasional/gabah (pelengkap, di luar SISKAPERBAPO) ---------
+#
+# Sumber ini melacak harga GABAH/beras di tingkat produsen, bukan harga
+# konsumen per pasar seperti di atas. Semuanya BUKAN real-time:
+#   - Panel Harga Bapanas & PIHPS  : publikasi harian (siang, ~13.00 WIB)
+#   - BPS Kabupaten Gresik/Lamongan: repost rilis NTP + harga gabah Jatim,
+#                                    BULANAN (sekitar tanggal 1-5)
+#   - HPP Bulog/KDMP               : bukan hasil scraping, angka acuan tetap
+#                                    yang hanya berubah kalau ada Perbadan/SK
+#                                    baru — ganti manual di HPP_KDMP_DEFAULT.
+#   - Harga pengepul/tengkulak     : TIDAK ADA sumber publik untuk ini (itu
+#                                    transaksi langsung di lapangan), jadi
+#                                    kolomnya kosong dan harus diisi manual.
+NATIONAL_REFERENCE_URLS = {
+    "panelBapanas": "https://panelharga.badanpangan.go.id/",
+    "pihps": "https://www.hargapangan.id/",
+}
+BPS_KABUPATEN_URLS = {
+    "gresik": "https://gresikkab.bps.go.id",
+    "lamongan": "https://lamongankab.bps.go.id",
+}
+HPP_KDMP_DEFAULT = 6500
+DEFAULT_NATIONAL_HISTORY = DATA_DIR / "national-reference-history.csv"
+NATIONAL_CSV_FIELDS = [
+    "date",
+    "panelBapanas",
+    "pihps",
+    "bpsGresik",
+    "bpsLamongan",
+    "hppKdmp",
+    "pengepulManual",
+]
+
+
+@dataclass(frozen=True)
+class Commodity:
+    key: str
+    label: str
+    source_label: str
+    unit: str
+
+
+COMMODITIES = [
+    Commodity("beras-premium", "Beras premium", "Beras Premium / kg", "kg"),
+    Commodity("beras-medium", "Beras medium", "Beras Medium / kg", "kg"),
+    Commodity("gula", "Gula kristal putih", "Gula Kristal Putih / kg", "kg"),
+    Commodity("minyak-curah", "Minyak goreng curah", "Minyak Goreng Curah / kg", "kg"),
+    Commodity("minyakita", "Minyakita", "Minyak Goreng MINYAKITA / liter", "liter"),
+    Commodity("ayam", "Daging ayam ras", "Daging Ayam Ras / kg", "kg"),
+    Commodity("telur", "Telur ayam ras", "Telur Ayam Ras / kg", "kg"),
+    Commodity("sapi", "Daging sapi paha belakang", "Daging Sapi Paha Belakang / kg", "kg"),
+    Commodity("cabai-keriting", "Cabai merah keriting", "Cabe Merah Keriting / kg", "kg"),
+    Commodity("cabai-besar", "Cabai merah besar", "Cabe Merah Besar / kg", "kg"),
+    Commodity("cabai-rawit", "Cabai rawit merah", "Cabe Rawit Merah / kg", "kg"),
+    Commodity("bawang-merah", "Bawang merah", "Bawang Merah / kg", "kg"),
+    Commodity("bawang-putih", "Bawang putih", "Bawang Putih / kg", "kg"),
+    Commodity("lpg", "LPG 3 kg", "GAS ELPIGI 3 Kg", "tabung"),
+]
+
+COMMODITY_BY_KEY = {commodity.key: commodity for commodity in COMMODITIES}
+SOURCE_TYPES = {"pasar rakyat", "toko", "koperasi", "swalayan"}
+CSV_FIELDS = [
+    "date",
+    "area",
+    "marketId",
+    "location",
+    "sourceType",
+    "commodityKey",
+    "commodity",
+    "brand",
+    "productName",
+    "size",
+    "unit",
+    "price",
+    "priceType",
+    "stockStatus",
+    "confidence",
+    "observedAt",
+    "address",
+    "sourceUrl",
+]
+SIZE_PATTERN = re.compile(
+    r"^\s*(?P<quantity>\d+(?:[.,]\d+)?)\s*"
+    r"(?P<unit>kg|kilogram|g|gram|liter|litre|l|ml|tabung|unit|pcs|buah|ekor|bungkus)\b",
+    re.IGNORECASE,
+)
+UNIT_ALIASES = {
+    "kilogram": "kg",
+    "gram": "g",
+    "litre": "liter",
+    "l": "liter",
+    "ml": "ml",
+    "tabung": "tabung",
+    "unit": "unit",
+    "pcs": "pcs",
+    "buah": "buah",
+    "ekor": "ekor",
+    "bungkus": "bungkus",
+}
+
+
+def today_jakarta() -> str:
+    return datetime.now(ZoneInfo("Asia/Jakarta")).strftime("%Y-%m-%d")
+
+
+def jakarta_now_iso() -> str:
+    return datetime.now(ZoneInfo("Asia/Jakarta")).isoformat()
+
+
+def valid_date(value: str) -> bool:
+    try:
+        datetime.strptime(value, "%Y-%m-%d")
+    except (TypeError, ValueError):
+        return False
+    return True
+
+
+def iso_date_argument(value: str) -> str:
+    if not valid_date(value):
+        raise argparse.ArgumentTypeError(
+            f"Tanggal harus berformat YYYY-MM-DD: {value!r}"
+        )
+    return value
+
+
+def non_negative_number(value: str) -> float:
+    try:
+        number = float(value)
+    except ValueError as error:
+        raise argparse.ArgumentTypeError(f"Angka tidak valid: {value!r}") from error
+    if not math.isfinite(number) or number < 0:
+        raise argparse.ArgumentTypeError("Nilai harus berupa angka nol atau lebih.")
+    return number
+
+
+def positive_integer(value: str) -> int:
+    try:
+        number = int(value)
+    except ValueError as error:
+        raise argparse.ArgumentTypeError(f"Bilangan bulat tidak valid: {value!r}") from error
+    if number < 1:
+        raise argparse.ArgumentTypeError("Nilai harus minimal 1.")
+    return number
+
+
+def parse_csv_list(value: str | None, default: list[str]) -> list[str]:
+    if not value:
+        return default
+    return [item.strip().lower() for item in value.split(",") if item.strip()]
+
+
+def selected_areas(value: str | None) -> list[str]:
+    requested = parse_csv_list(value, ["gresik", "lamongan"])
+    valid = [area for area in requested if area in AREAS]
+    invalid = [area for area in requested if area not in AREAS]
+    if invalid:
+        raise ValueError(
+            f"Wilayah tidak dikenal: {', '.join(invalid)}. "
+            f"Pilihan: {', '.join(AREAS)}."
+        )
+    return valid
+
+
+def selected_commodities(value: str | None) -> list[Commodity]:
+    if not value or value.lower() == "all":
+        return COMMODITIES
+    keys = parse_csv_list(value, [])
+    invalid = [key for key in keys if key not in COMMODITY_BY_KEY]
+    if invalid:
+        raise ValueError(
+            f"Komoditas tidak dikenal: {', '.join(invalid)}. "
+            "Gunakan commodity key yang tercantum di README.md."
+        )
+    return [COMMODITY_BY_KEY[key] for key in keys]
+
+
+def project_path(value: str | None, fallback: Path) -> Path:
+    if not value:
+        return fallback
+    candidate = Path(value)
+    if candidate.is_absolute():
+        return candidate
+    from_project = ROOT / candidate
+    from_cwd = Path.cwd() / candidate
+    if from_project.exists() or not from_cwd.exists():
+        return from_project
+    return from_cwd
+
+
+def clean_html(source: str) -> str:
+    cleaned = re.sub(r"<script[\s\S]*?</script>", " ", source, flags=re.IGNORECASE)
+    cleaned = re.sub(r"<style[\s\S]*?</style>", " ", cleaned, flags=re.IGNORECASE)
+    cleaned = re.sub(r"<br\s*/?>", "\n", cleaned, flags=re.IGNORECASE)
+    cleaned = re.sub(
+        r"</?(?:div|p|li|tr|td|th|h[1-6]|section|article|strong|span)\b[^>]*>",
+        "\n",
+        cleaned,
+        flags=re.IGNORECASE,
+    )
+    cleaned = re.sub(r"<[^>]+>", " ", cleaned)
+    lines = [
+        " ".join(html.unescape(line).split())
+        for line in cleaned.splitlines()
+    ]
+    return "\n".join(line for line in lines if line).strip()
+
+
+def extract_price(text: str, source_label: str) -> int | None:
+    source_lower = source_label.lower()
+    lines = text.splitlines()
+    for index, line in enumerate(lines):
+        start = line.lower().find(source_lower)
+        if start < 0:
+            continue
+        candidates = [line[start + len(source_label) :]]
+        if index + 1 < len(lines):
+            candidates.append(lines[index + 1])
+        for candidate in candidates:
+            match = re.search(r"\bRp\s*([0-9][0-9.]*)\b", candidate, re.IGNORECASE)
+            if not match:
+                continue
+            price = int(match.group(1).replace(".", ""))
+            return price if price > 0 else None
+        return None
+    return None
+
+
+def fetch_text(url: str, accept: str = "text/html,application/json") -> str:
+    request = Request(
+        url,
+        headers={
+            "User-Agent": "PelacakHargaSembako/1.0",
+            "Accept": accept,
+        },
+    )
+    try:
+        with urlopen(request, timeout=30) as response:
+            return response.read().decode("utf-8", errors="replace")
+    except (HTTPError, URLError, TimeoutError) as error:
+        raise RuntimeError(f"Gagal mengambil {url}: {error}") from error
+
+
+def market_url(date: str, area: str, market_id: str = "") -> str:
+    keycode = AREAS[area]["keycode"]
+    query = f"tanggal={date}&kabkota={keycode}&pasar={market_id}"
+    return f"{SOURCE_BASE}/display/show/?{query}"
+
+
+def fetch_markets(area: str) -> list[dict[str, Any]]:
+    url = f"{SOURCE_BASE}/harga/pasar.json/{AREAS[area]['keycode']}"
+    data = json.loads(fetch_text(url, "application/json"))
+    if not isinstance(data, list):
+        raise RuntimeError(f"Format daftar pasar {AREAS[area]['label']} tidak dikenal")
+    markets = []
+    for item in data:
+        if not isinstance(item, dict) or "psr_id" not in item or "psr_nama" not in item:
+            continue
+        if item.get("psr_status") in (0, "0", False):
+            continue
+        try:
+            market_id = int(item["psr_id"])
+        except (TypeError, ValueError):
+            continue
+        name = str(item["psr_nama"]).strip()
+        if market_id > 0 and name:
+            markets.append({"psr_id": market_id, "psr_nama": name})
+    return markets
+
+
+def fetch_market_prices(
+    date: str,
+    area: str,
+    market: dict[str, Any],
+    commodities: list[Commodity],
+) -> list[dict[str, Any]]:
+    source_url = market_url(date, area, str(market["psr_id"]))
+    text = clean_html(fetch_text(source_url))
+    records: list[dict[str, Any]] = []
+    for commodity in commodities:
+        price = extract_price(text, commodity.source_label)
+        if price is None:
+            continue
+        records.append(
+            {
+                "date": date,
+                "area": area,
+                "marketId": str(market["psr_id"]),
+                "location": market["psr_nama"],
+                "sourceType": "pasar rakyat",
+                "commodityKey": commodity.key,
+                "commodity": commodity.label,
+                "brand": "Komoditas pasar",
+                "productName": commodity.label,
+                "size": f"1 {commodity.unit}",
+                "unit": commodity.unit,
+                "price": price,
+                "priceType": "survei",
+                "stockStatus": "terpantau",
+                "confidence": "resmi-pasar",
+                "observedAt": date,
+                "address": f"{market['psr_nama']}, {AREAS[area]['label']}",
+                "sourceUrl": source_url,
+            }
+        )
+    return records
+
+
+def extract_rupiah_figures(text: str, limit: int = 5) -> list[str]:
+    """Best-effort scrape of the first few 'Rp ...' figures on a page.
 
     Sites like Panel Harga Bapanas and PIHPS render heavily with
     JavaScript, so a plain HTTP fetch sometimes only returns a shell
