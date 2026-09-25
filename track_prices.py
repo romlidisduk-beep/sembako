@@ -52,9 +52,18 @@ AREAS: dict[str, dict[str, str]] = {
 #   - Harga pengepul/tengkulak     : TIDAK ADA sumber publik untuk ini (itu
 #                                    transaksi langsung di lapangan), jadi
 #                                    kolomnya kosong dan harus diisi manual.
+#
+# CATATAN (25-09-2026): www.hargapangan.id (PIHPS lama) sudah DINONAKTIFKAN
+# oleh Bank Indonesia sejak 1 Juli 2023 dan datanya dipindah ke
+# https://www.bi.go.id/hargapangan. HTTP 522 yang muncul di log bukan
+# gangguan sementara, tapi karena domain lama itu sudah mati permanen.
+# Panel Bapanas masih aktif, tapi sering gagal ke-scrape karena angkanya
+# kemungkinan dirender lewat JavaScript/API, bukan ada langsung di HTML
+# mentah — kalau masih gagal setelah ini, perlu dicek endpoint API-nya
+# lewat tab Network di devtools browser, bukan tambal regex lagi.
 NATIONAL_REFERENCE_URLS = {
     "panelBapanas": "https://panelharga.badanpangan.go.id/",
-    "pihps": "https://www.hargapangan.id/",
+    "pihps": "https://www.bi.go.id/hargapangan",
 }
 BPS_KABUPATEN_URLS = {
     "gresik": "https://gresikkab.bps.go.id",
