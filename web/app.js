@@ -316,52 +316,5 @@ async function loadReport() {
   }
 }
 
-function renderPanenRingkasan(ringkasan) {
-  $("#panen-ringkasan").innerHTML = ringkasan.map((item) => `
-    <article class="price-card">
-      <div>
-        <span class="chip">${escapeHtml(item.komoditas)}</span>
-        <h3>${escapeHtml(item.kualitas)}</h3>
-        <div class="product-meta">${item.jumlahCatatan} catatan · rata-rata ${rupiah(item.rataRata)}/kg</div>
-      </div>
-      <div>
-        <div class="price">${rupiah(item.hargaTerakhir)} <small>/ kg</small></div>
-        <div class="location">${escapeHtml(item.lokasiTerakhir)} · ${escapeHtml(item.tanggalTerakhir)}</div>
-      </div>
-    </article>
-  `).join("");
-}
-
-function renderPanenTable(records) {
-  $("#panen-table").innerHTML = records.slice(0, 100).map((record) => `
-    <tr>
-      <td><strong>${escapeHtml(record.komoditas)}</strong></td>
-      <td>${escapeHtml(record.kualitas)}</td>
-      <td><strong>${rupiah(record.hargaPerKg)}</strong></td>
-      <td>${escapeHtml(record.lokasi)}</td>
-      <td><small>${escapeHtml(record.tanggal)}</small></td>
-    </tr>
-  `).join("") || '<tr><td colspan="5"><div class="empty">Belum ada data.</div></td></tr>';
-}
-
-async function loadPanenReport() {
-  try {
-    const response = await fetch(`data/harga-panen-report.json?ts=${Date.now()}`);
-    if (!response.ok) return; // Belum pernah "publish" — section tetap disembunyikan.
-    const report = await response.json();
-    const records = report.records || [];
-    if (!records.length) return;
-    $("#panen-section").hidden = false;
-    $("#panen-ringkasan").hidden = false;
-    $("#panen-table-wrap").hidden = false;
-    $("#panen-updated").textContent = `${records.length} catatan`;
-    renderPanenRingkasan(report.ringkasan || []);
-    renderPanenTable(records);
-  } catch (error) {
-    console.error(error); // Diam-diam disembunyikan; ini section opsional.
-  }
-}
-
 connectFilters();
 loadReport();
-loadPanenReport();
