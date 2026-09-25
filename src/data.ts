@@ -27,8 +27,20 @@ export type OfficialSnapshotStatus = 'ok' | 'stale' | 'unavailable';
 
 export type PriceData = {
   sembako: SembakoRecord[]; panen: PanenRecord[]; official: OfficialPriceRecord[];
-  origin: 'demo' | 'official'; officialStatus: OfficialSnapshotStatus;
-  officialFetchedAt: string | null;
+  origin: 'demo' | 'snapshot'; officialStatus: OfficialSnapshotStatus;
+  officialFetchedAt: string | null; reportDate: string | null; generatedAt: string | null;
+  marketSource: string; marketErrors: string[]; trends: PriceTrend[]; history: PriceHistoryRecord[];
+};
+
+export type PriceTrend = {
+  area: string; commodityKey: string; commodity: string; unit: string;
+  latestPrice: number | null; previousAverage: number | null;
+  changePercent: number | null; signal: string; reason: string;
+};
+
+export type PriceHistoryRecord = {
+  date: string; area: Area; marketId: string; location: string;
+  commodityKey: string; commodity: string; price: number; unit: string;
 };
 
 let sourceCounter = 100;
@@ -67,39 +79,140 @@ export const demoPanen: PanenRecord[] = [
 ];
 
 const fallbackData: PriceData = {
-  sembako: demoSembako, panen: demoPanen, official: [], origin: 'demo',
-  officialStatus: 'unavailable', officialFetchedAt: null,
+  sembako: demoSembako, panen: [], official: [], origin: 'demo',
+  officialStatus: 'unavailable', officialFetchedAt: null, reportDate: null,
+  generatedAt: null, marketSource: 'Snapshot lokal', marketErrors: [], trends: [], history: [],
 };
 
+const reportDataUrl = `${import.meta.env.BASE_URL}data/latest-price-report.json`;
 const officialDataUrl = `${import.meta.env.BASE_URL}data/official-prices.json`;
+const panenDataUrl = `${import.meta.env.BASE_URL}data/harga-panen-report.json`;
+const historyDataUrl = `${import.meta.env.BASE_URL}data/price-history.csv`;
+const displayMarketSource = (source: unknown) => {
+  const value = String(source ?? '');
+  return value.includes('siskaperbapo') ? 'SISKAPERBAPO Jawa Timur' : (value || 'Snapshot lokal');
+};
 
-export const loadPriceData = async (): Promise<PriceData> => {
-  await new Promise((resolve) => window.setTimeout(resolve, 280));
+const normalizeArea = (value: unknown): Area | null => {
+  const area = String(value ?? '').toLowerCase();
+  if (area === 'gresik') return 'Gresik';
+  if (area === 'lamongan') return 'Lamongan';
+  return null;
+};
+
+const normalizeMarketRecord = (record: Record<string, unknown>): SembakoRecord | null => {
+  const area = normalizeArea(record.area);
+  const price = Number(record.price);
+  if (!area || !record.commodityKey || !record.commodity || !record.location || !Number.isFinite(price) || price <= 0) return null;
+  return {
+    date: String(record.date ?? ''),
+    area,
+    marketId: String(record.marketId ?? `${record.location}-${record.commodityKey}`),
+    location: String(record.location),
+    sourceType: String(record.sourceType ?? 'pasar rakyat'),
+    commodityKey: String(record.commodityKey),
+    commodity: String(record.commodity),
+    brand: String(record.brand ?? 'Komoditas pasar'),
+    productName: String(record.productName ?? record.commodity),
+    size: String(record.size ?? `1 ${record.unit ?? 'kg'}`),
+    unit: String(record.unit ?? 'kg'),
+    price,
+    unitPrice: Number(record.unitPrice) || price,
+    priceType: String(record.priceType ?? 'survei'),
+    stockStatus: String(record.stockStatus ?? 'terpantau') as SembakoRecord['stockStatus'],
+    confidence: String(record.confidence ?? 'resmi-pasar') as SembakoRecord['confidence'],
+    observedAt: String(record.observedAt ?? record.date ?? ''),
+    address: String(record.address ?? ''),
+    sourceUrl: String(record.sourceUrl ?? ''),
+  };
+};
+
+const parseCsvLine = (line: string): string[] => {
+  const values: string[] = [];
+  let current = '';
+  let quoted = false;
+  for (let index = 0; index < line.length; index += 1) {
+    const character = line[index];
+    if (character === '"') {
+      if (quoted && line[index + 1] === '"') {
+        current += '"';
+        index += 1;
+      } else {
+        quoted = !quoted;
+      }
+    } else if (character === ',' && !quoted) {
+      values.push(current);
+      current = '';
+    } else {
+      current += character;
+    }
+  }
+  values.push(current);
+  return values;
+};
+
+const parseHistoryCsv = (csv: string): PriceHistoryRecord[] => {
+  const rows = csv.split(/\r?\n/).filter(Boolean).slice(1);
+  return rows.flatMap((row) => {
+    const columns = parseCsvLine(row);
+    const area = normalizeArea(columns[1]);
+    const price = Number(columns[11]);
+    if (!area || !columns[0] || !columns[2] || !columns[5] || !columns[6] || !Number.isFinite(price)) return [];
+    return [{
+      date: columns[0], area, marketId: columns[2], location: columns[3],
+      commodityKey: columns[5], commodity: columns[6], price, unit: columns[10] || 'kg',
+    }];
+  });
+};
+
+const loadOfficialSnapshot = async (): Promise<Pick<PriceData, 'official' | 'officialStatus' | 'officialFetchedAt'>> => {
   try {
-    const response = await fetch(officialDataUrl, { cache: 'no-store' });
-    if (!response.ok) return fallbackData;
-    const payload = await response.json() as {
-      status?: string; fetchedAt?: string | null; records?: Array<Partial<OfficialPriceRecord>>;
-    };
+    const response = await fetch(`${officialDataUrl}?ts=${Date.now()}`, { cache: 'no-store' });
+    if (!response.ok) return { official: [], officialStatus: 'unavailable', officialFetchedAt: null };
+    const payload = await response.json() as { status?: string; fetchedAt?: string | null; records?: Array<Partial<OfficialPriceRecord>> };
     const official = (payload.records ?? []).flatMap((record) => {
       const harga = Number(record.harga);
       if (!record.komoditas || !Number.isFinite(harga) || harga <= 0) return [];
       return [{
-        tanggal: String(record.tanggal ?? ''),
-        sumber: String(record.sumber ?? 'Panel Harga Badan Pangan'),
-        komoditas: String(record.komoditas),
-        harga, satuan: String(record.satuan ?? 'kg'),
-        level: String(record.level ?? 'petani'),
-        wilayah: String(record.wilayah ?? 'Jawa Timur'),
+        tanggal: String(record.tanggal ?? ''), sumber: String(record.sumber ?? 'Panel Harga Badan Pangan'),
+        komoditas: String(record.komoditas), harga, satuan: String(record.satuan ?? 'kg'),
+        level: String(record.level ?? 'petani'), wilayah: String(record.wilayah ?? 'Jawa Timur'),
       }];
     });
-    if (!['ok', 'stale'].includes(payload.status ?? '') || official.length === 0) return fallbackData;
+    if (!['ok', 'stale'].includes(payload.status ?? '') || official.length === 0) return { official: [], officialStatus: 'unavailable', officialFetchedAt: null };
+    return { official, officialStatus: payload.status as 'ok' | 'stale', officialFetchedAt: payload.fetchedAt ?? null };
+  } catch {
+    return { official: [], officialStatus: 'unavailable', officialFetchedAt: null };
+  }
+};
+
+export const loadPriceData = async (): Promise<PriceData> => {
+  try {
+    const [reportResponse, panenResponse, historyResponse, officialSnapshot] = await Promise.all([
+      fetch(`${reportDataUrl}?ts=${Date.now()}`, { cache: 'no-store' }),
+      fetch(`${panenDataUrl}?ts=${Date.now()}`, { cache: 'no-store' }).catch(() => null),
+      fetch(`${historyDataUrl}?ts=${Date.now()}`, { cache: 'no-store' }).catch(() => null),
+      loadOfficialSnapshot(),
+    ]);
+    if (!reportResponse.ok) return { ...fallbackData, ...officialSnapshot };
+    const report = await reportResponse.json() as {
+      date?: string; generatedAt?: string; source?: string; records?: Array<Record<string, unknown>>;
+      errors?: string[]; trends?: PriceTrend[];
+    };
+    const records = (report.records ?? []).map(normalizeMarketRecord).filter((record): record is SembakoRecord => Boolean(record));
+    if (records.length === 0) return { ...fallbackData, ...officialSnapshot };
+    let panen: PanenRecord[] = [];
+    if (panenResponse?.ok) {
+      const panenPayload = await panenResponse.json() as { records?: PanenRecord[] };
+      panen = Array.isArray(panenPayload.records) ? panenPayload.records : [];
+    }
+    const history = historyResponse?.ok ? parseHistoryCsv(await historyResponse.text()) : [];
     return {
-      ...fallbackData,
-      official,
-      origin: 'official',
-      officialStatus: payload.status as 'ok' | 'stale',
-      officialFetchedAt: payload.fetchedAt ?? null,
+      sembako: records, panen, ...officialSnapshot, origin: 'snapshot',
+      reportDate: report.date ?? null, generatedAt: report.generatedAt ?? null,
+      marketSource: displayMarketSource(report.source),
+      marketErrors: Array.isArray(report.errors) ? report.errors : [],
+      trends: Array.isArray(report.trends) ? report.trends : [], history,
     };
   } catch {
     return fallbackData;

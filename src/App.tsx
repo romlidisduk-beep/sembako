@@ -3,10 +3,11 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ErrorBoundary } from '@/components/error-boundary';
 import { Toaster } from '@/components/ui/toaster';
 import { TooltipProvider } from '@/components/ui/tooltip';
-import { ChevronDown, ChevronUp, CircleHelp, Filter, Layers3, MapPin, Search, SlidersHorizontal, Sprout, Store, Wifi, X } from 'lucide-react';
-import { Route, Switch, useLocation, Router as WouterRouter } from 'wouter';
+import { ArrowUpRight, ChevronDown, ChevronUp, CircleHelp, Database, Layers3, MapPin, Search, SlidersHorizontal, Sprout, Store, Wheat, Wifi, X } from 'lucide-react';
+import { Route, Switch, Link, useLocation, useRoute, Router as WouterRouter } from 'wouter';
+import { CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import NotFound from '@/pages/not-found';
-import { loadPriceData, summarizePanen, type Area, type OfficialPriceRecord, type PanenRecord, type PanenSummary, type PriceData, type SembakoRecord } from './data';
+import { loadPriceData, summarizePanen, type OfficialPriceRecord, type PanenRecord, type PanenSummary, type PriceData, type PriceHistoryRecord, type SembakoRecord } from './data';
 import { fieldSources, googleSheetFormula, officialSources, referencePrices, verificationContacts } from './sources';
 
 const queryClient = new QueryClient();
@@ -26,14 +27,14 @@ function AppMark() {
   </div>;
 }
 
-function StatusBand({ count, panenCount, origin, officialStatus, officialCount }: { count: number; panenCount: number; origin: PriceData['origin']; officialStatus: PriceData['officialStatus']; officialCount: number }) {
-  const hasOfficial = origin === 'official';
+function StatusBand({ count, panenCount, origin, officialStatus, officialCount, reportDate, source }: { count: number; panenCount: number; origin: PriceData['origin']; officialStatus: PriceData['officialStatus']; officialCount: number; reportDate: string | null; source: string }) {
+  const hasSnapshot = origin === 'snapshot';
   const officialIsFresh = officialStatus === 'ok';
-  const statusTitle = hasOfficial ? (officialIsFresh ? 'Data resmi aktif' : 'Snapshot resmi tersimpan') : 'Data contoh aktif';
-  const statusBadge = hasOfficial ? (officialIsFresh ? 'Terbaru' : 'Snapshot') : 'Siap dipakai';
-  const statusDescription = hasOfficial
-    ? (officialIsFresh ? 'Harga resmi tingkat petani dari Panel Harga Badan Pangan ditampilkan terpisah dari laporan lapangan.' : 'API sedang tidak tersedia, jadi harga resmi terakhir yang berhasil disimpan tetap ditampilkan.')
-    : 'Snapshot lokal dipakai agar perbandingan tetap tersedia saat sumber resmi belum merespons.';
+  const statusTitle = hasSnapshot ? 'Snapshot pasar aktif' : 'Data contoh aktif';
+  const statusBadge = hasSnapshot ? (officialIsFresh ? 'Terbaru' : 'Tersimpan') : 'Demo';
+  const statusDescription = hasSnapshot
+    ? `${source} · laporan ${reportDate ? shortDate(reportDate) : 'terakhir tersedia'}. Jika sumber resmi gagal, snapshot sebelumnya tetap dipertahankan.`
+    : 'Snapshot laporan belum terbaca, jadi data contoh lokal dipakai sementara.';
   return <div className="flex flex-col gap-3 rounded-[18px] border border-[#cae1d2] bg-[#edf7ef] px-4 py-3.5 text-[#22453b] shadow-sm sm:flex-row sm:items-center sm:justify-between">
     <div className="flex items-start gap-3">
       <div className="pulse-dot mt-1 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#d3ebd5] text-[#328252]"><Wifi size={14} /></div>
@@ -71,6 +72,75 @@ function AreaFilter({ value, onChange }: { value: string; onChange: (value: stri
   </label>;
 }
 
+type CategoryKey = 'semua' | 'pokok' | 'protein' | 'bumbu' | 'kebutuhan';
+const categoryOptions: Array<{ key: CategoryKey; label: string; description: string; keys: string[] }> = [
+  { key: 'semua', label: 'Semua komoditas', description: '14 jenis', keys: [] },
+  { key: 'pokok', label: 'Bahan pokok', description: 'beras & gula', keys: ['beras', 'gula'] },
+  { key: 'protein', label: 'Protein', description: 'ayam, telur & sapi', keys: ['ayam', 'telur', 'sapi'] },
+  { key: 'bumbu', label: 'Bumbu & sayur', description: 'cabai & bawang', keys: ['cabai', 'bawang'] },
+  { key: 'kebutuhan', label: 'Kebutuhan dapur', description: 'minyak, tepung & LPG', keys: ['minyak', 'tepung', 'lpg'] },
+];
+
+function CategoryNav({ records, value, onChange }: { records: SembakoRecord[]; value: CategoryKey; onChange: (value: CategoryKey) => void }) {
+  return <div className="category-scroll" role="tablist" aria-label="Kelompok komoditas">
+    {categoryOptions.map((category) => {
+      const count = new Set(records.filter((record) => category.keys.length === 0 || category.keys.some((key) => record.commodityKey.includes(key))).map((record) => record.commodityKey)).size;
+      return <button key={category.key} role="tab" aria-selected={value === category.key} onClick={() => onChange(category.key)} className={`category-tab ${value === category.key ? 'category-tab-active' : ''}`}>
+        <span className="category-icon"><Wheat size={16} /></span>
+        <span className="min-w-0 text-left"><strong>{category.label}</strong><small>{count} komoditas · {category.description}</small></span>
+      </button>;
+    })}
+  </div>;
+}
+
+function OverviewStats({ data }: { data: PriceData }) {
+  const commodities = new Set(data.sembako.map((record) => record.commodityKey)).size;
+  const locations = new Set(data.sembako.map((record) => `${record.area}-${record.location}`)).size;
+  const warnings = data.trends.filter((trend) => trend.signal === 'WASPADA NAIK').length;
+  return <div className="overview-stats">
+    <div><span className="stat-kicker">Harga terpantau</span><strong>{data.sembako.length}</strong><small>catatan pasar</small></div>
+    <div><span className="stat-kicker">Komoditas</span><strong>{commodities}</strong><small>jenis kebutuhan</small></div>
+    <div><span className="stat-kicker">Lokasi aktif</span><strong>{locations}</strong><small>pasar Gresik–Lamongan</small></div>
+    <div className={warnings > 0 ? 'stat-alert' : ''}><span className="stat-kicker">Sinyal naik</span><strong>{warnings}</strong><small>{warnings > 0 ? 'perlu dipantau' : 'belum terdeteksi'}</small></div>
+  </div>;
+}
+
+function usePriceData() {
+  const [data, setData] = useState<PriceData | null>(null);
+  useEffect(() => { loadPriceData().then(setData); }, []);
+  return data;
+}
+
+function PriceTrendChart({ history, area, commodityKey, commodity }: { history: PriceHistoryRecord[]; area: string; commodityKey: string; commodity: string }) {
+  const points = useMemo(() => {
+    const grouped = new Map<string, number[]>();
+    history.filter((item) => item.area === area && item.commodityKey === commodityKey).forEach((item) => {
+      grouped.set(item.date, [...(grouped.get(item.date) ?? []), item.price]);
+    });
+    return [...grouped.entries()].sort(([left], [right]) => left.localeCompare(right)).map(([date, prices]) => ({
+      date, label: shortDate(date), price: Math.round(prices.reduce((sum, price) => sum + price, 0) / prices.length),
+    }));
+  }, [history, area, commodityKey]);
+
+  return <div className="rounded-[16px] border border-[#dfd5c4] bg-[#fffaf1] p-4 sm:p-5">
+    <div className="mb-4 flex flex-col gap-1 sm:flex-row sm:items-end sm:justify-between">
+      <div><div className="font-data text-[10px] uppercase tracking-[.12em] text-[#a06e55]">Riwayat harga</div><h3 className="font-display text-lg font-bold text-[#2e5045]">{commodity} · {area}</h3></div>
+      <span className="text-xs text-[#7b8379]">Rata-rata seluruh pasar pada area terpilih</span>
+    </div>
+    {points.length < 2 ? <div className="flex min-h-[190px] items-center justify-center rounded-[12px] border border-dashed border-[#d9cdbb] bg-[#fbf5e9] px-6 text-center text-sm leading-relaxed text-[#7c8379]">Riwayat belum cukup untuk membentuk tren. Grafik akan terisi otomatis setelah minimal dua tanggal laporan tersimpan.</div> : <div className="h-[230px] w-full">
+      <ResponsiveContainer width="100%" height="100%">
+        <LineChart data={points} margin={{ top: 8, right: 8, left: 0, bottom: 0 }}>
+          <CartesianGrid stroke="#eadfce" strokeDasharray="3 3" vertical={false} />
+          <XAxis dataKey="label" tick={{ fill: '#7b8379', fontSize: 10 }} tickLine={false} axisLine={false} />
+          <YAxis tickFormatter={(value) => `Rp${Math.round(Number(value) / 1000)}k`} tick={{ fill: '#7b8379', fontSize: 10 }} tickLine={false} axisLine={false} width={48} />
+          <Tooltip formatter={(value) => [money(Number(value)), 'Rata-rata']} labelFormatter={(label) => `Tanggal ${label}`} contentStyle={{ borderRadius: 10, borderColor: '#dfd5c4', background: '#fffaf1', fontSize: 12 }} />
+          <Line type="monotone" dataKey="price" stroke="#d27855" strokeWidth={3} dot={{ r: 3, fill: '#d27855', strokeWidth: 0 }} activeDot={{ r: 5 }} />
+        </LineChart>
+      </ResponsiveContainer>
+    </div>}
+  </div>;
+}
+
 function SelectFilter({ label, value, options, onChange, testId }: { label: string; value: string; options: string[]; onChange: (value: string) => void; testId: string }) {
   return <label className="min-w-[136px] flex-1"><span className="mb-1.5 block font-data text-[10px] uppercase tracking-[.11em] text-[#7d857d]">{label}</span><select data-testid={testId} value={value} onChange={(event) => onChange(event.target.value)} className="h-10 w-full rounded-[10px] border border-[#d7cdbd] bg-[#fffaf1] px-2.5 text-xs font-semibold text-[#35584b] outline-none focus:border-[#d48a57]"><option value="Semua">Semua</option>{options.map((option) => <option key={option} value={option}>{option}</option>)}</select></label>;
 }
@@ -96,23 +166,25 @@ function CommodityCard({ commodity, records, expanded, onExpand }: { commodity: 
       <div className="text-right"><div className="font-data text-base font-medium text-[#d3674e]">{money(cheapest.unitPrice)}<span className="text-[10px] text-[#908679]">/{cheapest.unit}</span></div><div className="mt-1 flex items-center justify-end gap-1 text-[10px] text-[#85897e]">{expanded ? 'Tutup' : 'Lihat sumber'} {expanded ? <ChevronUp size={13} /> : <ChevronDown size={13} />}</div></div>
     </button>
     {expanded && <div className="border-t border-[#eadfce] bg-[#f8f0e2] px-4 py-3 sm:px-5">
-      {records.sort((a, b) => a.unitPrice - b.unitPrice).map((record) => <div data-testid={`source-row-${record.marketId}`} key={record.marketId} className="flex flex-col gap-2 border-b border-[#e8ddcc] py-3 last:border-0 sm:flex-row sm:items-center sm:justify-between"><div><div className="flex items-center gap-2 text-sm font-semibold text-[#35584b]"><MapPin size={13} className="text-[#d27855]" />{record.location}<span className="rounded bg-[#e7f1e3] px-1.5 py-0.5 font-data text-[9px] font-normal text-[#528056]">{record.area}</span></div><div className="mt-1 text-xs text-[#81867d]">{record.productName} · {record.brand} · {record.stockStatus.toLowerCase()}</div></div><div className="flex items-center justify-between gap-4 sm:justify-end"><span className="font-data text-sm text-[#2e5045]">{money(record.unitPrice)}/{record.unit}</span><span className={`text-[10px] ${record.confidence === 'Tinggi' ? 'text-[#528056]' : 'text-[#a77a3c]'}`}>Kepercayaan {record.confidence.toLowerCase()}</span></div></div>)}
+       {records.sort((a, b) => a.unitPrice - b.unitPrice).map((record) => <div data-testid={`source-row-${record.marketId}`} key={record.marketId} className="flex flex-col gap-2 border-b border-[#e8ddcc] py-3 last:border-0 sm:flex-row sm:items-center sm:justify-between"><div><div className="flex items-center gap-2 text-sm font-semibold text-[#35584b]"><MapPin size={13} className="text-[#d27855]" /><Link href={`/pasar/${encodeURIComponent(record.marketId)}`} className="underline decoration-[#c9b898] underline-offset-2 hover:text-[#bd654e]">{record.location}</Link><span className="rounded bg-[#e7f1e3] px-1.5 py-0.5 font-data text-[9px] font-normal text-[#528056]">{record.area}</span></div><div className="mt-1 text-xs text-[#81867d]">{record.productName} · {record.brand} · {record.stockStatus.toLowerCase()}</div></div><div className="flex items-center justify-between gap-4 sm:justify-end"><span className="font-data text-sm text-[#2e5045]">{money(record.unitPrice)}/{record.unit}</span><span className={`text-[10px] ${record.confidence === 'Tinggi' ? 'text-[#528056]' : 'text-[#a77a3c]'}`}>Kepercayaan {record.confidence.toLowerCase()}</span></div></div>)}
+       <Link href={`/komoditas/${encodeURIComponent(records[0].commodityKey)}`} className="mt-2 inline-flex items-center gap-1 text-xs font-bold text-[#ba654d] underline decoration-[#d5a17e] underline-offset-4">Lihat tren komoditas <ArrowUpRight size={13} /></Link>
     </div>}
   </div>;
 }
 
-function SembakoPanel({ records, search, area, detailView, setDetailView }: { records: SembakoRecord[]; search: string; area: string; detailView: boolean; setDetailView: (value: boolean) => void }) {
+function SembakoPanel({ records, search, area, category, reportDate, detailView, setDetailView }: { records: SembakoRecord[]; search: string; area: string; category: CategoryKey; reportDate: string | null; detailView: boolean; setDetailView: (value: boolean) => void }) {
   const [sort, setSort] = useState('Harga terendah');
   const [expanded, setExpanded] = useState<string | null>(null);
-  const filtered = useMemo(() => records.filter((record) => (area === 'Semua area' || record.area === area) && `${record.commodity} ${record.productName} ${record.location}`.toLowerCase().includes(search.toLowerCase())), [records, area, search]);
+  const categoryKeys = categoryOptions.find((item) => item.key === category)?.keys ?? [];
+  const filtered = useMemo(() => records.filter((record) => (area === 'Semua area' || record.area === area) && (categoryKeys.length === 0 || categoryKeys.some((key) => record.commodityKey.includes(key))) && `${record.commodity} ${record.productName} ${record.location}`.toLowerCase().includes(search.toLowerCase())), [records, area, search, categoryKeys]);
   const groups = useMemo(() => [...new Map(filtered.map((record) => [record.commodityKey, filtered.filter((item) => item.commodityKey === record.commodityKey)])).values()].sort((a, b) => {
     if (sort === 'A–Z') return a[0].commodity.localeCompare(b[0].commodity);
     return Math.min(...a.map((item) => item.unitPrice)) - Math.min(...b.map((item) => item.unitPrice));
   }), [filtered, sort]);
   return <section className="rise rise-delay-1">
-    <div className="mb-3 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between"><div><div className="flex items-center gap-2"><span className="h-2 w-2 rounded-full bg-[#d27855]" /><h2 className="font-display text-[22px] font-bold text-[#2a4e43]">Perbandingan sembako</h2></div><p className="mt-1 text-sm text-[#78827b]">Satu baris per komoditas, supaya harga terbaik langsung terbaca.</p></div><div className="flex items-center gap-2"><button data-testid="button-toggle-source-view" onClick={() => setDetailView(!detailView)} className={`flex items-center gap-2 rounded-[10px] border px-3 py-2 text-xs font-semibold transition ${detailView ? 'border-[#d27855] bg-[#fff0e8] text-[#b65c43]' : 'border-[#d7cdbd] bg-[#fffaf1] text-[#567066]'}`}><SlidersHorizontal size={14} /> {detailView ? 'Tampilan ringkas' : 'Lihat per sumber'}</button><select data-testid="select-sort-sembako" value={sort} onChange={(event) => setSort(event.target.value)} className="h-9 rounded-[10px] border border-[#d7cdbd] bg-[#fffaf1] px-2 text-xs font-semibold text-[#567066] outline-none"><option>Harga terendah</option><option>A–Z</option></select></div></div>
-    {filtered.length === 0 ? <EmptyState title="Belum ada harga yang cocok" body="Coba hapus kata pencarian atau pilih area yang lain." action={<button data-testid="button-reset-sembako" onClick={() => { setExpanded(null); setSort('Harga terendah'); }} className="mt-4 text-xs font-bold text-[#ba654d] underline underline-offset-4">Atur ulang tampilan</button>} /> : detailView ? <div className="space-y-2">{filtered.sort((a, b) => a.unitPrice - b.unitPrice).map((record) => <div key={record.marketId} data-testid={`detail-card-${record.marketId}`} className="flex flex-col gap-3 rounded-[14px] border border-[#dfd5c4] bg-[#fffaf1] p-4 sm:flex-row sm:items-center sm:justify-between"><div><div className="flex items-center gap-2 font-semibold text-[#35584b]"><MapPin size={14} className="text-[#d27855]" />{record.location}<span className="rounded-full bg-[#e9f0df] px-2 py-0.5 font-data text-[9px] text-[#5c7b5d]">{record.area}</span></div><div className="mt-1 text-xs text-[#7c8379]">{record.commodity} · {record.productName} · {record.size} {record.unit}</div></div><div className="flex items-center justify-between gap-5"><span className="font-data text-base text-[#d3674e]">{money(record.unitPrice)}<span className="text-[10px] text-[#908679]">/{record.unit}</span></span><span className="text-[10px] text-[#6e8177]">{record.observedAt}</span></div></div>)}</div> : <div className="space-y-2">{groups.map((group) => <CommodityCard key={group[0].commodityKey} commodity={group[0].commodity} records={group} expanded={expanded === group[0].commodityKey} onExpand={() => setExpanded(expanded === group[0].commodityKey ? null : group[0].commodityKey)} />)}</div>}
-    <div className="mt-3 flex items-center justify-between font-data text-[10px] uppercase tracking-[.1em] text-[#8a8c82]"><span>Menampilkan {detailView ? filtered.length : groups.length} {detailView ? 'sumber' : 'komoditas'}</span><span>Terakhir dipantau 18 Jun 2024</span></div>
+     <div className="mb-3 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between"><div><div className="flex items-center gap-2"><span className="h-2 w-2 rounded-full bg-[#d27855]" /><h2 className="font-display text-[22px] font-bold text-[#2a4e43]">Bandingkan harga</h2></div><p className="mt-1 text-sm text-[#78827b]">Pilih folder komoditas untuk melihat harga terbaik tanpa menjejalkan semua data dalam satu layar.</p></div><div className="flex items-center gap-2"><button data-testid="button-toggle-source-view" onClick={() => setDetailView(!detailView)} className={`flex items-center gap-2 rounded-[10px] border px-3 py-2 text-xs font-semibold transition ${detailView ? 'border-[#d27855] bg-[#fff0e8] text-[#b65c43]' : 'border-[#d7cdbd] bg-[#fffaf1] text-[#567066]'}`}><SlidersHorizontal size={14} /> {detailView ? 'Tampilan ringkas' : 'Lihat per sumber'}</button><select data-testid="select-sort-sembako" value={sort} onChange={(event) => setSort(event.target.value)} className="h-9 rounded-[10px] border border-[#d7cdbd] bg-[#fffaf1] px-2 text-xs font-semibold text-[#567066] outline-none"><option>Harga terendah</option><option>A–Z</option></select></div></div>
+     {filtered.length === 0 ? <EmptyState title="Belum ada harga yang cocok" body="Coba hapus kata pencarian atau pilih area yang lain." action={<button data-testid="button-reset-sembako" onClick={() => { setExpanded(null); setSort('Harga terendah'); }} className="mt-4 text-xs font-bold text-[#ba654d] underline underline-offset-4">Atur ulang tampilan</button>} /> : detailView ? <div className="space-y-2">{filtered.sort((a, b) => a.unitPrice - b.unitPrice).map((record) => <div key={record.marketId} data-testid={`detail-card-${record.marketId}`} className="flex flex-col gap-3 rounded-[14px] border border-[#dfd5c4] bg-[#fffaf1] p-4 sm:flex-row sm:items-center sm:justify-between"><div><div className="flex items-center gap-2 font-semibold text-[#35584b]"><MapPin size={14} className="text-[#d27855]" /><Link href={`/pasar/${encodeURIComponent(record.marketId)}`} className="underline decoration-[#c9b898] underline-offset-2 hover:text-[#bd654e]">{record.location}</Link><span className="rounded-full bg-[#e9f0df] px-2 py-0.5 font-data text-[9px] text-[#5c7b5d]">{record.area}</span></div><div className="mt-1 text-xs text-[#7c8379]">{record.commodity} · {record.productName} · {record.size} {record.unit}</div></div><div className="flex items-center justify-between gap-5"><span className="font-data text-base text-[#d3674e]">{money(record.unitPrice)}<span className="text-[10px] text-[#908679]">/{record.unit}</span></span><span className="text-[10px] text-[#6e8177]">{record.observedAt}</span></div></div>)}</div> : <div className="space-y-2">{groups.map((group) => <CommodityCard key={group[0].commodityKey} commodity={group[0].commodity} records={group} expanded={expanded === group[0].commodityKey} onExpand={() => setExpanded(expanded === group[0].commodityKey ? null : group[0].commodityKey)} />)}</div>}
+     <div className="mt-3 flex items-center justify-between font-data text-[10px] uppercase tracking-[.1em] text-[#8a8c82]"><span>Menampilkan {detailView ? filtered.length : groups.length} {detailView ? 'sumber' : 'komoditas'}</span><span>Terakhir dipantau {reportDate ? shortDate(reportDate) : '—'}</span></div>
   </section>;
 }
 
@@ -166,29 +238,94 @@ function PanenRow({ summary, expanded, onExpand }: { summary: PanenSummary; expa
   return <div className={`overflow-hidden rounded-[14px] border bg-[#fffaf1] ${expanded ? 'border-[#91a86b]' : 'border-[#dfd5c4]'}`}><button data-testid={`button-expand-panen-${summary.komoditas}`} onClick={onExpand} className="flex w-full flex-col gap-3 p-4 text-left sm:grid sm:grid-cols-[1.6fr_1fr_1fr_1.3fr_auto] sm:items-center sm:gap-4"><div><div className="font-semibold text-[#35584b]">{summary.komoditas}</div><div className="mt-1 text-xs text-[#81867d]">{summary.kualitas} <span className="mx-1 text-[#b5aa99]">·</span> {summary.jumlahCatatan} catatan</div></div><div><span className="block font-data text-[9px] uppercase tracking-wider text-[#8b8f84]">Terakhir</span><span className="font-data text-base text-[#d3674e]">{money(summary.hargaTerakhir)}<small className="text-[10px] text-[#8b8f84]">/kg</small></span></div><div><span className="block font-data text-[9px] uppercase tracking-wider text-[#8b8f84]">Rata-rata</span><span className="font-data text-sm text-[#35584b]">{money(summary.rataRata)}</span></div><div className="flex items-center gap-1.5 text-xs text-[#64796f]"><MapPin size={13} className="shrink-0 text-[#7a9b57]" />{summary.lokasiTerakhir}, {summary.kabupaten}</div><div className="flex items-center gap-2 text-[10px] text-[#8b8f84]">{shortDate(summary.tanggalTerakhir)} {expanded ? <ChevronUp size={14} /> : <ChevronDown size={14} />}</div></button>{expanded && <div className="border-t border-[#dce6cf] bg-[#f3f6e9] px-4 py-3 text-xs leading-relaxed text-[#617467]">Catatan terakhir berasal dari <strong>{summary.lokasiTerakhir}</strong>. Rata-rata dihitung dari {summary.jumlahCatatan} laporan yang tersedia pada area terpilih.</div>}</div>;
 }
 
+function MarketDetail() {
+  const [, params] = useRoute<{ marketId: string }>('/pasar/:marketId');
+  const data = usePriceData();
+  const marketId = params?.marketId ? decodeURIComponent(params.marketId) : '';
+  const marketRecords = useMemo(() => data?.sembako.filter((record) => record.marketId === marketId) ?? [], [data, marketId]);
+  const [selectedCommodity, setSelectedCommodity] = useState('');
+  useEffect(() => {
+    if (!selectedCommodity && marketRecords[0]) setSelectedCommodity(marketRecords[0].commodityKey);
+  }, [marketRecords, selectedCommodity]);
+  const selectedRecord = marketRecords.find((record) => record.commodityKey === selectedCommodity) ?? marketRecords[0];
+
+  if (!data) return <div className="grain flex min-h-[100dvh] items-center justify-center market-shell"><SkeletonCards /></div>;
+  if (!marketRecords.length) return <div className="grain min-h-[100dvh] market-shell px-5 py-8"><div className="mx-auto max-w-[760px]"><Link href="/" className="text-sm font-semibold text-[#557567]">← Kembali ke ringkasan</Link><div className="mt-8"><EmptyState title="Pasar tidak ditemukan" body="Lokasi ini tidak ada di snapshot harga yang sedang aktif." action={<Link href="/" className="mt-4 inline-block text-xs font-bold text-[#ba654d] underline underline-offset-4">Kembali ke daftar harga</Link>} /></div></div></div>;
+
+  const market = marketRecords[0];
+  return <div className="grain min-h-[100dvh] market-shell text-[#29463e]">
+    <main className="mx-auto max-w-[1000px] px-5 pb-16 pt-7 sm:px-8 lg:pt-10">
+      <Link href="/" className="inline-flex items-center gap-2 text-sm font-semibold text-[#557567] transition hover:text-[#bd654e]">← Kembali ke ringkasan</Link>
+      <div className="mt-7 flex flex-col justify-between gap-5 border-b border-[#ddd2c0] pb-7 sm:flex-row sm:items-end">
+        <div><div className="mb-2 font-data text-[10px] uppercase tracking-[.16em] text-[#a06e55]">Detail pasar</div><h1 className="font-display text-[clamp(2.2rem,5vw,4rem)] font-bold leading-none tracking-[-.045em] text-[#244a40]">{market.location}</h1><p className="mt-3 flex items-center gap-2 text-sm text-[#718077]"><MapPin size={15} className="text-[#d27855]" />{market.area} · {market.address}</p></div>
+        <div className="rounded-[14px] border border-[#d9e5d6] bg-[#eef7ee] px-4 py-3 text-sm text-[#527064]"><strong className="block font-data text-lg text-[#2e6b4d]">{marketRecords.length}</strong>komoditas tercatat</div>
+      </div>
+      <div className="mt-7 grid gap-7 lg:grid-cols-[.8fr_1.5fr]">
+        <section><div className="mb-3"><div className="font-data text-[10px] uppercase tracking-[.12em] text-[#a06e55]">Komoditas di lokasi ini</div><p className="mt-1 text-sm text-[#78827b]">Pilih komoditas untuk melihat trennya.</p></div><div className="space-y-2">{marketRecords.sort((left, right) => left.unitPrice - right.unitPrice).map((record) => <button key={record.commodityKey} onClick={() => setSelectedCommodity(record.commodityKey)} className={`flex w-full items-center justify-between rounded-[13px] border p-3 text-left transition ${selectedRecord?.commodityKey === record.commodityKey ? 'border-[#d79a58] bg-[#fff3e7] shadow-sm' : 'border-[#dfd5c4] bg-[#fffaf1] hover:border-[#caaa76]'}`}><span><strong className="block text-sm text-[#35584b]">{record.commodity}</strong><small className="mt-1 block text-xs text-[#81867d]">{record.productName} · {record.unit}</small></span><span className="font-data text-sm text-[#d3674e]">{money(record.unitPrice)}</span></button>)}</div></section>
+        <section className="space-y-4">{selectedRecord && <><PriceTrendChart history={data.history} area={selectedRecord.area} commodityKey={selectedRecord.commodityKey} commodity={selectedRecord.commodity} /><div className="rounded-[16px] border border-[#dfd5c4] bg-[#f8f0e2] p-4 text-sm text-[#617467]"><div className="mb-2 flex items-center justify-between gap-3"><strong className="text-[#35584b]">Sumber pencatatan</strong><span className="rounded-full bg-[#e7f1e3] px-2 py-1 font-data text-[9px] uppercase tracking-wide text-[#528056]">{selectedRecord.confidence}</span></div><p>{selectedRecord.productName} · {selectedRecord.size} · dipantau {selectedRecord.observedAt}.</p>{selectedRecord.sourceUrl && <a href={selectedRecord.sourceUrl} target="_blank" rel="noreferrer" className="mt-3 inline-flex items-center gap-1 font-semibold text-[#bd654e] underline underline-offset-2">Buka sumber resmi <ArrowUpRight size={13} /></a>}</div></>}</section>
+      </div>
+    </main>
+  </div>;
+}
+
+function CommodityDetail() {
+  const [, params] = useRoute<{ commodityKey: string }>('/komoditas/:commodityKey');
+  const data = usePriceData();
+  const commodityKey = params?.commodityKey ? decodeURIComponent(params.commodityKey) : '';
+  const records = useMemo(() => data?.sembako.filter((record) => record.commodityKey === commodityKey) ?? [], [data, commodityKey]);
+  const areas = [...new Set(records.map((record) => record.area))];
+  const areaLeaders = areas.map((area) => {
+    const areaRecords = records.filter((record) => record.area === area);
+    return { area, record: [...areaRecords].sort((left, right) => left.unitPrice - right.unitPrice)[0] };
+  });
+
+  if (!data) return <div className="grain flex min-h-[100dvh] items-center justify-center market-shell"><SkeletonCards /></div>;
+  if (!records.length) return <div className="grain min-h-[100dvh] market-shell px-5 py-8"><div className="mx-auto max-w-[760px]"><Link href="/" className="text-sm font-semibold text-[#557567]">← Kembali ke ringkasan</Link><div className="mt-8"><EmptyState title="Komoditas tidak ditemukan" body="Komoditas ini tidak ada di snapshot harga yang sedang aktif." action={<Link href="/" className="mt-4 inline-block text-xs font-bold text-[#ba654d] underline underline-offset-4">Kembali ke daftar harga</Link>} /></div></div></div>;
+
+  const commodity = records[0];
+  return <div className="grain min-h-[100dvh] market-shell text-[#29463e]">
+    <main className="mx-auto max-w-[1180px] px-5 pb-16 pt-7 sm:px-8 lg:pt-10">
+      <Link href="/" className="inline-flex items-center gap-2 text-sm font-semibold text-[#557567] transition hover:text-[#bd654e]">← Kembali ke ringkasan</Link>
+      <div className="mt-7 flex flex-col justify-between gap-5 border-b border-[#ddd2c0] pb-7 sm:flex-row sm:items-end">
+        <div><div className="mb-2 font-data text-[10px] uppercase tracking-[.16em] text-[#a06e55]">Detail komoditas</div><h1 className="font-display text-[clamp(2.2rem,5vw,4rem)] font-bold leading-none tracking-[-.045em] text-[#244a40]">{commodity.commodity}</h1><p className="mt-3 text-sm text-[#718077]">Perbandingan harga terbaru dan riwayat rata-rata per wilayah.</p></div>
+        <div className="rounded-[14px] border border-[#d9e5d6] bg-[#eef7ee] px-4 py-3 text-sm text-[#527064]"><strong className="block font-data text-lg text-[#2e6b4d]">{records.length}</strong>sumber harga aktif</div>
+      </div>
+      <section className="mt-7">
+        <div className="mb-3"><div className="font-data text-[10px] uppercase tracking-[.12em] text-[#a06e55]">Harga terbaru</div><p className="mt-1 text-sm text-[#78827b]">Harga terendah per wilayah pada snapshot {data.reportDate ? shortDate(data.reportDate) : 'terakhir tersedia'}.</p></div>
+        <div className="grid gap-3 sm:grid-cols-2">{areaLeaders.map(({ area, record }) => <div key={area} className="rounded-[16px] border border-[#dfd5c4] bg-[#fffaf1] p-4"><div className="flex items-center justify-between gap-3"><div><div className="flex items-center gap-2 text-sm font-semibold text-[#35584b]"><MapPin size={14} className="text-[#d27855]" />{area}</div><div className="mt-1 text-xs text-[#81867d]">{record.location} · {record.size}</div></div><div className="text-right font-data text-lg text-[#d3674e]">{money(record.unitPrice)}<small className="text-[10px] text-[#908679]">/{record.unit}</small></div></div><Link href={`/pasar/${encodeURIComponent(record.marketId)}`} className="mt-3 inline-flex items-center gap-1 text-xs font-semibold text-[#ba654d] underline underline-offset-2">Buka detail pasar <ArrowUpRight size={12} /></Link></div>)}</div>
+      </section>
+      <section className="mt-8">
+        <div className="mb-3"><div className="font-data text-[10px] uppercase tracking-[.12em] text-[#a06e55]">Pergerakan antarwilayah</div><p className="mt-1 text-sm text-[#78827b]">Gunakan grafik untuk melihat apakah harga bergerak searah atau berbeda antarwilayah.</p></div>
+        <div className="grid gap-4 lg:grid-cols-2">{areas.map((area) => <PriceTrendChart key={area} history={data.history} area={area} commodityKey={commodityKey} commodity={commodity.commodity} />)}</div>
+      </section>
+    </main>
+  </div>;
+}
+
 function Home() {
   const [mode, setMode] = useState<'sembako' | 'panen'>('sembako');
-  const [data, setData] = useState<PriceData | null>(null);
+  const data = usePriceData();
   const [search, setSearch] = useState('');
   const [area, setArea] = useState('Semua area');
+  const [category, setCategory] = useState<CategoryKey>('semua');
   const [detailView, setDetailView] = useState(false);
-  useEffect(() => { loadPriceData().then(setData); }, []);
   const panenSummary = useMemo(() => data ? summarizePanen(data.panen) : [], [data]);
   const setProductMode = (next: 'sembako' | 'panen') => { setMode(next); if (next === 'panen') window.setTimeout(() => document.getElementById('harga-panen')?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50); };
   return <div className="grain flex min-h-[100dvh] market-shell text-[#29463e]">
     <aside className="hidden min-h-[100dvh] w-[238px] shrink-0 flex-col justify-between bg-[#1d403a] px-5 py-6 lg:flex"><div><AppMark /><div className="mt-14"><span className="font-data text-[10px] uppercase tracking-[.16em] text-[#88a79b]">Navigasi</span><nav className="mt-3 space-y-1"><button data-testid="nav-overview" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="flex w-full items-center gap-3 rounded-[11px] bg-[#31574e] px-3 py-2.5 text-left text-sm font-semibold text-[#f6eddb]"><Layers3 size={16} /> Ringkasan harga</button><button data-testid="nav-panen" onClick={() => setProductMode('panen')} className="flex w-full items-center gap-3 rounded-[11px] px-3 py-2.5 text-left text-sm text-[#bdd0c5] transition hover:bg-[#294d46] hover:text-[#f6eddb]"><Sprout size={16} /> Pantau harga panen</button></nav></div></div><div className="rounded-[14px] border border-[#49665d] bg-[#294d46] p-3 text-xs leading-relaxed text-[#b8cdc2]"><CircleHelp size={15} className="mb-2 text-[#e8b84d]" /><strong className="block text-[#f3ead9]">Butuh konteks?</strong>Harga terbaik berarti harga per satuan yang paling rendah dari sumber yang tersedia.</div></aside>
     <main className="min-w-0 flex-1"><header className="flex items-center justify-between border-b border-[#ddd2c0] bg-[#f5eddf]/90 px-5 py-4 backdrop-blur sm:px-8 lg:hidden"><AppMark /><button data-testid="mobile-nav-panen" onClick={() => setProductMode('panen')} className="rounded-[9px] border border-[#d5c7b3] bg-[#fffaf1] p-2 text-[#527064]" aria-label="Buka harga panen"><Sprout size={17} /></button></header><div className="mx-auto max-w-[1180px] px-5 pb-16 pt-7 sm:px-8 lg:px-12 lg:pt-10">
-      <div className="rise flex flex-col justify-between gap-6 sm:flex-row sm:items-end"><div><div className="mb-3 flex items-center gap-2 font-data text-[10px] uppercase tracking-[.16em] text-[#a06e55]"><span className="h-1.5 w-1.5 rounded-full bg-[#d27855]" />Selasa, 18 Juni 2024</div><h1 className="max-w-[580px] font-display text-[clamp(2.2rem,5vw,4.15rem)] font-bold leading-[.98] tracking-[-.045em] text-[#244a40]">Harga hari ini,<br /><em className="font-normal text-[#cf7052]">tanpa berkeliling.</em></h1><p className="mt-4 max-w-[510px] text-[15px] leading-relaxed text-[#6d7d74]">Bandingkan kebutuhan dapur dan hasil panen dari titik-titik lokal Gresik–Lamongan dalam satu pandangan.</p></div><div className="flex shrink-0 items-center gap-2 rounded-[12px] border border-[#e1d5c3] bg-[#f9f3e8] px-3 py-2 text-xs text-[#718077]"><span className="h-2 w-2 rounded-full bg-[#6fa26d]" />Pantauan lokal · data diperbarui pagi</div></div>
-       <div className="mt-8"><StatusBand count={data?.sembako.length ?? 0} panenCount={panenSummary.length} origin={data?.origin ?? 'demo'} officialStatus={data?.officialStatus ?? 'unavailable'} officialCount={data?.official.length ?? 0} /></div>
+       <div className="rise flex flex-col justify-between gap-6 sm:flex-row sm:items-end"><div><div className="mb-3 flex items-center gap-2 font-data text-[10px] uppercase tracking-[.16em] text-[#a06e55]"><span className="h-1.5 w-1.5 rounded-full bg-[#d27855]" />Laporan {data?.reportDate ? shortDate(data.reportDate) : 'menunggu pembaruan'}</div><h1 className="max-w-[580px] font-display text-[clamp(2.2rem,5vw,4.15rem)] font-bold leading-[.98] tracking-[-.045em] text-[#244a40]">Harga hari ini,<br /><em className="font-normal text-[#cf7052]">tanpa berkeliling.</em></h1><p className="mt-4 max-w-[510px] text-[15px] leading-relaxed text-[#6d7d74]">Bandingkan kebutuhan dapur dan hasil panen dari titik-titik lokal Gresik–Lamongan dalam satu pandangan.</p></div><div className="flex shrink-0 items-center gap-2 rounded-[12px] border border-[#e1d5c3] bg-[#f9f3e8] px-3 py-2 text-xs text-[#718077]"><span className="h-2 w-2 rounded-full bg-[#6fa26d]" />Pantauan lokal · pembaruan otomatis</div></div>
+       <div className="mt-8"><StatusBand count={data?.sembako.length ?? 0} panenCount={panenSummary.length} origin={data?.origin ?? 'demo'} officialStatus={data?.officialStatus ?? 'unavailable'} officialCount={data?.official.length ?? 0} reportDate={data?.reportDate ?? null} source={data?.marketSource ?? 'SISKAPERBAPO Jawa Timur'} /></div>
+       {data && <OverviewStats data={data} />}
       <div className="mt-8 flex flex-col gap-4 border-b border-[#ddd2c0] pb-4 sm:flex-row sm:items-center sm:justify-between"><SegmentedTabs mode={mode} setMode={setProductMode} /><div className="flex flex-col gap-2 sm:flex-row"><SearchBox value={search} onChange={setSearch} /><AreaFilter value={area} onChange={setArea} /></div></div>
-       <div className="mt-7">{!data ? <SkeletonCards /> : <>{mode === 'sembako' && <SembakoPanel records={data.sembako} search={search} area={area} detailView={detailView} setDetailView={setDetailView} />}<PanenPanel rows={data.panen} official={data.official} officialStatus={data.officialStatus} active={mode === 'panen'} /></>}</div>
-      <footer className="mt-14 flex flex-col gap-2 border-t border-[#ddd2c0] pt-5 text-[11px] text-[#899088] sm:flex-row sm:items-center sm:justify-between"><span>Pelacak Harga · dibuat untuk warga dan pedagang kecil</span><span className="font-data uppercase tracking-wider">Sumber lokal · snapshot v0.1</span></footer>
+       <div className="mt-7">{!data ? <SkeletonCards /> : mode === 'sembako' ? <><CategoryNav records={data.sembako} value={category} onChange={setCategory} /><div className="mt-7"><SembakoPanel records={data.sembako} search={search} area={area} category={category} reportDate={data.reportDate} detailView={detailView} setDetailView={setDetailView} /></div></> : <PanenPanel rows={data.panen} official={data.official} officialStatus={data.officialStatus} active={mode === 'panen'} />}</div>
+       <footer className="mt-14 flex flex-col gap-2 border-t border-[#ddd2c0] pt-5 text-[11px] text-[#899088] sm:flex-row sm:items-center sm:justify-between"><span>Pelacak Harga · dibuat untuk warga dan pedagang kecil</span><span className="flex items-center gap-1 font-data uppercase tracking-wider"><Database size={12} />{data?.marketSource ?? 'Snapshot lokal'} <ArrowUpRight size={12} /></span></footer>
     </div></main>
   </div>;
 }
 
 function Router() {
-  return <Switch><Route path="/" component={Home} /><Route component={NotFound} /></Switch>;
+  return <Switch><Route path="/" component={Home} /><Route path="/pasar/:marketId" component={MarketDetail} /><Route path="/komoditas/:commodityKey" component={CommodityDetail} /><Route component={NotFound} /></Switch>;
 }
 
 function RoutedErrorBoundary({ children }: { children: ReactNode }) {

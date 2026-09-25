@@ -19,13 +19,13 @@ export const officialSources: PriceSource[] = [
   },
   {
     name: 'SISKAPERBAPO Jawa Timur',
-    description: 'Harga pasar Gresik dan Lamongan',
-    url: 'https://siskaperbapo.jatimprov.go.id',
+    description: 'Harga konsumen dan pasar Jawa Timur',
+    url: 'https://siskaperbapo.indagjatim.com/display/show',
   },
   {
-    name: 'Harga Pengadaan Bulog',
-    description: 'Harga serap Bulog Jawa Timur',
-    url: 'https://pengadaan.bulog.co.id/harga',
+    name: 'PIHPS Nasional · Bank Indonesia',
+    description: 'Harga rata-rata dan perubahan antar daerah',
+    url: 'https://www.bi.go.id/hargapangan',
   },
 ];
 
@@ -51,4 +51,4 @@ export const referencePrices: ReferencePrice[] = [
 ];
 
 export const googleSheetFormula =
-  '=IMPORTHTML("https://panelharga.badanpangan.go.id";"table";1)';
+  '=IMPORTHTML("https://siskaperbapo.indagjatim.com/display/show";"table";1)';

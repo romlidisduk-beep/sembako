@@ -412,3 +412,78 @@
 @keyframes rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 .pulse-dot { animation: pulse-dot 2.2s ease-in-out infinite; }
 @keyframes pulse-dot { 0%,100% { box-shadow: 0 0 0 0 hsl(129 28% 51% / .35); } 50% { box-shadow: 0 0 0 5px hsl(129 28% 51% / 0); } }
+
+.overview-stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: .65rem;
+  margin-top: .85rem;
+}
+.overview-stats > div {
+  display: grid;
+  gap: .2rem;
+  min-height: 92px;
+  padding: .85rem 1rem;
+  border: 1px solid #e3d9c9;
+  border-radius: 14px;
+  background: hsl(42 45% 99% / .7);
+}
+.overview-stats strong {
+  color: #2b594b;
+  font-family: var(--app-font-mono);
+  font-size: 1.35rem;
+  font-weight: 500;
+}
+.overview-stats small { color: #7d887f; font-size: .7rem; }
+.stat-kicker {
+  color: #9b785f;
+  font-family: var(--app-font-mono);
+  font-size: .62rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.overview-stats .stat-alert { background: #fff5df; border-color: #ead29d; }
+.overview-stats .stat-alert strong { color: #ad6544; }
+.category-scroll {
+  display: flex;
+  gap: .6rem;
+  overflow-x: auto;
+  padding: .2rem .1rem .55rem;
+  scrollbar-width: thin;
+}
+.category-tab {
+  display: flex;
+  min-width: 170px;
+  align-items: center;
+  gap: .65rem;
+  padding: .7rem .8rem;
+  border: 1px solid #ded4c5;
+  border-radius: 14px;
+  background: #faf4e9;
+  color: #65776d;
+  text-align: left;
+  transition: .2s ease;
+}
+.category-tab:hover { border-color: #c9a46a; transform: translateY(-1px); }
+.category-tab strong { display: block; color: #416454; font-size: .77rem; font-weight: 700; }
+.category-tab small { display: block; margin-top: .15rem; color: #8a9188; font-family: var(--app-font-mono); font-size: .57rem; }
+.category-icon {
+  display: grid;
+  width: 30px;
+  height: 30px;
+  flex: 0 0 auto;
+  place-items: center;
+  border-radius: 10px;
+  background: #e9efdd;
+  color: #628157;
+}
+.category-tab-active { border-color: #c98a5a; background: #fffaf1; box-shadow: 0 5px 16px rgba(74,73,45,.08); }
+.category-tab-active .category-icon { background: #f2dfbd; color: #b66a46; }
+
+@media (max-width: 760px) {
+  .overview-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 420px) {
+  .overview-stats > div { padding-inline: .75rem; }
+  .category-tab { min-width: 155px; }
+}
