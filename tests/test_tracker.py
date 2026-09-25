@@ -16,6 +16,10 @@ class TrackerTests(unittest.TestCase):
         html = "<div>Beras Medium / kg</div><strong>Rp12.500</strong>"
         self.assertEqual(track_prices.extract_price(track_prices.clean_html(html), "Beras Medium / kg"), 12500)
 
+    def test_extract_price_accepts_rupiah_abbreviation_with_period(self):
+        html = "<div>Beras Medium / kg</div><strong>Rp. 12.500</strong>"
+        self.assertEqual(track_prices.extract_price(track_prices.clean_html(html), "Beras Medium / kg"), 12500)
+
     def test_extract_missing_price(self):
         self.assertIsNone(track_prices.extract_price("Beras Medium / kg belum tersedia", "Beras Medium / kg"))
 
@@ -136,6 +140,54 @@ class TrackerTests(unittest.TestCase):
         self.assertLess(message.index("Beras Medium"), message.index("Gula Premium"))
         self.assertIn("Merk Hemat", message)
         self.assertIn("Toko Contoh (toko)", message)
+
+    def test_daily_notifications_are_separated_by_type(self):
+        records = [
+            {
+                "area": "gresik",
+                "marketId": "45",
+                "location": "Pasar Baru",
+                "sourceType": "pasar rakyat",
+                "commodityKey": "gula",
+                "commodity": "Gula kristal putih",
+                "productName": "Gula kristal putih",
+                "brand": "Komoditas pasar",
+                "size": "1 kg",
+                "unit": "kg",
+                "price": 17000,
+            }
+        ]
+        trends = [
+            {
+                "area": "gresik",
+                "commodity": "Gula kristal putih",
+                "unit": "kg",
+                "latestPrice": 17500,
+                "changePercent": 3.2,
+                "signal": "WASPADA NAIK",
+                "reason": "Harga naik.",
+            }
+        ]
+        national = {
+            "panelBapanas": "6500",
+            "pihps": "7000",
+            "bpsGresik": "rilis",
+            "bpsLamongan": "rilis",
+            "hppKdmp": 6500,
+            "pengepulManual": "",
+        }
+        messages = track_prices.build_notification_messages(
+            records,
+            "2026-09-25",
+            trends=trends,
+            national=national,
+            limit=1,
+        )
+        self.assertGreaterEqual(len(messages), 4)
+        self.assertTrue(messages[0].startswith("🌾 UPDATE HARGA SEMBAKO"))
+        self.assertTrue(any("🛒 HARGA SEMBAKO TERMURAH" in message for message in messages))
+        self.assertTrue(any("⚠️ WASPADA KENAIKAN HARGA" in message for message in messages))
+        self.assertTrue(any("🌾 REFERENSI NASIONAL & PRODUSEN" in message for message in messages))
 
     def test_package_price_is_normalized_for_comparison(self):
         record = {
@@ -289,6 +341,13 @@ class TrackerTests(unittest.TestCase):
         )
         self.assertGreater(len(messages), 1)
         self.assertTrue(all(len(message) <= 120 for message in messages))
+
+    def test_message_builder_respects_small_limit_for_header(self):
+        messages = track_prices.build_telegram_messages(
+            [], "2026-09-25", max_length=20
+        )
+        self.assertTrue(messages)
+        self.assertTrue(all(len(message) <= 20 for message in messages))
 
     def test_parse_whatsapp_recipients_supports_multiple_formats(self):
         recipients = track_prices.parse_whatsapp_recipients(
