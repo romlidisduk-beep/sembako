@@ -3,8 +3,11 @@ name: Pelacak Harga Sembako
 on:
   workflow_dispatch:
   schedule:
-    # 08:00 WIB setiap hari (01:00 UTC)
-    - cron: "0 1 * * *"
+    # 14:00 WIB setiap hari (07:00 UTC). Sengaja SIANG bukan pagi:
+    # SISKAPERBAPO/PIHPS/Panel Bapanas baru publikasi data hari itu
+    # antara 09.00-13.00 WIB; kalau jalan jam 08.00 pagi datanya
+    # masih data kemarin.
+    - cron: "0 7 * * *"
 
 concurrency:
   group: pelacak-harga-pages
@@ -29,28 +32,27 @@ jobs:
 
       - name: Lacak harga terbaru
         run: |
+          ARGS=()
           if [ -n "${TELEGRAM_BOT_TOKEN}" ] && [ -n "${TELEGRAM_CHAT_ID}" ]; then
-            python track_prices.py --telegram
-          else
-            python track_prices.py
+            ARGS+=(--telegram)
           fi
+          if [ -n "${WHATSAPP_RECIPIENTS}" ] || { [ -n "${WHATSAPP_PHONE}" ] && [ -n "${WHATSAPP_APIKEY}" ]; }; then
+            ARGS+=(--whatsapp)
+          fi
+          python track_prices.py "${ARGS[@]}"
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-
-      - name: Terbitkan laporan harga panen
-        run: |
-          if [ -f data/harga_gresik_lamongan.csv ]; then
-            python harga_gresik_lamongan.py publish
-          fi
+          WHATSAPP_PHONE: ${{ secrets.WHATSAPP_PHONE }}
+          WHATSAPP_APIKEY: ${{ secrets.WHATSAPP_APIKEY }}
+          WHATSAPP_RECIPIENTS: ${{ secrets.WHATSAPP_RECIPIENTS }}
 
       - name: Simpan riwayat ke repository
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/price-history.csv data/latest-price-report.json
-          [ -f data/harga-panen-report.json ] && git add data/harga-panen-report.json
-          git diff --cached --quiet || git commit -m "Update harga sembako dan panen"
+          git add data/price-history.csv data/latest-price-report.json data/national-reference-history.csv
+          git diff --cached --quiet || git commit -m "Update harga sembako"
           git push
 
       - name: Siapkan GitHub Pages
@@ -62,7 +64,6 @@ jobs:
           mkdir -p _site/data
           cp -R web/. _site/
           cp data/latest-price-report.json _site/data/latest-price-report.json
-          [ -f data/harga-panen-report.json ] && cp data/harga-panen-report.json _site/data/harga-panen-report.json
           touch _site/.nojekyll
 
       - name: Unggah artefak Pages
