@@ -7,7 +7,7 @@ failures, keeps the last successful snapshot, and never deletes local field
 records.
 
 Run from the repository root:
-    python artifacts/pelacak-harga/scripts/pull_prices.py
+    python script/pull_prices.py
 """
 
 from __future__ import annotations
@@ -23,10 +23,8 @@ from typing import Any
 
 
 ROOT = Path(__file__).resolve().parents[1]
-DATA_DIR = ROOT / "public" / "data"
-LOCAL_DATA_DIR = ROOT / "data"
-OFFICIAL_CSV = LOCAL_DATA_DIR / "harga_resmi.csv"
-FIELD_CSV = LOCAL_DATA_DIR / "harga_gresik_lamongan.csv"
+DATA_DIR = ROOT / "data"
+OFFICIAL_CSV = DATA_DIR / "harga_resmi.csv"
 OFFICIAL_JSON = DATA_DIR / "official-prices.json"
 
 ENDPOINTS = [
@@ -42,18 +40,17 @@ SOURCE_CATALOG = [
     },
     {
         "name": "SISKAPERBAPO Jawa Timur",
-        "url": "https://siskaperbapo.jatimprov.go.id",
-        "role": "Harga pasar Gresik-Lamongan",
+        "url": "https://siskaperbapo.indagjatim.com/display/show",
+        "role": "Harga konsumen dan pasar Jawa Timur",
     },
     {
-        "name": "Harga Pengadaan Bulog",
-        "url": "https://pengadaan.bulog.co.id/harga",
-        "role": "Harga serap Bulog Jawa Timur",
+        "name": "PIHPS Nasional · Bank Indonesia",
+        "url": "https://www.bi.go.id/hargapangan",
+        "role": "Harga rata-rata dan perubahan antar daerah",
     },
 ]
 
 OFFICIAL_HEADER = ["Tgl", "Sumber", "Komoditas", "Harga", "Satuan"]
-FIELD_HEADER = ["Tgl", "Lokasi", "Komoditas", "Kualitas", "Harga", "Catatan"]
 COMMODITY_KEYWORDS = ("gabah", "jagung", "beras")
 
 
@@ -62,12 +59,10 @@ def now_iso() -> str:
 
 
 def init_files() -> None:
-    LOCAL_DATA_DIR.mkdir(parents=True, exist_ok=True)
     DATA_DIR.mkdir(parents=True, exist_ok=True)
-    for path, header in ((OFFICIAL_CSV, OFFICIAL_HEADER), (FIELD_CSV, FIELD_HEADER)):
-        if not path.exists():
-            with path.open("w", newline="", encoding="utf-8") as file:
-                csv.writer(file).writerow(header)
+    if not OFFICIAL_CSV.exists():
+        with OFFICIAL_CSV.open("w", newline="", encoding="utf-8") as file:
+            csv.writer(file).writerow(OFFICIAL_HEADER)
 
 
 def parse_number(value: Any) -> int | None:
