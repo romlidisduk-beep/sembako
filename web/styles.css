@@ -80,6 +80,11 @@ h2 { margin: 7px 0 0; font-size: 27px; letter-spacing: -.04em; }
 .chip { display: inline-flex; width: fit-content; border-radius: 999px; padding: 5px 8px; font-size: 10px; font-weight: 800; background: #edf3ee; color: var(--green); text-transform: uppercase; letter-spacing: .06em; }
 .chip.promo { background: #fff0c7; color: #88500f; }
 .chip.manual { background: #eee9ff; color: #5a3d9a; }
+.national-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; }
+.national-card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 10px 12px; display: grid; gap: 3px; min-height: 0; }
+.national-card .nat-label { font-size: 9px; letter-spacing: .08em; font-weight: 800; color: var(--muted); text-transform: uppercase; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.national-card .nat-value { font-size: 13px; font-weight: 750; color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.national-card.empty-value .nat-value { color: var(--muted); font-weight: 600; font-size: 12px; }
 .trend-list { display: grid; gap: 9px; }
 .trend-row { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 14px 16px; border: 1px solid var(--line); border-radius: 14px; background: var(--card); }
 .trend-copy { display: grid; gap: 4px; }
@@ -107,11 +112,13 @@ footer { display: flex; justify-content: space-between; gap: 20px; color: var(--
   .controls { grid-template-columns: 1fr 1fr; }
   .search-field { grid-column: 1 / -1; }
   .cheapest-grid { grid-template-columns: repeat(2, 1fr); }
+  .national-grid { grid-template-columns: repeat(3, 1fr); }
 }
 @media (max-width: 560px) {
   .page-shell { padding: 12px 12px 40px; }
   .hero { padding: 28px 24px; border-radius: 20px; }
   .controls, .stats, .cheapest-grid { grid-template-columns: 1fr; }
+  .national-grid { grid-template-columns: repeat(2, 1fr); }
   .search-field { grid-column: auto; }
   .section-heading { margin-top: 32px; }
   footer { display: grid; }

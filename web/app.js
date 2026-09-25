@@ -229,6 +229,37 @@ function renderTrends() {
   }).join("");
 }
 
+function renderNational() {
+  const national = state.report?.nationalReferences;
+  const heading = $("#national-heading");
+  const grid = $("#national-grid");
+  if (!national) {
+    heading.hidden = true;
+    grid.hidden = true;
+    return;
+  }
+  const items = [
+    ["Panel Bapanas", national.panelBapanas],
+    ["PIHPS", national.pihps],
+    ["BPS Gresik", national.bpsGresik],
+    ["BPS Lamongan", national.bpsLamongan],
+    ["HPP Bulog/KDMP", national.hppKdmp],
+    ["Pengepul (manual)", national.pengepulManual],
+  ];
+  heading.hidden = false;
+  grid.hidden = false;
+  grid.innerHTML = items.map(([label, value]) => {
+    const hasValue = value !== null && value !== undefined && value !== "";
+    const display = hasValue ? String(value) : "belum diisi";
+    return `
+      <div class="national-card${hasValue ? "" : " empty-value"}" title="${escapeHtml(`${label}: ${display}`)}">
+        <span class="nat-label">${escapeHtml(label)}</span>
+        <span class="nat-value">${escapeHtml(display)}</span>
+      </div>
+    `;
+  }).join("");
+}
+
 function renderTable(records) {
   const sorted = [...records].sort((a, b) => {
     if (state.filters.sort === "product") return productName(a).localeCompare(productName(b));
@@ -259,6 +290,7 @@ function render() {
   renderStats(records, cheapest, state.report?.trends || []);
   renderCheapest(cheapest);
   renderTrends();
+  renderNational();
   renderTable(records);
 }
 
