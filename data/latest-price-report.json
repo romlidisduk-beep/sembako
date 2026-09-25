@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-25T16:12:16.172893+07:00",
+  "generatedAt": "2026-09-25T16:34:52.329982+07:00",
   "date": "2026-09-25",
   "areas": [
     "gresik",
@@ -2389,7 +2389,7 @@
   "nationalReferences": {
     "date": "2026-09-25",
     "panelBapanas": "Data tidak ditemukan di halaman",
-    "pihps": "Gagal diambil: Gagal mengambil https://www.hargapangan.id/: HTTP Error 522: <none>",
+    "pihps": "0,0,0,0,0",
     "bpsGresik": "(belum waktunya cek - rilis BPS bulanan)",
     "bpsLamongan": "(belum waktunya cek - rilis BPS bulanan)",
     "hppKdmp": 6500,
