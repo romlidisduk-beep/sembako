@@ -26,5 +26,5 @@
     "https://panelharga.badanpangan.go.id/api/harga/harian-provinsi?provinsi_id=11: respons bukan JSON (text/html)",
     "https://panelharga.badanpangan.go.id/api/harga/pasar-modern?provinsi_id=11: respons bukan JSON (text/html)"
   ],
-  "lastAttemptAt": "2026-09-25T14:10:04+00:00"
+  "lastAttemptAt": "2026-09-25T14:20:49+00:00"
 }
