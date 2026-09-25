@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-25T16:34:52.329982+07:00",
+  "generatedAt": "2026-09-25T16:51:53.066786+07:00",
   "date": "2026-09-25",
   "areas": [
     "gresik",
@@ -2388,12 +2388,12 @@
   "errors": [],
   "nationalReferences": {
     "date": "2026-09-25",
-    "panelBapanas": "Data tidak ditemukan di halaman",
-    "pihps": "0,0,0,0,0",
-    "bpsGresik": "(belum waktunya cek - rilis BPS bulanan)",
-    "bpsLamongan": "(belum waktunya cek - rilis BPS bulanan)",
+    "panelBapanas": "Belum pernah berhasil diambil otomatis — cek manual",
+    "pihps": "Belum pernah berhasil diambil otomatis — cek manual",
+    "bpsGresik": "Belum pernah berhasil diambil otomatis — cek manual",
+    "bpsLamongan": "Belum pernah berhasil diambil otomatis — cek manual",
     "hppKdmp": 6500,
-    "pengepulManual": "",
+    "pengepulManual": "Belum pernah berhasil diambil otomatis — cek manual",
     "pengepulNote": "Tidak ada sumber publik untuk harga pengepul/tengkulak — isi manual kalau sudah dicek sendiri (mis. lewat telepon/WA)."
   }
 }
