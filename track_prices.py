@@ -1,314 +1,95 @@
-#!/usr/bin/env python3
-"""Pelacak harga sembako Gresik-Lamongan.
 
-Dependensi: Python standard library saja.
-Sumber harga pasar: SISKAPERBAPO Jawa Timur.
-"""
-
-from __future__ import annotations
-
-import argparse
-import csv
-import html
-import json
-import math
-import os
-import re
-import sys
-from collections import defaultdict
-from dataclasses import dataclass
-from datetime import datetime, timedelta
-from pathlib import Path
-from typing import Any
-from urllib.error import HTTPError, URLError
-from urllib.request import Request, urlopen
-from zoneinfo import ZoneInfo
+    Sites like Panel Harga Bapanas and PIHPS render heavily with
+    JavaScript, so a plain HTTP fetch sometimes only returns a shell
+    page with no figures. This never raises; an empty result just means
+    "coba lagi nanti / cek manual", which the caller turns into a
+    human-readable placeholder rather than failing the whole run.
+    """
+    return re.findall(r"Rp\.?\s*([0-9][0-9.,]*)", text)[:limit]
 
 
-SOURCE_BASE = "https://siskaperbapo.indagjatim.com"
-ROOT = Path(__file__).resolve().parent
-DATA_DIR = ROOT / "data"
-DEFAULT_HISTORY = DATA_DIR / "price-history.csv"
-DEFAULT_REPORT = DATA_DIR / "latest-price-report.json"
-DEFAULT_RETAIL = DATA_DIR / "retail-prices.csv"
+def extract_bps_press_release_title(text: str) -> str | None:
+    """Pull the title of a BPS press release about NTP/harga gabah, if present.
 
-AREAS: dict[str, dict[str, str]] = {
-    "gresik": {"label": "Kabupaten Gresik", "keycode": "gresikkab"},
-    "lamongan": {"label": "Kabupaten Lamongan", "keycode": "lamongankab"},
-}
-
-
-@dataclass(frozen=True)
-class Commodity:
-    key: str
-    label: str
-    source_label: str
-    unit: str
-
-
-COMMODITIES = [
-    Commodity("beras-premium", "Beras premium", "Beras Premium / kg", "kg"),
-    Commodity("beras-medium", "Beras medium", "Beras Medium / kg", "kg"),
-    Commodity("gula", "Gula kristal putih", "Gula Kristal Putih / kg", "kg"),
-    Commodity("minyak-curah", "Minyak goreng curah", "Minyak Goreng Curah / kg", "kg"),
-    Commodity("minyakita", "Minyakita", "Minyak Goreng MINYAKITA / liter", "liter"),
-    Commodity("ayam", "Daging ayam ras", "Daging Ayam Ras / kg", "kg"),
-    Commodity("telur", "Telur ayam ras", "Telur Ayam Ras / kg", "kg"),
-    Commodity("sapi", "Daging sapi paha belakang", "Daging Sapi Paha Belakang / kg", "kg"),
-    Commodity("cabai-keriting", "Cabai merah keriting", "Cabe Merah Keriting / kg", "kg"),
-    Commodity("cabai-besar", "Cabai merah besar", "Cabe Merah Besar / kg", "kg"),
-    Commodity("cabai-rawit", "Cabai rawit merah", "Cabe Rawit Merah / kg", "kg"),
-    Commodity("bawang-merah", "Bawang merah", "Bawang Merah / kg", "kg"),
-    Commodity("bawang-putih", "Bawang putih", "Bawang Putih / kg", "kg"),
-    Commodity("lpg", "LPG 3 kg", "GAS ELPIGI 3 Kg", "tabung"),
-]
-
-COMMODITY_BY_KEY = {commodity.key: commodity for commodity in COMMODITIES}
-SOURCE_TYPES = {"pasar rakyat", "toko", "koperasi", "swalayan"}
-CSV_FIELDS = [
-    "date",
-    "area",
-    "marketId",
-    "location",
-    "sourceType",
-    "commodityKey",
-    "commodity",
-    "brand",
-    "productName",
-    "size",
-    "unit",
-    "price",
-    "priceType",
-    "stockStatus",
-    "confidence",
-    "observedAt",
-    "address",
-    "sourceUrl",
-]
-SIZE_PATTERN = re.compile(
-    r"^\s*(?P<quantity>\d+(?:[.,]\d+)?)\s*"
-    r"(?P<unit>kg|kilogram|g|gram|liter|litre|l|ml|tabung|unit|pcs|buah|ekor|bungkus)\b",
-    re.IGNORECASE,
-)
-UNIT_ALIASES = {
-    "kilogram": "kg",
-    "gram": "g",
-    "litre": "liter",
-    "l": "liter",
-    "ml": "ml",
-    "tabung": "tabung",
-    "unit": "unit",
-    "pcs": "pcs",
-    "buah": "buah",
-    "ekor": "ekor",
-    "bungkus": "bungkus",
-}
-
-
-def today_jakarta() -> str:
-    return datetime.now(ZoneInfo("Asia/Jakarta")).strftime("%Y-%m-%d")
-
-
-def jakarta_now_iso() -> str:
-    return datetime.now(ZoneInfo("Asia/Jakarta")).isoformat()
-
-
-def valid_date(value: str) -> bool:
-    try:
-        datetime.strptime(value, "%Y-%m-%d")
-    except (TypeError, ValueError):
-        return False
-    return True
-
-
-def iso_date_argument(value: str) -> str:
-    if not valid_date(value):
-        raise argparse.ArgumentTypeError(
-            f"Tanggal harus berformat YYYY-MM-DD: {value!r}"
-        )
-    return value
-
-
-def non_negative_number(value: str) -> float:
-    try:
-        number = float(value)
-    except ValueError as error:
-        raise argparse.ArgumentTypeError(f"Angka tidak valid: {value!r}") from error
-    if not math.isfinite(number) or number < 0:
-        raise argparse.ArgumentTypeError("Nilai harus berupa angka nol atau lebih.")
-    return number
-
-
-def positive_integer(value: str) -> int:
-    try:
-        number = int(value)
-    except ValueError as error:
-        raise argparse.ArgumentTypeError(f"Bilangan bulat tidak valid: {value!r}") from error
-    if number < 1:
-        raise argparse.ArgumentTypeError("Nilai harus minimal 1.")
-    return number
-
-
-def parse_csv_list(value: str | None, default: list[str]) -> list[str]:
-    if not value:
-        return default
-    return [item.strip().lower() for item in value.split(",") if item.strip()]
-
-
-def selected_areas(value: str | None) -> list[str]:
-    requested = parse_csv_list(value, ["gresik", "lamongan"])
-    valid = [area for area in requested if area in AREAS]
-    invalid = [area for area in requested if area not in AREAS]
-    if invalid:
-        raise ValueError(
-            f"Wilayah tidak dikenal: {', '.join(invalid)}. "
-            f"Pilihan: {', '.join(AREAS)}."
-        )
-    return valid
-
-
-def selected_commodities(value: str | None) -> list[Commodity]:
-    if not value or value.lower() == "all":
-        return COMMODITIES
-    keys = parse_csv_list(value, [])
-    invalid = [key for key in keys if key not in COMMODITY_BY_KEY]
-    if invalid:
-        raise ValueError(
-            f"Komoditas tidak dikenal: {', '.join(invalid)}. "
-            "Gunakan commodity key yang tercantum di README.md."
-        )
-    return [COMMODITY_BY_KEY[key] for key in keys]
-
-
-def project_path(value: str | None, fallback: Path) -> Path:
-    if not value:
-        return fallback
-    candidate = Path(value)
-    if candidate.is_absolute():
-        return candidate
-    from_project = ROOT / candidate
-    from_cwd = Path.cwd() / candidate
-    if from_project.exists() or not from_cwd.exists():
-        return from_project
-    return from_cwd
-
-
-def clean_html(source: str) -> str:
-    cleaned = re.sub(r"<script[\s\S]*?</script>", " ", source, flags=re.IGNORECASE)
-    cleaned = re.sub(r"<style[\s\S]*?</style>", " ", cleaned, flags=re.IGNORECASE)
-    cleaned = re.sub(r"<br\s*/?>", "\n", cleaned, flags=re.IGNORECASE)
-    cleaned = re.sub(
-        r"</?(?:div|p|li|tr|td|th|h[1-6]|section|article|strong|span)\b[^>]*>",
-        "\n",
-        cleaned,
-        flags=re.IGNORECASE,
+    BPS kabupaten sites repost the monthly "Nilai Tukar Petani ... harga
+    gabah" provincial release. This looks for the Indonesian or English
+    title pattern in raw (or lightly cleaned) HTML/text.
+    """
+    match = re.search(
+        r"(Nilai Tukar Petani[^<\"\n]{0,160}|Farmer Exchange Rate[^<\"\n]{0,160})",
+        text,
     )
-    cleaned = re.sub(r"<[^>]+>", " ", cleaned)
-    lines = [
-        " ".join(html.unescape(line).split())
-        for line in cleaned.splitlines()
-    ]
-    return "\n".join(line for line in lines if line).strip()
+    return match.group(1).strip() if match else None
 
 
-def extract_price(text: str, source_label: str) -> int | None:
-    source_lower = source_label.lower()
-    lines = text.splitlines()
-    for index, line in enumerate(lines):
-        start = line.lower().find(source_lower)
-        if start < 0:
-            continue
-        candidates = [line[start + len(source_label) :]]
-        if index + 1 < len(lines):
-            candidates.append(lines[index + 1])
-        for candidate in candidates:
-            match = re.search(r"\bRp\s*([0-9][0-9.]*)\b", candidate, re.IGNORECASE)
-            if not match:
-                continue
-            price = int(match.group(1).replace(".", ""))
-            return price if price > 0 else None
-        return None
-    return None
-
-
-def fetch_text(url: str, accept: str = "text/html,application/json") -> str:
-    request = Request(
-        url,
-        headers={
-            "User-Agent": "PelacakHargaSembako/1.0",
-            "Accept": accept,
-        },
-    )
+def fetch_bps_kabupaten_reference(base_url: str) -> str:
+    """Monthly validator: latest NTP/harga-gabah release title from a BPS
+    kabupaten site, or a 'cek manual' pointer if it can't be parsed.
+    """
+    url = f"{base_url}/en/pressrelease"
     try:
-        with urlopen(request, timeout=30) as response:
-            return response.read().decode("utf-8", errors="replace")
-    except (HTTPError, URLError, TimeoutError) as error:
-        raise RuntimeError(f"Gagal mengambil {url}: {error}") from error
+        text = fetch_text(url, accept="text/html")
+    except RuntimeError:
+        return f"Cek manual: {url}"
+    title = extract_bps_press_release_title(text)
+    return title or f"Tidak terbaca otomatis - cek manual: {url}"
 
 
-def market_url(date: str, area: str, market_id: str = "") -> str:
-    keycode = AREAS[area]["keycode"]
-    query = f"tanggal={date}&kabkota={keycode}&pasar={market_id}"
-    return f"{SOURCE_BASE}/display/show/?{query}"
-
-
-def fetch_markets(area: str) -> list[dict[str, Any]]:
-    url = f"{SOURCE_BASE}/harga/pasar.json/{AREAS[area]['keycode']}"
-    data = json.loads(fetch_text(url, "application/json"))
-    if not isinstance(data, list):
-        raise RuntimeError(f"Format daftar pasar {AREAS[area]['label']} tidak dikenal")
-    markets = []
-    for item in data:
-        if not isinstance(item, dict) or "psr_id" not in item or "psr_nama" not in item:
-            continue
-        if item.get("psr_status") in (0, "0", False):
-            continue
-        try:
-            market_id = int(item["psr_id"])
-        except (TypeError, ValueError):
-            continue
-        name = str(item["psr_nama"]).strip()
-        if market_id > 0 and name:
-            markets.append({"psr_id": market_id, "psr_nama": name})
-    return markets
-
-
-def fetch_market_prices(
+def fetch_national_reference_prices(
     date: str,
-    area: str,
-    market: dict[str, Any],
-    commodities: list[Commodity],
-) -> list[dict[str, Any]]:
-    source_url = market_url(date, area, str(market["psr_id"]))
-    text = clean_html(fetch_text(source_url))
-    records: list[dict[str, Any]] = []
-    for commodity in commodities:
-        price = extract_price(text, commodity.source_label)
-        if price is None:
-            continue
-        records.append(
-            {
-                "date": date,
-                "area": area,
-                "marketId": str(market["psr_id"]),
-                "location": market["psr_nama"],
-                "sourceType": "pasar rakyat",
-                "commodityKey": commodity.key,
-                "commodity": commodity.label,
-                "brand": "Komoditas pasar",
-                "productName": commodity.label,
-                "size": f"1 {commodity.unit}",
-                "unit": commodity.unit,
-                "price": price,
-                "priceType": "survei",
-                "stockStatus": "terpantau",
-                "confidence": "resmi-pasar",
-                "observedAt": date,
-                "address": f"{market['psr_nama']}, {AREAS[area]['label']}",
-                "sourceUrl": source_url,
-            }
-        )
-    return records
+    hpp_kdmp: int = HPP_KDMP_DEFAULT,
+    pengepul_manual: str = "",
+) -> dict[str, Any]:
+    """Kumpulkan referensi gabah/beras nasional & daerah di luar SISKAPERBAPO.
+
+    Selalu mengembalikan dict lengkap (tidak pernah raise) — setiap sumber
+    yang gagal diambil hanya diisi keterangan gagal, supaya satu sumber
+    yang down tidak menggagalkan seluruh laporan harian.
+    """
+    result: dict[str, Any] = {"date": date}
+
+    try:
+        text = fetch_text(NATIONAL_REFERENCE_URLS["panelBapanas"], accept="text/html")
+        figures = extract_rupiah_figures(text)
+        result["panelBapanas"] = ",".join(figures) if figures else "Data tidak ditemukan di halaman"
+    except RuntimeError as error:
+        result["panelBapanas"] = f"Gagal diambil: {error}"
+
+    try:
+        text = fetch_text(NATIONAL_REFERENCE_URLS["pihps"], accept="text/html")
+        figures = extract_rupiah_figures(text)
+        result["pihps"] = ",".join(figures) if figures else "Data tidak ditemukan di halaman"
+    except RuntimeError as error:
+        result["pihps"] = f"Gagal diambil: {error}"
+
+    # Rilis BPS kabupaten bulanan — cukup dicek awal bulan, hemat request
+    # di hari-hari lain karena rilisnya memang bulanan, bukan harian.
+    day = int(date.split("-")[2]) if valid_date(date) else datetime.now().day
+    if day <= 5:
+        result["bpsGresik"] = fetch_bps_kabupaten_reference(BPS_KABUPATEN_URLS["gresik"])
+        result["bpsLamongan"] = fetch_bps_kabupaten_reference(BPS_KABUPATEN_URLS["lamongan"])
+    else:
+        result["bpsGresik"] = "(belum waktunya cek - rilis BPS bulanan)"
+        result["bpsLamongan"] = "(belum waktunya cek - rilis BPS bulanan)"
+
+    result["hppKdmp"] = hpp_kdmp
+    result["pengepulManual"] = pengepul_manual
+    result["pengepulNote"] = (
+        "Tidak ada sumber publik untuk harga pengepul/tengkulak — isi manual "
+        "kalau sudah dicek sendiri (mis. lewat telepon/WA)."
+    )
+    return result
+
+
+def append_national_reference_history(path: Path, entry: dict[str, Any]) -> None:
+    row = {field: entry.get(field, "") for field in NATIONAL_CSV_FIELDS}
+    is_new = not path.exists()
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("a", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=NATIONAL_CSV_FIELDS)
+        if is_new:
+            writer.writeheader()
+        writer.writerow(row)
 
 
 def package_quantity(size: str | None, unit: str | None) -> float:
@@ -553,10 +334,18 @@ def build_telegram_messages(
     records: list[dict[str, Any]],
     date: str,
     limit: int = 40,
+    max_length: int = 3900,
 ) -> list[str]:
-    """Build Telegram-safe messages ordered from the cheapest price."""
+    """Build chat-safe messages ordered from the cheapest price.
+
+    Used for both Telegram (max_length long, one bot API call per message)
+    and WhatsApp via CallMeBot (max_length short — see WHATSAPP_MAX_MESSAGE_LENGTH,
+    since each WhatsApp message is a single URL-encoded GET request).
+    """
     if limit < 1:
-        raise ValueError("Batas harga Telegram harus minimal 1")
+        raise ValueError("Batas harga harus minimal 1")
+    if max_length < 1:
+        raise ValueError("Panjang pesan harus minimal 1 karakter")
 
     ordered = sorted(
         records,
@@ -597,12 +386,33 @@ def build_telegram_messages(
     messages: list[str] = []
     current = "\n".join(header)
     for line in lines:
-        candidate = f"{current}\n{line}"
-        if len(candidate) > 3900 and current.strip():
+        remaining = line
+        while remaining:
+            available = max_length - len(current) - 1
+            if available <= 0:
+                if current.strip():
+                    messages.append(current.rstrip())
+                current = ""
+                available = max_length
+
+            if len(remaining) <= available:
+                current = f"{current}\n{remaining}" if current else remaining
+                remaining = ""
+                continue
+
+            # Prefer splitting at a space, but also split an unusually long
+            # single word so the provider's request limit is never exceeded.
+            split_at = remaining.rfind(" ", 0, available + 1)
+            if split_at <= 0:
+                split_at = available
+            part = remaining[:split_at].rstrip()
+            if not part:
+                part = remaining[:available]
+                split_at = available
+            current = f"{current}\n{part}" if current else part
             messages.append(current.rstrip())
-            current = line
-        else:
-            current = candidate
+            current = ""
+            remaining = remaining[split_at:].lstrip()
     if current.strip():
         messages.append(current.rstrip())
     return messages
@@ -657,6 +467,235 @@ def send_telegram_notification(
     limit: int = 40,
 ) -> int:
     return send_telegram_messages(build_telegram_messages(records, date, limit))
+
+
+# --- WhatsApp via CallMeBot (gratis, personal use only) -----------------
+#
+# CallMeBot BUKAN WhatsApp Cloud API resmi dari Meta — ini layanan gratis
+# pihak ketiga yang meneruskan pesan ke satu nomor WhatsApp pribadi.
+# Setup (sekali saja, manual lewat WhatsApp kamu sendiri):
+#   1. Simpan nomor bot CallMeBot sebagai kontak (nomornya bisa berubah,
+#      cek https://www.callmebot.com/blog/free-api-whatsapp-messages/).
+#   2. Kirim pesan "I allow callmebot to send me messages" ke kontak itu.
+#   3. Tunggu balasan berisi API key (kadang sampai beberapa menit).
+# API key + nomor kamu sendiri itu yang dipakai di WHATSAPP_APIKEY dan
+# WHATSAPP_PHONE. Karena ini layanan gratis tak resmi, ada rate limit
+# ketat — pesan dipecah lebih pendek (lihat WHATSAPP_MAX_MESSAGE_LENGTH)
+# dan diberi jeda antar pesan supaya tidak ditolak/diblokir.
+CALLMEBOT_ENDPOINT = "https://api.callmebot.com/whatsapp.php"
+WHATSAPP_MAX_MESSAGE_LENGTH = 1200
+WHATSAPP_SEND_DELAY_SECONDS = 3
+WHATSAPP_MAX_RETRIES = 3
+WHATSAPP_RETRY_BACKOFF_SECONDS = 2
+
+
+def normalize_whatsapp_phone(value: str) -> str:
+    """Normalize a phone number to CallMeBot's international digit format."""
+    phone = str(value or "").strip()
+    if phone.startswith("+"):
+        phone = phone[1:]
+    phone = re.sub(r"[\s().-]", "", phone)
+    if not re.fullmatch(r"\d{8,15}", phone):
+        raise ValueError(
+            f"Nomor WhatsApp tidak valid: {value!r}. "
+            "Gunakan format internasional, misalnya 6281234567890."
+        )
+    return phone
+
+
+def _split_secret_list(value: str) -> list[str]:
+    return [item.strip() for item in re.split(r"[\n,;]+", value or "") if item.strip()]
+
+
+def parse_whatsapp_recipients(
+    value: str | None = None,
+    phone: str | None = None,
+    apikey: str | None = None,
+) -> list[tuple[str, str]]:
+    """Read WhatsApp recipients while keeping the old single-recipient envs.
+
+    Preferred format for several recipients is WHATSAPP_RECIPIENTS:
+    ``628111111111=key-satu,628222222222=key-dua``.
+    One recipient per line is also supported. JSON is accepted for secrets
+    managers that make structured values easier to maintain:
+    ``[{"phone": "...", "apikey": "..."}]``.
+    """
+    raw = value if value is not None else os.environ.get("WHATSAPP_RECIPIENTS", "")
+    entries: list[tuple[str, str]] = []
+
+    if raw.strip():
+        parsed: Any = None
+        try:
+            parsed = json.loads(raw)
+        except json.JSONDecodeError:
+            parsed = None
+
+        if isinstance(parsed, dict):
+            parsed = [
+                {"phone": recipient_phone, "apikey": recipient_key}
+                for recipient_phone, recipient_key in parsed.items()
+            ]
+
+        if isinstance(parsed, list):
+            for item in parsed:
+                if isinstance(item, dict):
+                    entries.append(
+                        (str(item.get("phone", "")), str(item.get("apikey", "")))
+                    )
+                elif isinstance(item, str):
+                    parts = re.split(r"\s*(?:=|\||:)\s*", item, maxsplit=1)
+                    if len(parts) == 2:
+                        entries.append((parts[0], parts[1]))
+        else:
+            for item in _split_secret_list(raw):
+                parts = re.split(r"\s*(?:=|\||:)\s*", item, maxsplit=1)
+                if len(parts) != 2:
+                    raise ValueError(
+                        "Format WHATSAPP_RECIPIENTS harus "
+                        "nomor=apikey, satu penerima per baris."
+                    )
+                entries.append((parts[0], parts[1]))
+    else:
+        configured_phone = phone or os.environ.get("WHATSAPP_PHONE", "")
+        configured_key = apikey or os.environ.get("WHATSAPP_APIKEY", "")
+        phones = _split_secret_list(configured_phone)
+        keys = _split_secret_list(configured_key)
+        if len(phones) > 1 and len(keys) not in {1, len(phones)}:
+            raise ValueError(
+                "Jumlah WHATSAPP_APIKEY harus satu atau sama dengan jumlah "
+                "WHATSAPP_PHONE."
+            )
+        if phones and keys:
+            entries = [
+                (recipient_phone, keys[0] if len(keys) == 1 else keys[index])
+                for index, recipient_phone in enumerate(phones)
+            ]
+
+    if not entries:
+        raise ValueError(
+            "WhatsApp belum dikonfigurasi. Isi WHATSAPP_RECIPIENTS atau "
+            "WHATSAPP_PHONE dan WHATSAPP_APIKEY."
+        )
+
+    recipients: list[tuple[str, str]] = []
+    seen_phones: set[str] = set()
+    for recipient_phone, recipient_key in entries:
+        normalized_phone = normalize_whatsapp_phone(recipient_phone)
+        normalized_key = str(recipient_key or "").strip()
+        if not normalized_key:
+            raise ValueError(f"API key WhatsApp kosong untuk nomor {normalized_phone}.")
+        # A repeated phone must not receive duplicate notifications just
+        # because it appeared twice in a secret.
+        if normalized_phone in seen_phones:
+            continue
+        seen_phones.add(normalized_phone)
+        recipients.append((normalized_phone, normalized_key))
+    return recipients
+
+
+def build_whatsapp_messages(
+    records: list[dict[str, Any]],
+    date: str,
+    limit: int = 20,
+) -> list[str]:
+    return build_telegram_messages(records, date, limit, max_length=WHATSAPP_MAX_MESSAGE_LENGTH)
+
+
+def _whatsapp_error_is_retryable(error: BaseException) -> bool:
+    if isinstance(error, HTTPError):
+        return error.code in {408, 425, 429, 500, 502, 503, 504}
+    return isinstance(error, (URLError, TimeoutError))
+
+
+def _send_one_whatsapp_message(phone: str, apikey: str, message: str) -> None:
+    query = urlencode({"phone": phone, "text": message, "apikey": apikey})
+    request = Request(
+        f"{CALLMEBOT_ENDPOINT}?{query}",
+        headers={"User-Agent": "PelacakHargaSembako/1.0"},
+        method="GET",
+    )
+    last_error: BaseException | None = None
+    for attempt in range(WHATSAPP_MAX_RETRIES):
+        retryable = False
+        try:
+            with urlopen(request, timeout=30) as response:
+                body = response.read().decode("utf-8", errors="replace")
+            lowered_body = body.lower()
+            if "message queued" in lowered_body or "message sent" in lowered_body:
+                return
+            raise RuntimeError(f"CallMeBot menolak pesan: {body.strip()[:200]}")
+        except HTTPError as error:
+            response_body = error.read().decode("utf-8", errors="replace")
+            last_error = RuntimeError(
+                f"HTTP {error.code}: {response_body.strip()[:200] or error.reason}"
+            )
+            retryable = _whatsapp_error_is_retryable(error)
+        except (URLError, TimeoutError, RuntimeError) as error:
+            last_error = error
+            retryable = _whatsapp_error_is_retryable(error)
+
+        if not retryable or attempt + 1 >= WHATSAPP_MAX_RETRIES:
+            break
+        time.sleep(WHATSAPP_RETRY_BACKOFF_SECONDS * (attempt + 1))
+
+    raise RuntimeError(str(last_error or "CallMeBot gagal mengirim pesan"))
+
+
+def send_whatsapp_messages(
+    messages: list[str],
+    phone: str | None = None,
+    apikey: str | None = None,
+) -> int:
+    """Send messages to one or more CallMeBot recipients.
+
+    A failed recipient is isolated so the remaining recipients still receive
+    the notification. The final error reports partial delivery instead of
+    pretending that all recipients succeeded.
+    """
+    if not messages:
+        raise RuntimeError("Tidak ada pesan WhatsApp yang dapat dikirim.")
+
+    try:
+        recipients = parse_whatsapp_recipients(phone=phone, apikey=apikey)
+    except ValueError as error:
+        raise RuntimeError(str(error)) from error
+
+    sent_count = 0
+    errors: list[str] = []
+    total_requests = len(recipients) * len(messages)
+    request_number = 0
+    for recipient_phone, recipient_key in recipients:
+        for index, message in enumerate(messages, start=1):
+            request_number += 1
+            try:
+                _send_one_whatsapp_message(recipient_phone, recipient_key, message)
+                sent_count += 1
+            except RuntimeError as error:
+                errors.append(
+                    f"{recipient_phone} (pesan {index}/{len(messages)}): {error}"
+                )
+                # Do not send later chunks to a recipient whose previous
+                # request failed; continue with other recipients instead.
+                break
+            if request_number < total_requests:
+                time.sleep(WHATSAPP_SEND_DELAY_SECONDS)
+
+    if errors:
+        detail = "; ".join(errors[:3])
+        if len(errors) > 3:
+            detail += f"; dan {len(errors) - 3} kegagalan lain"
+        raise RuntimeError(
+            f"{sent_count} dari {total_requests} target pesan WhatsApp terkirim. {detail}"
+        )
+    return sent_count
+
+
+def send_whatsapp_notification(
+    records: list[dict[str, Any]],
+    date: str,
+    limit: int = 20,
+) -> int:
+    return send_whatsapp_messages(build_whatsapp_messages(records, date, limit))
 
 
 def print_report(
@@ -743,6 +782,33 @@ def build_parser() -> argparse.ArgumentParser:
         type=positive_integer,
         default=40,
         help="Jumlah harga teratas yang dikirim ke Telegram",
+    )
+    parser.add_argument(
+        "--whatsapp",
+        action="store_true",
+        help="Kirim daftar harga termurah ke WhatsApp lewat CallMeBot (gratis, personal)",
+    )
+    parser.add_argument(
+        "--whatsapp-limit",
+        type=positive_integer,
+        default=20,
+        help="Jumlah harga teratas yang dikirim ke WhatsApp",
+    )
+    parser.add_argument(
+        "--no-national",
+        action="store_true",
+        help="Lewati pengambilan referensi gabah nasional (Bapanas/PIHPS/BPS)",
+    )
+    parser.add_argument(
+        "--hpp-kdmp",
+        type=positive_integer,
+        default=HPP_KDMP_DEFAULT,
+        help="Acuan HPP Bulog/KDMP saat ini (ganti kalau ada Perbadan/SK baru)",
+    )
+    parser.add_argument(
+        "--pengepul-price",
+        default="",
+        help="Harga pengepul hasil cek manual (tidak ada sumber publik otomatis)",
     )
     return parser
 
@@ -840,11 +906,32 @@ def main() -> int:
         "trends": trends,
         "errors": errors,
     }
+    if not args.no_national:
+        national = fetch_national_reference_prices(
+            args.date,
+            hpp_kdmp=args.hpp_kdmp,
+            pengepul_manual=args.pengepul_price,
+        )
+        report["nationalReferences"] = national
+        try:
+            append_national_reference_history(DEFAULT_NATIONAL_HISTORY, national)
+        except OSError as error:
+            print(f"Peringatan: gagal menyimpan riwayat referensi nasional: {error}", file=sys.stderr)
+
     report_path.parent.mkdir(parents=True, exist_ok=True)
     report_path.write_text(json.dumps(report, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     print_report(args.date, all_current_records, trends, errors, args.transport)
     print(f"\nRiwayat tersimpan: {history_path}")
     print(f"Laporan JSON: {report_path}")
+    if not args.no_national:
+        national = report["nationalReferences"]
+        print("\nReferensi gabah nasional/daerah (di luar SISKAPERBAPO):")
+        print(f"  Panel Bapanas          : {national['panelBapanas']}")
+        print(f"  PIHPS                  : {national['pihps']}")
+        print(f"  BPS Gresik (bulanan)   : {national['bpsGresik']}")
+        print(f"  BPS Lamongan (bulanan) : {national['bpsLamongan']}")
+        print(f"  Acuan HPP Bulog/KDMP   : {national['hppKdmp']}")
+        print(f"  Pengepul (manual)      : {national['pengepulManual'] or '(belum diisi)'}")
     if not retail_records:
         print(f"Harga toko/koperasi/swalayan belum ada. Tambahkan data ke: {retail_path}")
     if args.telegram:
@@ -858,6 +945,17 @@ def main() -> int:
             print(f"\nGagal mengirim Telegram: {error}", file=sys.stderr)
             return 1
         print(f"Telegram: notifikasi terkirim dalam {sent_count} pesan.")
+    if args.whatsapp:
+        try:
+            sent_count = send_whatsapp_notification(
+                all_current_records,
+                args.date,
+                args.whatsapp_limit,
+            )
+        except RuntimeError as error:
+            print(f"\nGagal mengirim WhatsApp: {error}", file=sys.stderr)
+            return 1
+        print(f"WhatsApp: notifikasi terkirim dalam {sent_count} pesan.")
     return 0
 
 
