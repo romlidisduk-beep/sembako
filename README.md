@@ -29,17 +29,18 @@ File hasil:
 
 - `data/price-history.csv` — riwayat harga;
 - `data/latest-price-report.json` — laporan lengkap untuk dipakai aplikasi lain.
-- `web/` — website statis untuk menampilkan laporan dengan pencarian, filter,
-  perbandingan harga per satuan, dan urutan termurah.
+- `src/` — dashboard React dengan pencarian, filter, perbandingan harga per
+  satuan, tren, dan urutan termurah.
 
-Untuk mencoba website di komputer:
+Untuk mencoba dashboard di komputer:
 
 ```bash
-python -m http.server 8080
+npm ci
+npm run dev
 ```
 
-Buka `http://localhost:8080/web/` setelah laporan JSON tersedia. Website
-membaca `data/latest-price-report.json` secara langsung.
+Vite otomatis menyalin empat snapshot dari `data/` ke `public/data/` sebelum
+server dijalankan atau build dibuat. Buka alamat yang ditampilkan Vite.
 
 ## Notifikasi Telegram
 
@@ -174,7 +175,7 @@ Selain harga konsumen per pasar, skrip juga mengambil referensi harga
 GABAH/beras tingkat produsen setiap kali dijalankan (aktif secara default):
 
 - **Panel Harga Bapanas** (`panelharga.badanpangan.go.id`) — pusat, harian
-- **PIHPS Nasional / BI** (`hargapangan.id`) — pusat, harian
+- **PIHPS Nasional / BI** (`bi.go.id/hargapangan`) — pusat, harian
 - **BPS Kabupaten Gresik & Lamongan** — repost rilis NTP + harga gabah
   Provinsi Jawa Timur, **bulanan** (dicek otomatis tiap tanggal 1–5 saja
   supaya tidak boros request di hari lain)
@@ -201,8 +202,8 @@ python track_prices.py --hpp-kdmp=6600 --pengepul-price=7200
 Salin isi folder ini ke root repository GitHub. Workflow di
 `.github/workflows/track-prices.yml` dapat dijalankan manual atau otomatis
 setiap hari. Workflow akan menyimpan riwayat dan laporan terbaru kembali ke
-repository, lalu menerbitkan folder `web/` bersama laporan JSON ke GitHub
-Pages.
+ repository. Workflow akan menjalankan `npm run build`, lalu menerbitkan
+folder `dist/` ke GitHub Pages.
 
 Jalankan manual melalui menu **Actions → Pelacak Harga Sembako → Run workflow**.
 

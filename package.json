@@ -4,7 +4,9 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "predev": "python script/sync_public_data.py",
     "dev": "vite",
+    "prebuild": "python script/sync_public_data.py",
     "build": "vite build",
     "serve": "vite preview",
     "typecheck": "tsc -p tsconfig.json --noEmit"

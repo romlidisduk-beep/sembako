@@ -456,6 +456,8 @@ def is_meaningful_reference_value(value: Any) -> bool:
     failure_prefixes = (
         "Gagal diambil",
         "Data tidak ditemukan di halaman",
+        "Belum berhasil diambil otomatis",
+        "Belum pernah berhasil diambil otomatis",
         "(belum waktunya cek",
         "Cek manual:",
         "Tidak terbaca otomatis",
