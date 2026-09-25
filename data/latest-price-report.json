@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-25T16:51:53.066786+07:00",
+  "generatedAt": "2026-09-25T18:53:17.833559+07:00",
   "date": "2026-09-25",
   "areas": [
     "gresik",
@@ -2388,12 +2388,12 @@
   "errors": [],
   "nationalReferences": {
     "date": "2026-09-25",
-    "panelBapanas": "Belum pernah berhasil diambil otomatis — cek manual",
-    "pihps": "Belum pernah berhasil diambil otomatis — cek manual",
-    "bpsGresik": "Belum pernah berhasil diambil otomatis — cek manual",
-    "bpsLamongan": "Belum pernah berhasil diambil otomatis — cek manual",
+    "panelBapanas": "Belum pernah berhasil diambil otomatis — cek manual (data 2026-09-25, menunggu update otomatis)",
+    "pihps": "Belum pernah berhasil diambil otomatis — cek manual (data 2026-09-25, menunggu update otomatis)",
+    "bpsGresik": "Belum pernah berhasil diambil otomatis — cek manual (data 2026-09-25, menunggu update otomatis)",
+    "bpsLamongan": "Belum pernah berhasil diambil otomatis — cek manual (data 2026-09-25, menunggu update otomatis)",
     "hppKdmp": 6500,
-    "pengepulManual": "Belum pernah berhasil diambil otomatis — cek manual",
+    "pengepulManual": "Belum pernah berhasil diambil otomatis — cek manual (data 2026-09-25, menunggu update otomatis)",
     "pengepulNote": "Tidak ada sumber publik untuk harga pengepul/tengkulak — isi manual kalau sudah dicek sendiri (mis. lewat telepon/WA)."
   }
 }
