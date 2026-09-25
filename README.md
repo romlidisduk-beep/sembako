@@ -69,6 +69,21 @@ Website statis tidak mengirim Telegram secara langsung. Notifikasi dikirim oleh
 workflow GitHub Actions agar token dan chat ID tetap berada di environment
 server dan tidak pernah dikirim ke browser.
 
+### Format notifikasi harian
+
+Workflow berjalan otomatis **satu kali sehari pada pukul 14.00 WIB**. Jika
+Telegram atau WhatsApp aktif, setiap kanal menerima beberapa pesan terpisah
+agar tidak menjadi satu pesan panjang:
+
+1. `🌾 Update harga sembako` — tanggal, jumlah harga, lokasi, pasar, dan retail;
+2. `🛒 Harga sembako termurah` — daftar harga termurah berdasarkan harga per
+   satuan;
+3. `⚠️ Waspada kenaikan harga` — hanya komoditas dengan sinyal kenaikan kuat;
+4. `💚 Peluang harga murah` — komoditas yang dekat titik terendah;
+5. `🌾 Referensi nasional & produsen` — Panel Bapanas, PIHPS, BPS, HPP, dan
+   input pengepul manual jika tersedia;
+6. `🚧 Catatan sumber data` — hanya muncul bila ada sumber yang gagal dibaca.
+
 ## Notifikasi WhatsApp (gratis, lewat CallMeBot)
 
 Ada juga opsi kirim daftar harga termurah ke WhatsApp memakai **CallMeBot**,

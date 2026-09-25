@@ -257,7 +257,7 @@ def extract_price(text: str, source_label: str) -> int | None:
         if index + 1 < len(lines):
             candidates.append(lines[index + 1])
         for candidate in candidates:
-            match = re.search(r"\bRp\s*([0-9][0-9.]*)\b", candidate, re.IGNORECASE)
+            match = re.search(r"\bRp\.?\s*([0-9][0-9.]*)\b", candidate, re.IGNORECASE)
             if not match:
                 continue
             price = int(match.group(1).replace(".", ""))
@@ -680,6 +680,63 @@ def currency(value: float) -> str:
     return f"Rp{round(value):,}".replace(",", ".")
 
 
+def _build_message_chunks(
+    header: list[str],
+    lines: list[str],
+    max_length: int,
+) -> list[str]:
+    if max_length < 1:
+        raise ValueError("Panjang pesan harus minimal 1 karakter")
+
+    messages: list[str] = []
+    current = ""
+
+    def append_line(line: str) -> None:
+        nonlocal current
+        remaining = line
+        if not remaining:
+            if current and len(current) < max_length:
+                current += "\n"
+            elif current:
+                messages.append(current.rstrip())
+                current = ""
+            return
+
+        while remaining:
+            separator_length = 1 if current else 0
+            available = max_length - len(current) - separator_length
+            if available <= 0:
+                if current.strip():
+                    messages.append(current.rstrip())
+                current = ""
+                continue
+
+            if len(remaining) <= available:
+                current = f"{current}\n{remaining}" if current else remaining
+                remaining = ""
+                continue
+
+            # Prefer splitting at a space, but also split an unusually long
+            # single word so the provider's request limit is never exceeded.
+            split_at = remaining.rfind(" ", 0, available + 1)
+            if split_at <= 0:
+                split_at = available
+            part = remaining[:split_at].rstrip()
+            if not part:
+                part = remaining[:available]
+                split_at = available
+            current = f"{current}\n{part}" if current else part
+            messages.append(current.rstrip())
+            current = ""
+            remaining = remaining[split_at:].lstrip()
+
+    for line in [*header, *lines]:
+        append_line(line)
+    if current.strip():
+        messages.append(current.rstrip())
+    return messages
+
+
 def build_telegram_messages(
     records: list[dict[str, Any]],
     date: str,
@@ -694,9 +751,6 @@ def build_telegram_messages(
     """
     if limit < 1:
         raise ValueError("Batas harga harus minimal 1")
-    if max_length < 1:
-        raise ValueError("Panjang pesan harus minimal 1 karakter")
-
     ordered = sorted(
         records,
         key=lambda record: (
@@ -707,7 +761,7 @@ def build_telegram_messages(
     )
     selected = ordered[:limit]
     header = [
-        f"HARGA SEMBAKO TERMURAH — {date}",
+        f"🛒 HARGA SEMBAKO TERMURAH — {date}",
         f"{len(ordered)} harga terpantau | menampilkan {len(selected)} teratas",
         "",
     ]
@@ -733,38 +787,146 @@ def build_telegram_messages(
     if not lines:
         lines = ["Belum ada harga yang dapat dikirim."]
 
-    messages: list[str] = []
-    current = "\n".join(header)
-    for line in lines:
-        remaining = line
-        while remaining:
-            available = max_length - len(current) - 1
-            if available <= 0:
-                if current.strip():
-                    messages.append(current.rstrip())
-                current = ""
-                available = max_length
+    return _build_message_chunks(header, lines, max_length)
 
-            if len(remaining) <= available:
-                current = f"{current}\n{remaining}" if current else remaining
-                remaining = ""
-                continue
 
-            # Prefer splitting at a space, but also split an unusually long
-            # single word so the provider's request limit is never exceeded.
-            split_at = remaining.rfind(" ", 0, available + 1)
-            if split_at <= 0:
-                split_at = available
-            part = remaining[:split_at].rstrip()
-            if not part:
-                part = remaining[:available]
-                split_at = available
-            current = f"{current}\n{part}" if current else part
-            messages.append(current.rstrip())
-            current = ""
-            remaining = remaining[split_at:].lstrip()
-    if current.strip():
-        messages.append(current.rstrip())
+def _trend_message_lines(trends: list[dict[str, Any]]) -> list[str]:
+    lines: list[str] = []
+    for trend in trends:
+        area = AREAS.get(
+            str(trend.get("area")),
+            {},
+        ).get("label", str(trend.get("area", "")))
+        latest_price = trend.get("latestPrice")
+        price = (
+            f"{currency(float(latest_price))}/{trend.get('unit') or 'unit'}"
+            if latest_price is not None
+            else "harga terbaru belum tersedia"
+        )
+        change = trend.get("changePercent")
+        change_text = (
+            f"{float(change):+.1f}%"
+            if change is not None
+            else "menunggu riwayat"
+        )
+        lines.extend(
+            [
+                f"{trend.get('commodity') or trend.get('commodityKey') or 'Komoditas'} — {area}",
+                f"   {price} | perubahan {change_text}",
+                f"   {trend.get('reason') or 'Perlu dipantau.'}",
+                "",
+            ]
+        )
+    return lines
+
+
+def build_notification_messages(
+    records: list[dict[str, Any]],
+    date: str,
+    trends: list[dict[str, Any]] | None = None,
+    national: dict[str, Any] | None = None,
+    errors: list[str] | None = None,
+    limit: int = 40,
+    max_length: int = 3900,
+) -> list[str]:
+    """Build a daily notification as separate, clearly labeled sections."""
+    trends = trends or []
+    messages = _build_message_chunks(
+        [
+            "🌾 UPDATE HARGA SEMBAKO",
+            f"📅 {date}",
+            "",
+        ],
+        [
+            f"📊 {len(records)} harga terpantau di "
+            f"{len({(record.get('area'), record.get('marketId')) for record in records})} lokasi.",
+            (
+                f"🏪 Pasar: {sum(record.get('sourceType') == 'pasar rakyat' for record in records)}"
+                f" | Retail: {sum(record.get('sourceType') != 'pasar rakyat' for record in records)}"
+            ),
+            "📍 Wilayah: "
+            + ", ".join(
+                AREAS.get(area, {}).get("label", area)
+                for area in dict.fromkeys(str(record.get("area", "")) for record in records)
+            ),
+        ],
+        max_length,
+    )
+    messages.extend(
+        build_telegram_messages(
+            records,
+            date,
+            limit=limit,
+            max_length=max_length,
+        )
+    )
+
+    warning_trends = [trend for trend in trends if trend.get("signal") == "WASPADA NAIK"]
+    cheap_trends = [trend for trend in trends if trend.get("signal") == "MURAH"]
+    no_data_trends = [
+        trend for trend in trends if trend.get("signal") == "TIDAK ADA DATA"
+    ]
+    if warning_trends:
+        messages.extend(
+            _build_message_chunks(
+                ["⚠️ WASPADA KENAIKAN HARGA", f"{len(warning_trends)} komoditas perlu diperhatikan", ""],
+                _trend_message_lines(warning_trends),
+                max_length,
+            )
+        )
+    else:
+        messages.extend(
+            _build_message_chunks(
+                ["✅ SINYAL KENAIKAN", "Tidak ada kenaikan kuat yang terdeteksi hari ini."],
+                [],
+                max_length,
+            )
+        )
+    if cheap_trends:
+        messages.extend(
+            _build_message_chunks(
+                ["💚 PELUANG HARGA MURAH", f"{len(cheap_trends)} komoditas dekat titik terendah", ""],
+                _trend_message_lines(cheap_trends),
+                max_length,
+            )
+        )
+    if no_data_trends:
+        messages.extend(
+            _build_message_chunks(
+                ["ℹ️ DATA BELUM CUKUP", f"{len(no_data_trends)} komoditas belum memiliki harga terbaru", ""],
+                _trend_message_lines(no_data_trends),
+                max_length,
+            )
+        )
+
+    if national is not None:
+        national_lines = []
+        for label, key in [
+            ("Panel Bapanas", "panelBapanas"),
+            ("PIHPS", "pihps"),
+            ("BPS Gresik", "bpsGresik"),
+            ("BPS Lamongan", "bpsLamongan"),
+            ("HPP Bulog/KDMP", "hppKdmp"),
+            ("Pengepul manual", "pengepulManual"),
+        ]:
+            value = national.get(key)
+            national_lines.append(f"{label}: {value or 'belum diisi'}")
+        messages.extend(
+            _build_message_chunks(
+                ["🌾 REFERENSI NASIONAL & PRODUSEN", "",],
+                national_lines,
+                max_length,
+            )
+        )
+
+    if errors:
+        messages.extend(
+            _build_message_chunks(
+                ["🚧 CATATAN SUMBER DATA", f"{len(errors)} sumber gagal dibaca", ""],
+                [f"• {error}" for error in errors],
+                max_length,
+            )
+        )
     return messages
 
 
@@ -815,8 +977,20 @@ def send_telegram_notification(
     records: list[dict[str, Any]],
     date: str,
     limit: int = 40,
+    trends: list[dict[str, Any]] | None = None,
+    national: dict[str, Any] | None = None,
+    errors: list[str] | None = None,
 ) -> int:
-    return send_telegram_messages(build_telegram_messages(records, date, limit))
+    return send_telegram_messages(
+        build_notification_messages(
+            records,
+            date,
+            trends=trends,
+            national=national,
+            errors=errors,
+            limit=limit,
+        )
+    )
 
 
 # --- WhatsApp via CallMeBot (gratis, personal use only) -----------------
@@ -1044,8 +1218,21 @@ def send_whatsapp_notification(
     records: list[dict[str, Any]],
     date: str,
     limit: int = 20,
+    trends: list[dict[str, Any]] | None = None,
+    national: dict[str, Any] | None = None,
+    errors: list[str] | None = None,
 ) -> int:
-    return send_whatsapp_messages(build_whatsapp_messages(records, date, limit))
+    return send_whatsapp_messages(
+        build_notification_messages(
+            records,
+            date,
+            trends=trends,
+            national=national,
+            errors=errors,
+            limit=limit,
+            max_length=WHATSAPP_MAX_MESSAGE_LENGTH,
+        )
+    )
 
 
 def print_report(
@@ -1234,6 +1421,7 @@ def main() -> int:
                 )
             )
 
+    national: dict[str, Any] | None = None
     report = {
         "generatedAt": jakarta_now_iso(),
         "date": args.date,
@@ -1290,6 +1478,9 @@ def main() -> int:
                 all_current_records,
                 args.date,
                 args.telegram_limit,
+                trends=trends,
+                national=national,
+                errors=errors,
             )
         except RuntimeError as error:
             print(f"\nGagal mengirim Telegram: {error}", file=sys.stderr)
@@ -1301,6 +1492,9 @@ def main() -> int:
                 all_current_records,
                 args.date,
                 args.whatsapp_limit,
+                trends=trends,
+                national=national,
+                errors=errors,
             )
         except RuntimeError as error:
             print(f"\nGagal mengirim WhatsApp: {error}", file=sys.stderr)
