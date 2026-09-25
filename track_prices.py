@@ -440,6 +440,86 @@ def fetch_national_reference_prices(
     return result
 
 
+def is_meaningful_reference_value(value: Any) -> bool:
+    """True kalau `value` benar-benar berisi data, bukan pesan gagal/placeholder
+    dari fetch_national_reference_prices — mis. "Gagal diambil: ...",
+    "Data tidak ditemukan di halaman", "(belum waktunya cek ...)",
+    "Cek manual: ...", string kosong, atau daftar angka yang isinya nol semua
+    seperti "0,0,0,0,0" (itu placeholder loading JS yang ke-scrape, bukan
+    harga sungguhan).
+    """
+    if value is None:
+        return False
+    text = str(value).strip()
+    if not text:
+        return False
+    failure_prefixes = (
+        "Gagal diambil",
+        "Data tidak ditemukan di halaman",
+        "(belum waktunya cek",
+        "Cek manual:",
+        "Tidak terbaca otomatis",
+    )
+    if any(text.startswith(prefix) for prefix in failure_prefixes):
+        return False
+    digits_only = re.sub(r"[^0-9]", "", text)
+    if digits_only and set(digits_only) == {"0"}:
+        return False
+    return True
+
+
+def find_last_meaningful_reference(path: Path, field: str) -> tuple[str, str] | None:
+    """Cari nilai referensi nasional terakhir yang benar-benar berhasil
+    (bukan pesan gagal/placeholder) untuk satu field, dari riwayat, mulai
+    dari yang paling baru. Return (value, tanggal) atau None kalau memang
+    belum pernah ada yang berhasil diambil untuk field ini.
+    """
+    if not path.exists():
+        return None
+    try:
+        with path.open("r", encoding="utf-8", newline="") as handle:
+            rows = list(csv.DictReader(handle))
+    except OSError:
+        return None
+    for row in reversed(rows):
+        value = row.get(field, "")
+        if is_meaningful_reference_value(value):
+            return value, row.get("date", "")
+    return None
+
+
+NATIONAL_REFERENCE_FALLBACK_FIELDS = [
+    "panelBapanas",
+    "pihps",
+    "bpsGresik",
+    "bpsLamongan",
+    "pengepulManual",
+]
+
+
+def apply_national_reference_fallback(national: dict[str, Any], history_path: Path) -> None:
+    """Kalau sumber hari ini gagal/kosong, pakai angka terakhir yang pernah
+    berhasil dari riwayat dan tandai jelas kapan datanya serta bahwa itu
+    menunggu update otomatis berikutnya — daripada tampil "Data tidak
+    ditemukan" atau "0,0,0,0,0" yang membingungkan. Kalau memang belum
+    pernah ada yang berhasil sama sekali, tandai itu juga secara jelas.
+
+    Dipanggil SEBELUM entry hari ini ditambahkan ke riwayat, supaya tidak
+    "jatuh cinta" ke kegagalannya sendiri.
+    """
+    for field in NATIONAL_REFERENCE_FALLBACK_FIELDS:
+        current_value = national.get(field, "")
+        if is_meaningful_reference_value(current_value):
+            continue
+        fallback = find_last_meaningful_reference(history_path, field)
+        if fallback is None:
+            national[field] = "Belum pernah berhasil diambil otomatis — cek manual"
+            continue
+        value, date = fallback
+        note = f"(data {date}, menunggu update otomatis)" if date else "(data lama, menunggu update otomatis)"
+        national[field] = f"{value} {note}"
+
+
 def append_national_reference_history(path: Path, entry: dict[str, Any]) -> None:
     row = {field: entry.get(field, "") for field in NATIONAL_CSV_FIELDS}
     is_new = not path.exists()
@@ -1459,6 +1539,7 @@ def main() -> int:
             hpp_kdmp=args.hpp_kdmp,
             pengepul_manual=args.pengepul_price,
         )
+        apply_national_reference_fallback(national, DEFAULT_NATIONAL_HISTORY)
         report["nationalReferences"] = national
         try:
             append_national_reference_history(DEFAULT_NATIONAL_HISTORY, national)
