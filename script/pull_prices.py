@@ -13,6 +13,7 @@ Run from the repository root:
 from __future__ import annotations
 
 import csv
+import html
 import json
 import re
 import urllib.error
@@ -31,6 +32,10 @@ ENDPOINTS = [
     "https://panelharga.badanpangan.go.id/api/harga/harian-provinsi?provinsi_id=11",
     "https://panelharga.badanpangan.go.id/api/harga/pasar-modern?provinsi_id=11",
 ]
+KEMENTAN_SIMHARGA_URL = (
+    "https://datanonkom.pertanian.go.id/simharga/"
+    "dashboard.php?page=harga_gabah_provinsi"
+)
 
 SOURCE_CATALOG = [
     {
@@ -47,6 +52,11 @@ SOURCE_CATALOG = [
         "name": "PIHPS Nasional · Bank Indonesia",
         "url": "https://www.bi.go.id/hargapangan",
         "role": "Harga rata-rata dan perubahan antar daerah",
+    },
+    {
+        "name": "SIMHARGA Kementerian Pertanian",
+        "url": KEMENTAN_SIMHARGA_URL,
+        "role": "Rekap harga gabah tingkat petani dan penggilingan",
     },
 ]
 
@@ -151,6 +161,74 @@ def fetch_endpoint(url: str) -> list[dict[str, Any]]:
     return extract_items(payload)
 
 
+def clean_html_cell(value: str) -> str:
+    value = re.sub(r"<[^>]+>", " ", value)
+    return re.sub(r"\s+", " ", html.unescape(value)).strip()
+
+
+def fetch_kementan_gabah(fetched_at: str) -> list[dict[str, Any]]:
+    """Read the public SIMHARGA province table when it is available.
+
+    SIMHARGA is an HTML table rather than a stable JSON API. The parser is
+    deliberately conservative: only rows whose first cell is a known
+    Indonesian province are accepted, and no value is invented when the page
+    returns a login/maintenance/Cloudflare page.
+    """
+    provinces = {
+        "aceh", "sumatera utara", "sumatera barat", "riau", "jambi",
+        "sumatera selatan", "bengkulu", "lampung", "kepulauan bangka belitung",
+        "kepulauan riau", "dki jakarta", "jawa barat", "jawa tengah",
+        "di yogyakarta", "jawa timur", "banten", "bali", "nusa tenggara barat",
+        "nusa tenggara timur", "kalimantan barat", "kalimantan tengah",
+        "kalimantan selatan", "kalimantan timur", "kalimantan utara",
+        "sulawesi utara", "sulawesi tengah", "sulawesi selatan",
+        "sulawesi tenggara", "gorontalo", "sulawesi barat", "maluku",
+        "maluku utara", "papua", "papua barat", "papua selatan",
+        "papua tengah", "papua pegunungan", "papua barat daya",
+    }
+    request = urllib.request.Request(
+        KEMENTAN_SIMHARGA_URL,
+        headers={
+            "Accept": "text/html,application/xhtml+xml",
+            "Accept-Language": "id-ID,id;q=0.9",
+            "User-Agent": "PelacakHarga/1.0 (+local-price-dashboard)",
+        },
+    )
+    with urllib.request.urlopen(request, timeout=20) as response:
+        body = response.read().decode("utf-8", errors="replace")
+    if "cloudflare" in body.lower() or "just a moment" in body.lower():
+        raise ValueError("halaman terlindungi Cloudflare")
+
+    rows = re.findall(r"<tr\b[^>]*>(.*?)</tr>", body, flags=re.IGNORECASE | re.DOTALL)
+    records: list[dict[str, Any]] = []
+    for row in rows:
+        cells = [
+            clean_html_cell(cell)
+            for cell in re.findall(r"<t[dh]\b[^>]*>(.*?)</t[dh]>", row, flags=re.IGNORECASE | re.DOTALL)
+        ]
+        if len(cells) < 2 or cells[0].casefold() not in provinces:
+            continue
+        prices = [parse_number(cell) for cell in cells[1:]]
+        prices = [price for price in prices if price is not None and 3000 <= price <= 30000]
+        if not prices:
+            continue
+        records.append(
+            {
+                "tanggal": fetched_at[:10],
+                "sumber": "SIMHARGA Kementerian Pertanian",
+                "komoditas": "Gabah tingkat petani",
+                "harga": prices[-1],
+                "satuan": "kg",
+                "level": "petani",
+                "wilayah": cells[0],
+                "sourceUrl": KEMENTAN_SIMHARGA_URL,
+            }
+        )
+    if not records:
+        raise ValueError("tabel harga gabah tidak terbaca")
+    return records
+
+
 def read_existing_snapshot() -> dict[str, Any]:
     if not OFFICIAL_JSON.exists():
         return {}
@@ -223,6 +301,20 @@ def tarik_panel_harga() -> dict[str, Any]:
             errors.append(message)
             print(f"  Lewati: {error}")
 
+    print(f"Mencoba: {KEMENTAN_SIMHARGA_URL}")
+    try:
+        records.extend(fetch_kementan_gabah(fetched_at))
+        print("  Berhasil membaca harga gabah SIMHARGA Kementan")
+    except (
+        OSError,
+        ValueError,
+        TypeError,
+        urllib.error.URLError,
+    ) as error:
+        message = f"{KEMENTAN_SIMHARGA_URL}: {error}"
+        errors.append(message)
+        print(f"  Lewati: {error}")
+
     unique_records = list(
         {
             (record["tanggal"], record["komoditas"], record["harga"], record["satuan"]): record
@@ -235,7 +327,7 @@ def tarik_panel_harga() -> dict[str, Any]:
         snapshot = {
             "version": 1,
             "status": "ok",
-            "source": "Panel Harga Badan Pangan",
+            "source": "Panel Harga Badan Pangan + SIMHARGA Kementan",
             "sources": SOURCE_CATALOG,
             "fetchedAt": fetched_at,
             "lastSuccessfulFetch": fetched_at,
@@ -249,8 +341,8 @@ def tarik_panel_harga() -> dict[str, Any]:
             **previous,
             "version": 1,
             "status": "stale" if previous.get("records") else "unavailable",
-            "source": previous.get("source", "Panel Harga Badan Pangan"),
-            "sources": previous.get("sources", SOURCE_CATALOG),
+            "source": "Panel Harga Badan Pangan + SIMHARGA Kementan",
+            "sources": SOURCE_CATALOG,
             "lastAttemptAt": fetched_at,
             "records": previous.get("records", []),
             "errors": errors or ["Tidak ada record harga yang dikenali dari endpoint."],
