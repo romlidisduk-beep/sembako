@@ -33,6 +33,7 @@ DATA_DIR = ROOT / "data"
 DEFAULT_HISTORY = DATA_DIR / "price-history.csv"
 DEFAULT_REPORT = DATA_DIR / "latest-price-report.json"
 DEFAULT_RETAIL = DATA_DIR / "retail-prices.csv"
+DEFAULT_PANEN = DATA_DIR / "harga-panen-report.json"
 
 AREAS: dict[str, dict[str, str]] = {
     "gresik": {"label": "Kabupaten Gresik", "keycode": "gresikkab"},
@@ -520,6 +521,64 @@ def apply_national_reference_fallback(national: dict[str, Any], history_path: Pa
         value, date = fallback
         note = f"(data {date}, menunggu update otomatis)" if date else "(data lama, menunggu update otomatis)"
         national[field] = f"{value} {note}"
+
+
+SOURCE_LABELS = {
+    "panelBapanas": "Panel Harga Bapanas",
+    "pihps": "PIHPS / Bank Indonesia",
+    "bpsGresik": "BPS Kabupaten Gresik",
+    "bpsLamongan": "BPS Kabupaten Lamongan",
+}
+
+
+def build_panen_report(national: dict[str, Any] | None, date: str, hpp_kdmp: int) -> dict[str, Any]:
+    """Susun data/harga-panen-report.json dari referensi nasional yang ada.
+
+    Prinsip: JANGAN PERNAH mengisi hargaPerKg dengan angka yang tidak jelas
+    asalnya (mis. daftar mentah "Rp..." dari Panel Bapanas/PIHPS yang belum
+    tentu itu harga GKP, atau judul rilis pers BPS yang bukan angka sama
+    sekali). Satu-satunya angka yang aman ditampilkan sebagai harga adalah
+    HPP/KDMP, karena itu acuan tetap resmi, bukan hasil scraping.
+
+    Sumber lain (Panel Bapanas, PIHPS, BPS) ditampilkan sebagai STATUS teks
+    apa adanya (termasuk fallback "data lama, menunggu update otomatis" dari
+    apply_national_reference_fallback), bukan dipaksakan jadi angka harga.
+    """
+    records = [
+        {
+            "tanggal": date,
+            "kabupaten": area_label,
+            "kecamatan": "-",
+            "desaKelurahan": "-",
+            "lokasi": "Acuan pemerintah (HPP/KDMP)",
+            "komoditas": "Gabah Kering Panen (GKP)",
+            "kualitas": "HPP",
+            "hargaPerKg": hpp_kdmp,
+            "catatan": (
+                "Harga Pembelian Pemerintah dari Bapanas/KDMP, bukan hasil transaksi "
+                "harian di lapangan. Nilainya tetap sampai ada Perbadan/SK baru."
+            ),
+        }
+        for area_label in ("Gresik", "Lamongan")
+    ]
+
+    sumber_referensi = []
+    if national:
+        for field, label in SOURCE_LABELS.items():
+            value = str(national.get(field, ""))
+            is_fallback = "(data" in value and "menunggu update otomatis" in value
+            is_ok = is_meaningful_reference_value(value) or is_fallback
+            sumber_referensi.append({
+                "sumber": label,
+                "status": value or "Belum ada data",
+                "ok": is_ok,
+            })
+
+    return {
+        "generatedAt": jakarta_now_iso(),
+        "records": records,
+        "sumberReferensi": sumber_referensi,
+    }
 
 
 def append_national_reference_history(path: Path, entry: dict[str, Any]) -> None:
@@ -1400,6 +1459,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--history", help="Path riwayat CSV relatif terhadap folder proyek")
     parser.add_argument("--retail", help="Path CSV toko/koperasi/swalayan relatif terhadap folder proyek")
     parser.add_argument("--report", help="Path laporan JSON relatif terhadap folder proyek")
+    parser.add_argument("--panen-report", help="Path laporan harga panen JSON relatif terhadap folder proyek")
     parser.add_argument(
         "--telegram",
         action="store_true",
@@ -1550,6 +1610,13 @@ def main() -> int:
 
     report_path.parent.mkdir(parents=True, exist_ok=True)
     report_path.write_text(json.dumps(report, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+
+    panen_path = project_path(args.panen_report, DEFAULT_PANEN)
+    panen_report = build_panen_report(national, args.date, args.hpp_kdmp)
+    panen_path.parent.mkdir(parents=True, exist_ok=True)
+    panen_path.write_text(json.dumps(panen_report, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    print(f"Laporan harga panen: {panen_path}")
+
     print_report(args.date, all_current_records, trends, errors, args.transport)
     print(f"\nRiwayat tersimpan: {history_path}")
     print(f"Laporan JSON: {report_path}")
