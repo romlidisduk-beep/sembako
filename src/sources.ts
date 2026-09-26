@@ -27,6 +27,11 @@ export const officialSources: PriceSource[] = [
     description: 'Harga rata-rata dan perubahan antar daerah',
     url: 'https://www.bi.go.id/hargapangan',
   },
+  {
+    name: 'SIMHARGA Kementerian Pertanian',
+    description: 'Rekap harga gabah tingkat petani dan penggilingan',
+    url: 'https://datanonkom.pertanian.go.id/simharga/dashboard.php?page=harga_gabah_provinsi',
+  },
 ];
 
 export const fieldSources = [
