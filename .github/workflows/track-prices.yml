@@ -65,11 +65,14 @@ jobs:
           git diff --cached --quiet || git commit -m "Update harga sembako"
           git push
 
+      - name: Siapkan GitHub Pages
+        id: pages
+        uses: actions/configure-pages@v5
+
       - name: Build website React
         run: npm run build
-
-      - name: Siapkan GitHub Pages
-        uses: actions/configure-pages@v5
+        env:
+          BASE_PATH: ${{ steps.pages.outputs.base_path }}
 
       - name: Unggah artefak Pages
         uses: actions/upload-pages-artifact@v3
