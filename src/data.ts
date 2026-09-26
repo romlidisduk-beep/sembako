@@ -25,8 +25,11 @@ export type OfficialPriceRecord = {
 
 export type OfficialSnapshotStatus = 'ok' | 'stale' | 'unavailable';
 
+export type ReferenceSourceStatus = { sumber: string; status: string; ok: boolean };
+
 export type PriceData = {
   sembako: SembakoRecord[]; panen: PanenRecord[]; official: OfficialPriceRecord[];
+  referenceSources: ReferenceSourceStatus[];
   origin: 'demo' | 'snapshot'; officialStatus: OfficialSnapshotStatus;
   officialFetchedAt: string | null; reportDate: string | null; generatedAt: string | null;
   marketSource: string; marketErrors: string[]; trends: PriceTrend[]; history: PriceHistoryRecord[];
@@ -79,7 +82,7 @@ export const demoPanen: PanenRecord[] = [
 ];
 
 const fallbackData: PriceData = {
-  sembako: demoSembako, panen: [], official: [], origin: 'demo',
+  sembako: demoSembako, panen: [], official: [], referenceSources: [], origin: 'demo',
   officialStatus: 'unavailable', officialFetchedAt: null, reportDate: null,
   generatedAt: null, marketSource: 'Snapshot lokal', marketErrors: [], trends: [], history: [],
 };
@@ -202,13 +205,15 @@ export const loadPriceData = async (): Promise<PriceData> => {
     const records = (report.records ?? []).map(normalizeMarketRecord).filter((record): record is SembakoRecord => Boolean(record));
     if (records.length === 0) return { ...fallbackData, ...officialSnapshot };
     let panen: PanenRecord[] = [];
+    let referenceSources: ReferenceSourceStatus[] = [];
     if (panenResponse?.ok) {
-      const panenPayload = await panenResponse.json() as { records?: PanenRecord[] };
+      const panenPayload = await panenResponse.json() as { records?: PanenRecord[]; sumberReferensi?: ReferenceSourceStatus[] };
       panen = Array.isArray(panenPayload.records) ? panenPayload.records : [];
+      referenceSources = Array.isArray(panenPayload.sumberReferensi) ? panenPayload.sumberReferensi : [];
     }
     const history = historyResponse?.ok ? parseHistoryCsv(await historyResponse.text()) : [];
     return {
-      sembako: records, panen, ...officialSnapshot, origin: 'snapshot',
+      sembako: records, panen, referenceSources, ...officialSnapshot, origin: 'snapshot',
       reportDate: report.date ?? null, generatedAt: report.generatedAt ?? null,
       marketSource: displayMarketSource(report.source),
       marketErrors: Array.isArray(report.errors) ? report.errors : [],
