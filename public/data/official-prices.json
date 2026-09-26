@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "status": "unavailable",
+  "source": "Panel Harga Badan Pangan + SIMHARGA Kementan",
+  "sources": [
+    {
+      "name": "Panel Harga Badan Pangan",
+      "url": "https://panelharga.badanpangan.go.id",
+      "role": "Harga gabah dan beras tingkat petani"
+    },
+    {
+      "name": "SISKAPERBAPO Jawa Timur",
+      "url": "https://siskaperbapo.indagjatim.com/display/show",
+      "role": "Harga konsumen dan pasar Jawa Timur"
+    },
+    {
+      "name": "PIHPS Nasional · Bank Indonesia",
+      "url": "https://www.bi.go.id/hargapangan",
+      "role": "Harga rata-rata dan perubahan antar daerah"
+    },
+    {
+      "name": "SIMHARGA Kementerian Pertanian",
+      "url": "https://datanonkom.pertanian.go.id/simharga/dashboard.php?page=harga_gabah_provinsi",
+      "role": "Rekap harga gabah tingkat petani dan penggilingan"
+    }
+  ],
+  "fetchedAt": null,
+  "lastSuccessfulFetch": null,
+  "records": [],
+  "errors": [
+    "https://panelharga.badanpangan.go.id/api/harga/harian-provinsi?provinsi_id=11: respons bukan JSON (text/html)",
+    "https://panelharga.badanpangan.go.id/api/harga/pasar-modern?provinsi_id=11: respons bukan JSON (text/html)",
+    "https://datanonkom.pertanian.go.id/simharga/dashboard.php?page=harga_gabah_provinsi: HTTP Error 403: Forbidden"
+  ],
+  "lastAttemptAt": "2026-09-26T02:26:38+00:00"
+}
