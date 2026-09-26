@@ -1,0 +1,83 @@
+name: Pelacak Harga Sembako
+
+on:
+  workflow_dispatch:
+  schedule:
+    # 14:00 WIB setiap hari (07:00 UTC). Sengaja SIANG bukan pagi:
+    # SISKAPERBAPO/PIHPS/Panel Bapanas/SIMHARGA baru publikasi data hari itu
+    # antara 09.00-13.00 WIB; kalau jalan jam 08.00 pagi datanya
+    # masih data kemarin.
+    - cron: "0 7 * * *"
+
+concurrency:
+  group: pelacak-harga-pages
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  track:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ambil kode
+        uses: actions/checkout@v4
+
+      - name: Siapkan Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Siapkan Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+
+      - name: Instal dependensi frontend
+        run: npm ci
+
+      - name: Ambil sumber resmi produsen
+        run: python script/pull_prices.py
+
+      - name: Lacak harga terbaru dan kirim notifikasi
+        run: |
+          ARGS=()
+          if [ -n "${TELEGRAM_BOT_TOKEN}" ] && [ -n "${TELEGRAM_CHAT_ID}" ]; then
+            ARGS+=(--telegram)
+          fi
+          if [ -n "${WHATSAPP_RECIPIENTS}" ] || { [ -n "${WHATSAPP_PHONE}" ] && [ -n "${WHATSAPP_APIKEY}" ]; }; then
+            ARGS+=(--whatsapp)
+          fi
+          python track_prices.py "${ARGS[@]}"
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          WHATSAPP_PHONE: ${{ secrets.WHATSAPP_PHONE }}
+          WHATSAPP_APIKEY: ${{ secrets.WHATSAPP_APIKEY }}
+          WHATSAPP_RECIPIENTS: ${{ secrets.WHATSAPP_RECIPIENTS }}
+
+      - name: Simpan riwayat ke repository
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/price-history.csv data/latest-price-report.json data/official-prices.json data/national-reference-history.csv data/harga_resmi.csv
+          git diff --cached --quiet || git commit -m "Update harga sembako"
+          git push
+
+      - name: Build website React
+        run: npm run build
+
+      - name: Siapkan GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Unggah artefak Pages
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: "dist"
+
+      - name: Terbitkan GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
