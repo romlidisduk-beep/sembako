@@ -179,6 +179,10 @@ GABAH/beras tingkat produsen setiap kali dijalankan (aktif secara default):
 - **BPS Kabupaten Gresik & Lamongan** — repost rilis NTP + harga gabah
   Provinsi Jawa Timur, **bulanan** (dicek otomatis tiap tanggal 1–5 saja
   supaya tidak boros request di hari lain)
+- **SIMHARGA Kementerian Pertanian** — rekap harga gabah provinsi di tingkat
+  petani dan penggilingan. Collector hanya menyimpan baris provinsi yang
+  terbaca; jika halaman kementerian memblokir request, dashboard tidak
+  menampilkan angka tebakan dan tetap menyimpan snapshot sebelumnya.
 - **HPP Bulog/KDMP** — bukan hasil scraping, angka acuan tetap. Ganti lewat
   `--hpp-kdmp` kalau ada Perbadan/SK baru
 - **Harga pengepul/tengkulak** — **tidak ada sumber publik** untuk ini (itu
@@ -201,9 +205,9 @@ python track_prices.py --hpp-kdmp=6600 --pengepul-price=7200
 
 Salin isi folder ini ke root repository GitHub. Workflow di
 `.github/workflows/track-prices.yml` dapat dijalankan manual atau otomatis
-setiap hari. Workflow akan menyimpan riwayat dan laporan terbaru kembali ke
- repository. Workflow akan menjalankan `npm run build`, lalu menerbitkan
-folder `dist/` ke GitHub Pages.
+setiap hari. Workflow akan mengambil Panel Bapanas dan SIMHARGA Kementan lebih
+dulu setiap hari, menyimpan riwayat dan laporan terbaru kembali ke repository,
+lalu menjalankan `npm run build` dan menerbitkan folder `dist/` ke GitHub Pages.
 
 Jalankan manual melalui menu **Actions → Pelacak Harga Sembako → Run workflow**.
 
