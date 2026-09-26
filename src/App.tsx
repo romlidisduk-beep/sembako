@@ -7,8 +7,8 @@ import { ArrowUpRight, ChevronDown, ChevronUp, CircleHelp, Database, Layers3, Ma
 import { Route, Switch, Link, useLocation, useRoute, Router as WouterRouter } from 'wouter';
 import { CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import NotFound from '@/pages/not-found';
-import { loadPriceData, summarizePanen, type OfficialPriceRecord, type PanenRecord, type PanenSummary, type PriceData, type PriceHistoryRecord, type ReferenceSourceStatus, type SembakoRecord } from './data';
-import { fieldSources, googleSheetFormula, officialSources, verificationContacts } from './sources';
+import { loadPriceData, summarizePanen, type OfficialPriceRecord, type PanenRecord, type PanenSummary, type PriceData, type PriceHistoryRecord, type SembakoRecord } from './data';
+import { fieldSources, googleSheetFormula, officialSources, referencePrices, verificationContacts } from './sources';
 
 const queryClient = new QueryClient();
 const money = (value: number) => `Rp${value.toLocaleString('id-ID')}`;
@@ -194,16 +194,17 @@ function PanenFilters({ rows, kabupaten, setKabupaten, commodity, setCommodity, 
 
 function OfficialPriceBand({ records, status }: { records: OfficialPriceRecord[]; status: PriceData['officialStatus'] }) {
   if (records.length === 0) return null;
+  const sources = [...new Set(records.map((record) => record.sumber))].join(' · ');
   return <div className="mb-4 rounded-[14px] border border-[#cfe1cd] bg-[#eef7ee] p-3">
-    <div className="mb-2 flex items-center justify-between gap-3"><div><div className="text-sm font-semibold text-[#315b49]">Harga resmi tingkat petani</div><div className="text-xs text-[#6b8073]">Panel Harga Badan Pangan · Jawa Timur</div></div><span className="rounded-full bg-[#d4ead5] px-2 py-1 font-data text-[9px] uppercase tracking-wide text-[#4d7a55]">{status === 'stale' ? 'Snapshot terakhir' : 'Sumber resmi'}</span></div>
-    <div className="grid gap-2 sm:grid-cols-3">{records.slice(0, 3).map((record) => <div key={`${record.komoditas}-${record.harga}`} className="flex items-center justify-between rounded-[10px] border border-[#d7e9d5] bg-[#f8fcf6] px-3 py-2"><div><div className="text-xs font-semibold text-[#3b6250]">{record.komoditas}</div><div className="text-[10px] text-[#7b8e81]">{record.level} · {record.wilayah}</div></div><span className="font-data text-sm text-[#c9664e]">{money(record.harga)}<small className="text-[9px] text-[#7e8a80]">/{record.satuan}</small></span></div>)}</div>
+    <div className="mb-2 flex items-center justify-between gap-3"><div><div className="text-sm font-semibold text-[#315b49]">Harga resmi tingkat petani</div><div className="text-xs text-[#6b8073]">{sources}</div></div><span className="rounded-full bg-[#d4ead5] px-2 py-1 font-data text-[9px] uppercase tracking-wide text-[#4d7a55]">{status === 'stale' ? 'Snapshot terakhir' : 'Sumber resmi'}</span></div>
+    <div className="grid gap-2 sm:grid-cols-3">{records.slice(0, 3).map((record) => <div key={`${record.sumber}-${record.wilayah}-${record.komoditas}-${record.harga}`} className="flex items-center justify-between rounded-[10px] border border-[#d7e9d5] bg-[#f8fcf6] px-3 py-2"><div><div className="text-xs font-semibold text-[#3b6250]">{record.komoditas}</div><div className="text-[10px] text-[#7b8e81]">{record.level} · {record.wilayah}</div></div><span className="font-data text-sm text-[#c9664e]">{money(record.harga)}<small className="text-[9px] text-[#7e8a80]">/{record.satuan}</small></span></div>)}</div>
   </div>;
 }
 
-function ReferenceStatusBand({ sources }: { sources: ReferenceSourceStatus[] }) {
+function ReferencePriceBand() {
   return <div className="mb-4 rounded-[14px] border border-[#e7d5a9] bg-[#fff8e8] p-3">
-    <div className="mb-2 flex items-start justify-between gap-3"><div><div className="text-sm font-semibold text-[#725c31]">Status sumber referensi gabah</div><div className="text-xs text-[#8c7b59]">Angka HPP di tabel di bawah acuan resmi tetap; sumber lain ditarik otomatis tiap hari</div></div><span className="rounded-full bg-[#f1e2b8] px-2 py-1 font-data text-[9px] uppercase tracking-wide text-[#876d34]">Referensi</span></div>
-    {sources.length === 0 ? <div className="text-xs text-[#9a8965]">Status sumber belum tersedia.</div> : <div className="grid gap-2 sm:grid-cols-2">{sources.map((source) => <div key={source.sumber} className="rounded-[10px] border border-[#eddfbc] bg-[#fffdf6] px-3 py-2"><div className="flex items-center gap-1.5 text-xs font-semibold text-[#6b5a37]"><span className={`h-1.5 w-1.5 rounded-full ${source.ok ? 'bg-[#7a9b57]' : 'bg-[#c9664e]'}`} />{source.sumber}</div><div className="mt-0.5 text-[10px] leading-relaxed text-[#9a8965]">{source.status}</div></div>)}</div>}
+    <div className="mb-2 flex items-start justify-between gap-3"><div><div className="text-sm font-semibold text-[#725c31]">Patokan bawah KDMP Merah Putih</div><div className="text-xs text-[#8c7b59]">Pembanding harga, bukan pengganti harga aktual lapangan</div></div><span className="rounded-full bg-[#f1e2b8] px-2 py-1 font-data text-[9px] uppercase tracking-wide text-[#876d34]">Referensi</span></div>
+    <div className="grid gap-2 sm:grid-cols-4">{referencePrices.map((reference) => <div key={reference.label} className="rounded-[10px] border border-[#eddfbc] bg-[#fffdf6] px-3 py-2"><div className="text-xs font-semibold text-[#6b5a37]">{reference.label}</div><div className="mt-1 font-data text-base text-[#c9664e]">{money(reference.price)}<small className="text-[9px] text-[#8c7b59]">/{reference.unit}</small></div><div className="mt-0.5 text-[10px] text-[#9a8965]">{reference.note}</div></div>)}</div>
   </div>;
 }
 
@@ -219,7 +220,7 @@ function SourceGuide() {
   </div>;
 }
 
-function PanenPanel({ rows, official, officialStatus, referenceSources, active }: { rows: PanenRecord[]; official: OfficialPriceRecord[]; officialStatus: PriceData['officialStatus']; referenceSources: ReferenceSourceStatus[]; active: boolean }) {
+function PanenPanel({ rows, official, officialStatus, active }: { rows: PanenRecord[]; official: OfficialPriceRecord[]; officialStatus: PriceData['officialStatus']; active: boolean }) {
   const [kabupaten, setKabupaten] = useState('Semua');
   const [commodity, setCommodity] = useState('Semua');
   const [quality, setQuality] = useState('Semua');
@@ -228,7 +229,7 @@ function PanenPanel({ rows, official, officialStatus, referenceSources, active }
   const summaries = useMemo(() => summarizePanen(rows.filter((row) => (kabupaten === 'Semua' || row.kabupaten === kabupaten) && (commodity === 'Semua' || row.komoditas === commodity) && (quality === 'Semua' || row.kualitas === quality))).sort((a, b) => sort === 'Harga tertinggi' ? b.hargaTerakhir - a.hargaTerakhir : b.tanggalTerakhir.localeCompare(a.tanggalTerakhir)), [rows, kabupaten, commodity, quality, sort]);
   return <section className={`rise rise-delay-2 mt-12 border-t border-[#dccfbd] pt-8 ${active ? 'scroll-mt-4' : ''}`} id="harga-panen">
     <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between"><div><div className="flex items-center gap-2"><span className="h-2 w-2 rounded-full bg-[#7a9b57]" /><h2 className="font-display text-[22px] font-bold text-[#2a4e43]">Harga panen</h2><span className="rounded-full bg-[#e6efd9] px-2 py-0.5 font-data text-[10px] text-[#628252]">Laporan warga</span></div><p className="mt-1 text-sm text-[#78827b]">Harga dari kebun dan lumbung terakhir yang dilaporkan.</p></div><select data-testid="select-sort-panen" value={sort} onChange={(event) => setSort(event.target.value)} className="h-9 rounded-[10px] border border-[#d7cdbd] bg-[#fffaf1] px-2 text-xs font-semibold text-[#567066] outline-none"><option>Terbaru</option><option>Harga tertinggi</option></select></div>
-      <OfficialPriceBand records={official} status={officialStatus} /><ReferenceStatusBand sources={referenceSources} /><PanenFilters rows={rows} kabupaten={kabupaten} setKabupaten={setKabupaten} commodity={commodity} setCommodity={setCommodity} quality={quality} setQuality={setQuality} />
+      <OfficialPriceBand records={official} status={officialStatus} /><ReferencePriceBand /><PanenFilters rows={rows} kabupaten={kabupaten} setKabupaten={setKabupaten} commodity={commodity} setCommodity={setCommodity} quality={quality} setQuality={setQuality} />
     {summaries.length === 0 ? <div className="mt-3"><EmptyState title="Belum ada laporan panen" body="Belum ada catatan yang cocok dengan filter ini. Data panen akan tetap tampil di sini saat laporan baru masuk." action={<button data-testid="button-reset-panen" onClick={() => { setKabupaten('Semua'); setCommodity('Semua'); setQuality('Semua'); }} className="mt-4 text-xs font-bold text-[#ba654d] underline underline-offset-4">Bersihkan filter</button>} /></div> : <div className="mt-3 space-y-2">{summaries.map((summary) => <PanenRow key={`${summary.komoditas}-${summary.kualitas}`} summary={summary} expanded={expanded === `${summary.komoditas}-${summary.kualitas}`} onExpand={() => setExpanded(expanded === `${summary.komoditas}-${summary.kualitas}` ? null : `${summary.komoditas}-${summary.kualitas}`)} />)}</div>}
      <SourceGuide />
   </section>;
@@ -318,7 +319,7 @@ function Home() {
        <div className="mt-8"><StatusBand count={data?.sembako.length ?? 0} panenCount={panenSummary.length} origin={data?.origin ?? 'demo'} officialStatus={data?.officialStatus ?? 'unavailable'} officialCount={data?.official.length ?? 0} reportDate={data?.reportDate ?? null} source={data?.marketSource ?? 'SISKAPERBAPO Jawa Timur'} /></div>
        {data && <OverviewStats data={data} />}
       <div className="mt-8 flex flex-col gap-4 border-b border-[#ddd2c0] pb-4 sm:flex-row sm:items-center sm:justify-between"><SegmentedTabs mode={mode} setMode={setProductMode} /><div className="flex flex-col gap-2 sm:flex-row"><SearchBox value={search} onChange={setSearch} /><AreaFilter value={area} onChange={setArea} /></div></div>
-       <div className="mt-7">{!data ? <SkeletonCards /> : mode === 'sembako' ? <><CategoryNav records={data.sembako} value={category} onChange={setCategory} /><div className="mt-7"><SembakoPanel records={data.sembako} search={search} area={area} category={category} reportDate={data.reportDate} detailView={detailView} setDetailView={setDetailView} /></div></> : <PanenPanel rows={data.panen} official={data.official} officialStatus={data.officialStatus} referenceSources={data.referenceSources} active={mode === 'panen'} />}</div>
+       <div className="mt-7">{!data ? <SkeletonCards /> : mode === 'sembako' ? <><CategoryNav records={data.sembako} value={category} onChange={setCategory} /><div className="mt-7"><SembakoPanel records={data.sembako} search={search} area={area} category={category} reportDate={data.reportDate} detailView={detailView} setDetailView={setDetailView} /></div></> : <PanenPanel rows={data.panen} official={data.official} officialStatus={data.officialStatus} active={mode === 'panen'} />}</div>
        <footer className="mt-14 flex flex-col gap-2 border-t border-[#ddd2c0] pt-5 text-[11px] text-[#899088] sm:flex-row sm:items-center sm:justify-between"><span>Pelacak Harga · dibuat untuk warga dan pedagang kecil</span><span className="flex items-center gap-1 font-data uppercase tracking-wider"><Database size={12} />{data?.marketSource ?? 'Snapshot lokal'} <ArrowUpRight size={12} /></span></footer>
     </div></main>
   </div>;
