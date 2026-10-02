@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-02T10:57:35.806682+07:00",
+  "generatedAt": "2026-10-02T12:49:49.744932+07:00",
   "records": [
     {
       "tanggal": "2026-10-02",
@@ -31,7 +31,7 @@
       "lokasi": "BI PIHPS - Harga Produsen",
       "komoditas": "Beras Kualitas Bawah I",
       "kualitas": "produsen",
-      "hargaPerKg": 14900.0,
+      "hargaPerKg": 14350.0,
       "catatan": "Harga indikatif tingkat produsen dari PIHPS Bank Indonesia (sumber resmi, bukan transaksi pasar/kios). Dipublikasi harian."
     }
   ],
@@ -43,7 +43,7 @@
     },
     {
       "sumber": "PIHPS / Bank Indonesia",
-      "status": "0,0,0,400,50",
+      "status": "0,0,0,0,250",
       "ok": true
     },
     {
