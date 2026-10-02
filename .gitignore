@@ -1,4 +1,4 @@
 __pycache__/
 *.pyc
 data/retail-prices.csv
-.DS_Store
+.DS_Storenode_modules
