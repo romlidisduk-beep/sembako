@@ -41,6 +41,8 @@ jobs:
           fi
           python track_prices.py "${ARGS[@]}"
           python script/pull_prices.py
+          # Laporan panen indikatif dari BI PIHPS (fail-soft, tidak pernah gagalkan workflow)
+          python script/pull_pihps_produsen.py
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
