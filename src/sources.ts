@@ -57,3 +57,26 @@ export const referencePrices: ReferencePrice[] = [
 
 export const googleSheetFormula =
   '=IMPORTHTML("https://siskaperbapo.indagjatim.com/display/show";"table";1)';
+
+// --- Kontak admin & interaksi WhatsApp (tanpa backend, gratis) ------------
+export const ADMIN_PHONE = '6282244756231'; // format internasional tanpa +
+export const ADMIN_DISPLAY = '0822-4475-6231';
+
+export const waLink = (message: string) =>
+  `https://wa.me/${ADMIN_PHONE}?text=${encodeURIComponent(message)}`;
+
+export const waAdminMessage =
+  'Halo Admin Pelacak Harga Sembako Gresik-Lamongan, saya ingin bertanya tentang harga.';
+
+export const waLaporHarga = (input: {
+  lokasi: string; komoditas: string; harga: string; catatan?: string;
+}) =>
+  [
+    '*LAPOR HARGA SEMBAKO*',
+    `Lokasi: ${input.lokasi || '-'}`,
+    `Komoditas: ${input.komoditas || '-'}`,
+    `Harga: Rp${input.harga || '-'}`,
+    input.catatan ? `Catatan: ${input.catatan}` : '',
+    '',
+    `Dikirim: ${new Date().toLocaleString('id-ID')}`,
+  ].filter(Boolean).join('\n');

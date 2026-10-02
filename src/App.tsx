@@ -8,7 +8,8 @@ import { Route, Switch, Link, useLocation, useRoute, Router as WouterRouter } fr
 import { CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import NotFound from '@/pages/not-found';
 import { loadPriceData, summarizePanen, type OfficialPriceRecord, type PanenRecord, type PanenSummary, type PriceData, type PriceHistoryRecord, type SembakoRecord } from './data';
-import { fieldSources, googleSheetFormula, officialSources, referencePrices, verificationContacts } from './sources';
+import { fieldSources, googleSheetFormula, officialSources, referencePrices, verificationContacts, ADMIN_DISPLAY } from './sources';
+import { AdminContact, LaporHargaCard } from '@/components/admin-contact';
 
 const queryClient = new QueryClient();
 const money = (value: number) => `Rp${value.toLocaleString('id-ID')}`;
@@ -320,7 +321,9 @@ function Home() {
        {data && <OverviewStats data={data} />}
       <div className="mt-8 flex flex-col gap-4 border-b border-[#ddd2c0] pb-4 sm:flex-row sm:items-center sm:justify-between"><SegmentedTabs mode={mode} setMode={setProductMode} /><div className="flex flex-col gap-2 sm:flex-row"><SearchBox value={search} onChange={setSearch} /><AreaFilter value={area} onChange={setArea} /></div></div>
        <div className="mt-7">{!data ? <SkeletonCards /> : mode === 'sembako' ? <><CategoryNav records={data.sembako} value={category} onChange={setCategory} /><div className="mt-7"><SembakoPanel records={data.sembako} search={search} area={area} category={category} reportDate={data.reportDate} detailView={detailView} setDetailView={setDetailView} /></div></> : <PanenPanel rows={data.panen} official={data.official} officialStatus={data.officialStatus} active={mode === 'panen'} />}</div>
-       <footer className="mt-14 flex flex-col gap-2 border-t border-[#ddd2c0] pt-5 text-[11px] text-[#899088] sm:flex-row sm:items-center sm:justify-between"><span>Pelacak Harga · dibuat untuk warga dan pedagang kecil</span><span className="flex items-center gap-1 font-data uppercase tracking-wider"><Database size={12} />{data?.marketSource ?? 'Snapshot lokal'} <ArrowUpRight size={12} /></span></footer>
+       <div className="mt-12 grid gap-4 sm:grid-cols-2"><AdminContact /><div className="rounded-[14px] border border-[#e1d5c3] bg-[#fdf7ec] px-4 py-3 text-sm text-[#687a70]"><strong className="block text-[#244a40]">Konfirmasi langsung</strong>{verificationContacts.map((source) => <div key={source}>• {source}</div>)}</div></div>
+       <LaporHargaCard />
+       <footer className="mt-14 flex flex-col gap-2 border-t border-[#ddd2c0] pt-5 text-[11px] text-[#899088] sm:flex-row sm:items-center sm:justify-between"><span>Pelacak Harga · dibuat untuk warga dan pedagang kecil · Admin: {ADMIN_DISPLAY}</span><span className="flex items-center gap-1 font-data uppercase tracking-wider"><Database size={12} />{data?.marketSource ?? 'Snapshot lokal'} <ArrowUpRight size={12} /></span></footer>
     </div></main>
   </div>;
 }
