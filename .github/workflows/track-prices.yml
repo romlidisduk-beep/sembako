@@ -2,6 +2,9 @@ name: Pelacak Harga Sembako
 
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['trigger-ci.flag']
   schedule:
     # 14:00 WIB setiap hari (07:00 UTC). Sengaja SIANG bukan pagi:
     # SISKAPERBAPO/PIHPS/Panel Bapanas baru publikasi data hari itu
