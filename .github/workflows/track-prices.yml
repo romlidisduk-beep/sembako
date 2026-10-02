@@ -43,6 +43,8 @@ jobs:
           python script/pull_prices.py
           # Laporan panen indikatif dari BI PIHPS (fail-soft, tidak pernah gagalkan workflow)
           python script/pull_pihps_produsen.py
+          # Kartu Potensi Kenaikan (momentum produsen -> proyeksi 7 hari)
+          python script/build_price_outlook.py
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
@@ -54,7 +56,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/price-history.csv data/latest-price-report.json data/official-prices.json data/national-reference-history.csv data/harga_resmi.csv data/harga-panen-report.json
+          git add data/price-history.csv data/latest-price-report.json data/official-prices.json data/national-reference-history.csv data/harga_resmi.csv data/harga-panen-report.json data/price-outlook.json
           git diff --cached --quiet || git commit -m "Update harga sembako"
           git push
 
