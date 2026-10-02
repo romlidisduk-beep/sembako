@@ -69,12 +69,15 @@ jobs:
       - name: Instal dependensi frontend
         run: |
           # npm ci 3x retry (insiden 25 Sep); fallback terakhir: npm install.
-          # Build ditambah NODE_OPTIONS utk berjaga kehabisan memori CI.
+          # Bug npm "Exit handler never called" di CI: bersihkan cache dulu.
           export NODE_OPTIONS="--max-old-space-size=3072"
-          for i in 1 2 3; do
-            if npm ci --no-audit --no-fund; then break; fi
-            rm -rf node_modules package-lock.json.tmp
-            if [ "$i" -lt 3 ]; then sleep $((10*i)); else npm install --no-audit --no-fund; fi
+          npm cache clean --force || true
+          npm config set update-notifier false
+          npm config set fund false
+          for i in 1 2 3 4; do
+            if npm ci --no-audit --no-fund --loglevel=error; then break; fi
+            rm -rf node_modules
+            if [ "$i" -lt 4 ]; then sleep $((15*i)); else npm install --no-audit --no-fund --loglevel=error; fi
           done
 
       - name: Siapkan GitHub Pages
