@@ -30,15 +30,6 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Siapkan Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: "22"
-          cache: npm
-
-      - name: Instal dependensi frontend
-        run: npm ci
-
       - name: Lacak harga terbaru
         run: |
           ARGS=()
@@ -64,6 +55,22 @@ jobs:
           git add data/price-history.csv data/latest-price-report.json data/official-prices.json data/national-reference-history.csv data/harga_resmi.csv data/harga-panen-report.json
           git diff --cached --quiet || git commit -m "Update harga sembako"
           git push
+
+      - name: Siapkan Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+
+      - name: Instal dependensi frontend
+        run: |
+          # Retry: gangguan registry npm / lock tidak sinkron tidak boleh
+          # menggagalkan pelacakan harga harian (insiden 25 Sep 2026).
+          for i in 1 2 3; do
+            if npm ci; then break; fi
+            rm -rf node_modules
+            if [ "$i" -lt 3 ]; then sleep $((10*i)); else npm install --no-audit --no-fund; fi
+          done
 
       - name: Siapkan GitHub Pages
         id: pages
