@@ -1535,8 +1535,21 @@ def main() -> int:
         and record["commodityKey"] in commodity_keys
     ]
     if not current_records and not retail_records:
-        print("Gagal: tidak ada harga yang berhasil dibaca.", file=sys.stderr)
-        return 1
+        # CACHE CADANGAN: semua sumber gagal -> pakai snapshot harga terakhir
+        # dari riwayat, tandai jelas bahwa itu data sebelumnya, lalu tetap
+        # tulis laporan (bukan kosong) supaya pengunjung tidak melihat 0.
+        previous = read_csv_records(history_path)
+        if not previous:
+            print("Gagal: tidak ada harga yang berhasil dibaca.", file=sys.stderr)
+            return 1
+        last_date = max(row["date"] for row in previous if row.get("date"))
+        print(f"Peringatan: semua sumber gagal; pakai cache cadangan dari {last_date}.", file=sys.stderr)
+        cached_records = [row for row in previous if row.get("date") == last_date]
+        current_records = [dict(row) for row in cached_records]
+        for row in current_records:
+            row["date"] = args.date
+            row["observedAt"] = f"cache {last_date}"
+        errors.append(f"Semua sumber gagal hari ini - menampilkan cache cadangan dari {last_date}.")
     if not current_records and errors:
         print(
             "Peringatan: sumber pasar gagal; laporan hanya berisi data retail.",

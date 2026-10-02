@@ -3,7 +3,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ErrorBoundary } from '@/components/error-boundary';
 import { Toaster } from '@/components/ui/toaster';
 import { TooltipProvider } from '@/components/ui/tooltip';
-import { ArrowUpRight, ChevronDown, ChevronUp, CircleHelp, Database, Layers3, MapPin, Search, SlidersHorizontal, Sprout, Store, Wheat, Wifi, X } from 'lucide-react';
+import { ArrowUpRight, ChevronDown, ChevronUp, CircleHelp, Database, Layers3, MapPin, Search, Share2, SlidersHorizontal, Sprout, Store, Wheat, Wifi, X } from 'lucide-react';
 import { Route, Switch, Link, useLocation, useRoute, Router as WouterRouter } from 'wouter';
 import { CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import NotFound from '@/pages/not-found';
@@ -173,11 +173,17 @@ function SignalBadge({ signal, changePercent }: { signal?: string; changePercent
 function CommodityCard({ commodity, records, trend, expanded, onExpand }: { commodity: string; records: SembakoRecord[]; trend?: { signal?: string; changePercent?: number | null }; expanded: boolean; onExpand: () => void }) {
   const cheapest = [...records].sort((a, b) => a.unitPrice - b.unitPrice)[0];
   const areas = [...new Set(records.map((record) => record.area))].join(' + ');
+  const shareUrl = `${location.origin}${import.meta.env.BASE_URL}`;
+  const shareText = `💰 Harga ${commodity} hari ini: ${money(cheapest.unitPrice)}/${cheapest.unit} (termurah) di ${areas} — cek lengkap di HargaSembako Gresik-Lamongan: ${shareUrl}`;
+  const share = () => {
+    const url = `https://wa.me/?text=${encodeURIComponent(shareText)}`;
+    window.open(url, '_blank', 'noopener');
+  };
   return <div className={`overflow-hidden rounded-[16px] border bg-[#fffaf1] transition-all ${expanded ? 'border-[#d79a58] shadow-[0_8px_22px_rgba(74,73,45,.08)]' : 'border-[#dfd5c4] hover:border-[#caaa76]'}`}>
     <button data-testid={`button-expand-${commodity}`} onClick={onExpand} className="flex w-full items-center gap-3 p-4 text-left sm:p-5">
       <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[12px] bg-[#edf0dc] font-display text-xl font-bold text-[#486c55]">{commodity.slice(0, 1)}</div>
       <div className="min-w-0 flex-1"><div className="flex flex-wrap items-center gap-2"><h3 className="font-display text-lg font-bold text-[#2b4c42]">{commodity}</h3><span className="rounded-full bg-[#f0e4c9] px-2 py-0.5 font-data text-[10px] text-[#897047]">{records.length} sumber</span><SignalBadge signal={trend?.signal} changePercent={trend?.changePercent} /></div><p className="mt-1 truncate text-xs text-[#7b8379]">{areas} <span className="mx-1 text-[#c1b4a2]">·</span> termurah hari ini</p></div>
-      <div className="text-right"><div className="font-data text-base font-medium text-[#d3674e]">{money(cheapest.unitPrice)}<span className="text-[10px] text-[#908679]">/{cheapest.unit}</span></div><div className="mt-1 flex items-center justify-end gap-1 text-[10px] text-[#85897e]">{expanded ? 'Tutup' : 'Lihat sumber'} {expanded ? <ChevronUp size={13} /> : <ChevronDown size={13} />}</div></div>
+      <div className="flex shrink-0 items-center gap-2"><button data-testid={`button-share-${commodity}`} onClick={(e) => { e.stopPropagation(); share(); }} title="Bagikan harga ini via WhatsApp" className="flex h-9 w-9 items-center justify-center rounded-full bg-[#25d366] text-white transition hover:bg-[#1fb457]" aria-label={`Bagikan harga ${commodity}`}><Share2 size={15} /></button><div className="text-right"><div className="font-data text-base font-medium text-[#d3674e]">{money(cheapest.unitPrice)}<span className="text-[10px] text-[#908679]">/{cheapest.unit}</span></div><div className="mt-1 flex items-center justify-end gap-1 text-[10px] text-[#85897e]">{expanded ? 'Tutup' : 'Lihat sumber'} {expanded ? <ChevronUp size={13} /> : <ChevronDown size={13} />}</div></div></div>
     </button>
     {expanded && <div className="border-t border-[#eadfce] bg-[#f8f0e2] px-4 py-3 sm:px-5">
        {records.sort((a, b) => a.unitPrice - b.unitPrice).map((record) => <div data-testid={`source-row-${record.marketId}`} key={record.marketId} className="flex flex-col gap-2 border-b border-[#e8ddcc] py-3 last:border-0 sm:flex-row sm:items-center sm:justify-between"><div><div className="flex items-center gap-2 text-sm font-semibold text-[#35584b]"><MapPin size={13} className="text-[#d27855]" /><Link href={`/pasar/${encodeURIComponent(record.marketId)}`} className="underline decoration-[#c9b898] underline-offset-2 hover:text-[#bd654e]">{record.location}</Link><span className="rounded bg-[#e7f1e3] px-1.5 py-0.5 font-data text-[9px] font-normal text-[#528056]">{record.area}</span></div><div className="mt-1 text-xs text-[#81867d]">{record.productName} · {record.brand} · {record.stockStatus.toLowerCase()}</div></div><div className="flex items-center justify-between gap-4 sm:justify-end"><span className="font-data text-sm text-[#2e5045]">{money(record.unitPrice)}/{record.unit}</span><span className={`text-[10px] ${record.confidence === 'Tinggi' ? 'text-[#528056]' : 'text-[#a77a3c]'}`}>Kepercayaan {record.confidence.toLowerCase()}</span></div></div>)}
