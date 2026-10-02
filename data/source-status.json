@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-02T19:26:33.258090+07:00",
+  "generatedAt": "2026-10-02T19:28:14.478014+07:00",
   "items": [
     {
       "status": "pemeliharaan",
@@ -20,7 +20,7 @@
       "url": "https://www.bi.go.id/hargapangan/TabelHarga/ProdusenDaerah"
     },
     {
-      "status": "aktif",
+      "status": "blokir-otomatis",
       "id": "siskaperbapo",
       "nama": "SISKAPERBAPO Jawa Timur",
       "url": "https://siskaperbapo.jatimprov.go.id/"
