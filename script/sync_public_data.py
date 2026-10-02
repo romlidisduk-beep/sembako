@@ -16,6 +16,7 @@ SNAPSHOTS = (
     "harga-panen-report.json",
     "price-history.csv",
     "price-outlook.json",
+    "source-status.json",
 )
 
 

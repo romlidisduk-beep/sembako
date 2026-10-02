@@ -222,11 +222,33 @@ function ReferencePriceBand() {
   </div>;
 }
 
+const STATUS_LABEL: Record<string, { text: string; cls: string }> = {
+  'aktif': { text: 'aktif', cls: 'bg-[#d9f2d9] text-[#2e7d32]' },
+  'pemeliharaan': { text: 'pemeliharaan', cls: 'bg-[#f8d7cf] text-[#a33a1c]' },
+  'blokir-otomatis': { text: 'blokir otomatis', cls: 'bg-[#fdf0c2] text-[#8a6d1a]' },
+  'terbatas': { text: 'data terbatas', cls: 'bg-[#fdf0c2] text-[#8a6d1a]' },
+  'tidak-dijangkau': { text: 'tidak dijangkau', cls: 'bg-[#e6e0d6] text-[#6d6459]' },
+};
+
+function SourceStatusBadge({ nama, status }: { nama: string; status?: string }) {
+  if (!status) return null;
+  const meta = STATUS_LABEL[status] ?? { text: status, cls: 'bg-[#e6e0d6] text-[#6d6459]' };
+  return <span title={`Status pengecekan otomatis: ${meta.text}`} className={`ml-1.5 rounded-full px-1.5 py-0.5 align-middle font-data text-[8px] font-bold uppercase ${meta.cls}`}>{meta.text}</span>;
+}
+
 function SourceGuide() {
+  const [statusMap, setStatusMap] = useState<Record<string, string>>({});
+  useEffect(() => {
+    fetch(`${import.meta.env.BASE_URL}data/source-status.json?ts=${Date.now()}`, { cache: 'no-store' })
+      .then((r) => (r.ok ? r.json() : Promise.reject()))
+      .then((d) => setStatusMap(Object.fromEntries((d.items ?? []).map((i: { nama: string; status: string }) => [i.nama, i.status]))))
+      .catch(() => setStatusMap({}));
+  }, []);
+  const statusOf = (name: string) => Object.entries(statusMap).find(([k]) => name.toLowerCase().includes(k.toLowerCase().split(' ')[0]))?.[1];
   return <div className="mt-5 rounded-[14px] border border-[#dfd5c4] bg-[#f8f0e1] p-4">
     <div className="mb-3 flex items-center justify-between gap-3"><div><div className="text-sm font-semibold text-[#35584b]">Sumber pelacak Gresik–Lamongan</div><div className="text-xs text-[#7d857d]">Gunakan minimal satu sumber resmi dan satu konfirmasi lapangan.</div></div><span className="rounded-full bg-[#e6efd9] px-2 py-1 font-data text-[9px] uppercase tracking-wide text-[#628252]">3 lapis verifikasi</span></div>
     <div className="grid gap-4 text-xs sm:grid-cols-3">
-      <div><div className="mb-1.5 font-data text-[10px] uppercase tracking-wider text-[#8a806d]">Aplikasi resmi</div><div className="space-y-1.5">{officialSources.map((source) => <a key={source.name} href={source.url} target="_blank" rel="noreferrer" className="block font-semibold text-[#466858] underline decoration-[#b9c9a5] underline-offset-2 hover:text-[#bd654e]">{source.name}<span className="mt-0.5 block font-normal no-underline text-[#879087]">{source.description}</span></a>)}</div></div>
+      <div><div className="mb-1.5 font-data text-[10px] uppercase tracking-wider text-[#8a806d]">Aplikasi resmi</div><div className="space-y-1.5">{officialSources.map((source) => <a key={source.name} href={source.url} target="_blank" rel="noreferrer" className="block font-semibold text-[#466858] underline decoration-[#b9c9a5] underline-offset-2 hover:text-[#bd654e]">{source.name}<SourceStatusBadge nama={source.name} status={statusOf(source.name)} /><span className="mt-0.5 block font-normal no-underline text-[#879087]">{source.description}</span></a>)}</div></div>
       <div><div className="mb-1.5 font-data text-[10px] uppercase tracking-wider text-[#8a806d]">Real-time lapangan</div><div className="space-y-1 text-[#687a70]">{fieldSources.map((source) => <div key={source}>• {source}</div>)}</div></div>
       <div><div className="mb-1.5 font-data text-[10px] uppercase tracking-wider text-[#8a806d]">Konfirmasi langsung</div><div className="space-y-1 text-[#687a70]">{verificationContacts.map((source) => <div key={source}>• {source}</div>)}</div></div>
     </div>

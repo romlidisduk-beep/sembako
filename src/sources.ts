@@ -14,17 +14,17 @@ export type ReferencePrice = {
 export const officialSources: PriceSource[] = [
   {
     name: 'Data Pangan Bapanas',
-    description: 'Portal data & publikasi pangan nasional (aktif)',
+    description: 'Portal data & publikasi pangan nasional',
     url: 'https://data.badanpangan.go.id/',
   },
   {
     name: 'PIHPS Nasional · Bank Indonesia',
-    description: 'Harga produsen dan perubahan antar daerah (aktif)',
+    description: 'Harga produsen dan perubahan antar daerah',
     url: 'https://www.bi.go.id/hargapangan',
   },
   {
     name: 'Panel Harga Badan Pangan',
-    description: 'Harga gabah dan beras tingkat petani (pemeliharaan)',
+    description: 'Harga gabah dan beras tingkat petani',
     url: 'https://panelharga.badanpangan.go.id/beranda',
   },
   {
