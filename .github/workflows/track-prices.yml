@@ -80,6 +80,14 @@ jobs:
             rm -rf node_modules
             if [ "$i" -lt 4 ]; then sleep $((15*i)); else npm install --no-audit --no-fund --loglevel=error; fi
           done
+          # Verifikasi: bug npm kadang exit 0 tanpa benar-benar memasang paket.
+          if [ ! -x node_modules/.bin/vite ]; then
+            echo "vite hilang - npm ci gagal diam-diam, ulangi dengan npm install"
+            rm -rf node_modules
+            npm install --no-audit --no-fund --loglevel=error
+          fi
+          ls node_modules/.bin/ | head -5
+          test -x node_modules/.bin/vite
 
       - name: Siapkan GitHub Pages
         id: pages
