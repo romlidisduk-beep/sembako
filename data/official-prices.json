@@ -32,5 +32,5 @@
     "https://panelharga.badanpangan.go.id/api/harga/pasar-modern?provinsi_id=11: respons bukan JSON (text/html)",
     "https://datanonkom.pertanian.go.id/simharga/dashboard.php?page=harga_gabah_provinsi: HTTP Error 403: Forbidden"
   ],
-  "lastAttemptAt": "2026-10-02T09:51:49+00:00"
+  "lastAttemptAt": "2026-10-02T10:15:27+00:00"
 }
