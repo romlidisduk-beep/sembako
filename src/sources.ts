@@ -13,24 +13,44 @@ export type ReferencePrice = {
 
 export const officialSources: PriceSource[] = [
   {
+    name: 'Data Pangan Bapanas',
+    description: 'Portal data & publikasi pangan nasional (aktif)',
+    url: 'https://data.badanpangan.go.id/',
+  },
+  {
+    name: 'PIHPS Nasional · Bank Indonesia',
+    description: 'Harga produsen dan perubahan antar daerah (aktif)',
+    url: 'https://www.bi.go.id/hargapangan',
+  },
+  {
     name: 'Panel Harga Badan Pangan',
-    description: 'Harga gabah dan beras tingkat petani Jawa Timur',
-    url: 'https://panelharga.badanpangan.go.id',
+    description: 'Harga gabah dan beras tingkat petani (pemeliharaan)',
+    url: 'https://panelharga.badanpangan.go.id/beranda',
   },
   {
     name: 'SISKAPERBAPO Jawa Timur',
     description: 'Harga konsumen dan pasar Jawa Timur',
-    url: 'https://siskaperbapo.indagjatim.com/display/show',
-  },
-  {
-    name: 'PIHPS Nasional · Bank Indonesia',
-    description: 'Harga rata-rata dan perubahan antar daerah',
-    url: 'https://www.bi.go.id/hargapangan',
+    url: 'https://siskaperbapo.jatimprov.go.id/',
   },
   {
     name: 'SIMHARGA Kementerian Pertanian',
-    description: 'Rekap harga gabah tingkat petani dan penggilingan',
-    url: 'https://datanonkom.pertanian.go.id/simharga/dashboard.php?page=harga_gabah_provinsi',
+    description: 'Rekap harga gabah petani dan penggilingan',
+    url: 'https://bdsp2.pertanian.go.id/simharga/index_harga.php',
+  },
+  {
+    name: 'SIJAGUNG Kementerian Pertanian',
+    description: 'Data pembelian dan harga jagung/gabah',
+    url: 'https://simpakan.ditjenpkh.pertanian.go.id/sijagung/backend/web/site/data-pembelian',
+  },
+  {
+    name: 'BPS Jawa Timur · Harga-harga',
+    description: 'Tabel statistik harga Jawa Timur',
+    url: 'https://jatim.bps.go.id/id/statistics-table?subject=536',
+  },
+  {
+    name: 'BPS Jawa Timur · Statistik Harga Produsen Gabah',
+    description: 'Publikasi harga produsen gabah Jatim 2024',
+    url: 'https://jatim.bps.go.id/id/publication/2025/02/17/28bd96a8b5e9c3751f7981b8/statistik-harga-produsen-gabah-provinsi-jawa-timur-2024.html',
   },
 ];
 
