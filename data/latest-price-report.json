@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-02T09:47:58.133224+07:00",
+  "generatedAt": "2026-10-02T10:04:45.985236+07:00",
   "date": "2026-10-02",
   "areas": [
     "gresik",
@@ -1276,7 +1276,7 @@
   "nationalReferences": {
     "date": "2026-10-02",
     "panelBapanas": "Belum pernah berhasil diambil otomatis — cek manual",
-    "pihps": "400,850,250,250,1150",
+    "pihps": "0,0,0,400,50",
     "bpsGresik": "Belum pernah berhasil diambil otomatis — cek manual",
     "bpsLamongan": "Belum pernah berhasil diambil otomatis — cek manual",
     "hppKdmp": 6500,
