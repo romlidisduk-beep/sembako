@@ -69,22 +69,24 @@ jobs:
 
       - name: Instal dependensi frontend
         run: |
-          # npm ci 3x retry (insiden 25 Sep); fallback terakhir: npm install.
-          # Bug npm "Exit handler never called" di CI: bersihkan cache dulu.
+          # Bug npm "Exit handler never called" di CI: npm ci gagal acak di runner GitHub.
+          # Solusi: verifikasi vite; jika npm ci gagal, gunakan pnpm (corepack) sebagai pengganti.
           export NODE_OPTIONS="--max-old-space-size=3072"
           npm cache clean --force || true
           npm config set update-notifier false
           npm config set fund false
-          for i in 1 2 3 4; do
-            if npm ci --no-audit --no-fund --loglevel=error; then break; fi
+          npm ci --no-audit --no-fund --loglevel=error || {
+            echo "npm ci gagal, pakai pnpm"
             rm -rf node_modules
-            if [ "$i" -lt 4 ]; then sleep $((15*i)); else npm install --no-audit --no-fund --loglevel=error; fi
-          done
+            corepack enable
+            pnpm install --no-frozen-lockfile
+          }
           # Verifikasi: bug npm kadang exit 0 tanpa benar-benar memasang paket.
           if [ ! -x node_modules/.bin/vite ]; then
-            echo "vite hilang - npm ci gagal diam-diam, ulangi dengan npm install"
+            echo "vite hilang - pakai pnpm"
             rm -rf node_modules
-            npm install --no-audit --no-fund --loglevel=error
+            corepack enable
+            pnpm install --no-frozen-lockfile
           fi
           ls node_modules/.bin/ | head -5
           test -x node_modules/.bin/vite
