@@ -63,8 +63,9 @@ jobs:
       - name: Siapkan Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "22"
-          cache: npm
+          # Node 20 LTS: npm bawaan Node 22 memicu bug CI "Exit handler never called".
+          # Cache npm dimatikan karena ikut memicu bug tersebut.
+          node-version: "20"
 
       - name: Instal dependensi frontend
         run: |
