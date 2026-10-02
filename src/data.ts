@@ -84,10 +84,14 @@ const fallbackData: PriceData = {
   generatedAt: null, marketSource: 'Snapshot lokal', marketErrors: [], trends: [], history: [],
 };
 
-const reportDataUrl = `${import.meta.env.BASE_URL}data/latest-price-report.json`;
-const officialDataUrl = `${import.meta.env.BASE_URL}data/official-prices.json`;
-const panenDataUrl = `${import.meta.env.BASE_URL}data/harga-panen-report.json`;
-const historyDataUrl = `${import.meta.env.BASE_URL}data/price-history.csv`;
+// BASE_URL kadang tanpa trailing slash ("/sembako") -> gabung harus aman
+// (bug produksi: fetch jadi "/sembakodata/..." -> 404 -> fallback data demo).
+const withSlash = (base: string) => (base.endsWith('/') ? base : `${base}/`);
+const BASE = withSlash(import.meta.env.BASE_URL);
+const reportDataUrl = `${BASE}data/latest-price-report.json`;
+const officialDataUrl = `${BASE}data/official-prices.json`;
+const panenDataUrl = `${BASE}data/harga-panen-report.json`;
+const historyDataUrl = `${BASE}data/price-history.csv`;
 const displayMarketSource = (source: unknown) => {
   const value = String(source ?? '');
   return value.includes('siskaperbapo') ? 'SISKAPERBAPO Jawa Timur' : (value || 'Snapshot lokal');
