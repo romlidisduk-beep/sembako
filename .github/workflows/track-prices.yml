@@ -81,15 +81,13 @@ jobs:
           npm ci --no-audit --no-fund --loglevel=error || {
             echo "npm ci gagal, pakai pnpm"
             rm -rf node_modules
-            corepack enable
-            pnpm install --no-frozen-lockfile
+            npx --yes pnpm@9 install --no-frozen-lockfile
           }
           # Verifikasi: bug npm kadang exit 0 tanpa benar-benar memasang paket.
           if [ ! -x node_modules/.bin/vite ]; then
             echo "vite hilang - pakai pnpm"
             rm -rf node_modules
-            corepack enable
-            pnpm install --no-frozen-lockfile
+            npx --yes pnpm@9 install --no-frozen-lockfile
           fi
           ls node_modules/.bin/ | head -5
           test -x node_modules/.bin/vite
