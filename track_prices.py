@@ -657,7 +657,7 @@ def read_csv_records(path: Path) -> list[dict[str, Any]]:
                 if (
                     not valid_date(date)
                     or area not in AREAS
-                    or source_type not in SOURCE_TYPES - {"pasar rakyat"}
+                    or source_type not in SOURCE_TYPES
                     or commodity_key not in COMMODITY_BY_KEY
                     or not location
                     or not math.isfinite(price)
