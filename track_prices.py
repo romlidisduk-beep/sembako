@@ -779,13 +779,13 @@ def trend_signal(
             "signal": "TIDAK ADA DATA",
             "reason": "Komoditas tidak berhasil dibaca pada tanggal laporan.",
         }
-    if len(previous_days) < 2:
+    if len(previous_days) < 1:
         return {
             **base,
             "previousAverage": None,
             "changePercent": None,
             "signal": "BASELINE",
-            "reason": "Belum ada riwayat minimal dua hari untuk membaca tren.",
+            "reason": "Belum ada riwayat kemarin untuk membaca tren.",
         }
 
     recent = previous_days[-7:]
