@@ -247,7 +247,7 @@ function SourceStatusBadge({ nama, status }: { nama: string; status?: string }) 
 function SourceGuide() {
   const [statusMap, setStatusMap] = useState<Record<string, string>>({});
   useEffect(() => {
-    fetch(`${import.meta.env.BASE_URL}data/source-status.json?ts=${Date.now()}`, { cache: 'no-store' })
+    fetch(`${import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : import.meta.env.BASE_URL + '/'}data/source-status.json?ts=${Date.now()}`, { cache: 'no-store' })
       .then((r) => (r.ok ? r.json() : Promise.reject()))
       .then((d) => setStatusMap(Object.fromEntries((d.items ?? []).map((i: { nama: string; status: string }) => [i.nama, i.status]))))
       .catch(() => setStatusMap({}));

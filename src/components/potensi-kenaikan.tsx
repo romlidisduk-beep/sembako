@@ -20,7 +20,7 @@ export function PotensiKenaikan() {
   const [showAll, setShowAll] = useState(false);
 
   useEffect(() => {
-    fetch(`${import.meta.env.BASE_URL}data/price-outlook.json?ts=${Date.now()}`, { cache: 'no-store' })
+    fetch(`${import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : import.meta.env.BASE_URL + '/'}data/price-outlook.json?ts=${Date.now()}`, { cache: 'no-store' })
       .then((r) => (r.ok ? r.json() : Promise.reject()))
       .then(setData)
       .catch(() => setData(null));
