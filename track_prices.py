@@ -801,9 +801,23 @@ def trend_signal(
         and latest_day - last_dates[-1] == timedelta(days=1)
         and last_three[0] < last_three[1] < last_three[2] < latest_price
     )
+    falling_three_days = (
+        len(last_three) == 3
+        and last_dates[1] - last_dates[0] == timedelta(days=1)
+        and last_dates[2] - last_dates[1] == timedelta(days=1)
+        and latest_day - last_dates[-1] == timedelta(days=1)
+        and last_three[0] > last_three[1] > last_three[2] > latest_price
+    )
     historical_low = min(value for _, value in previous_days)
 
-    if rising_three_days or change_percent >= 2:
+    if falling_three_days or change_percent <= -2:
+        reason = (
+            "Rata-rata pasar turun setidaknya tiga hari berturut-turut."
+            if falling_three_days
+            else "Harga terbaru minimal 2% di bawah rata-rata tujuh hari."
+        )
+        signal = "TURUN"
+    elif rising_three_days or change_percent >= 2:
         reason = (
             "Rata-rata pasar naik setidaknya tiga hari berturut-turut."
             if rising_three_days
