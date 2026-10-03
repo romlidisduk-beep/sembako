@@ -160,14 +160,16 @@ function EmptyState({ title, body, action }: { title: string; body: string; acti
 
 // Warna sinyal: hijau = NAIK (harga naik = buruk utk pembeli? -> mengikuti permintaan user: naik hijau, turun merah, stabil kuning)
 function SignalBadge({ signal, changePercent }: { signal?: string; changePercent?: number | null }) {
+  // Sesuai permintaan user: warna HANYA pada angka yang berubah — naik hijau, turun merah.
+  // Stabil / murah / baseline / normal: tanpa label apa pun.
   if (!signal) return null;
-  if (signal === 'BASELINE') return <span className="rounded-full bg-[#f0e4c9] px-2 py-0.5 font-data text-[9px] font-bold uppercase text-[#897047]" title="Belum ada riwayat minimal dua hari untuk membandingkan.">⏳ baseline</span>;
   const naik = signal === 'NAIK' || signal === 'WASPADA NAIK';
   const turun = signal === 'TURUN';
-  const warna = naik ? 'bg-[#d9f2d9] text-[#2e7d32]' : turun ? 'bg-[#f8d7cf] text-[#a33a1c]' : 'bg-[#fdf0c2] text-[#8a6d1a]';
-  const panah = naik ? '▲' : turun ? '▼' : '▬';
+  if (!naik && !turun) return null;
+  const warna = naik ? 'bg-[#d9f2d9] text-[#2e7d32]' : 'bg-[#f8d7cf] text-[#a33a1c]';
+  const panah = naik ? '▲' : '▼';
   const pct = typeof changePercent === 'number' ? ` ${changePercent > 0 ? '+' : ''}${changePercent.toFixed(1)}%` : '';
-  return <span className={`rounded-full px-2 py-0.5 font-data text-[9px] font-bold uppercase ${warna}`} title={naik ? 'Harga naik dibanding rata-rata sebelumnya' : turun ? 'Harga turun dibanding rata-rata sebelumnya' : 'Harga stabil'}>{panah}{signal.toLowerCase()}{pct}</span>;
+  return <span className={`rounded-full px-2 py-0.5 font-data text-[9px] font-bold uppercase ${warna}`} title={naik ? 'Harga naik dibanding sebelumnya' : 'Harga turun dibanding sebelumnya'}>{panah} {naik ? 'naik' : 'turun'}{pct}</span>;
 }
 
 function CommodityCard({ commodity, records, trend, expanded, onExpand }: { commodity: string; records: SembakoRecord[]; trend?: { signal?: string; changePercent?: number | null }; expanded: boolean; onExpand: () => void }) {
