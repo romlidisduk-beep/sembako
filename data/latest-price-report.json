@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-03T16:57:29.854336+07:00",
+  "generatedAt": "2026-10-03T17:57:48.664442+07:00",
   "date": "2026-10-03",
   "areas": [
     "gresik",
@@ -2061,10 +2061,10 @@
       "commodity": "Beras premium",
       "unit": "kg",
       "latestPrice": 15233.333333333334,
-      "previousAverage": null,
-      "changePercent": null,
-      "signal": "BASELINE",
-      "reason": "Belum ada riwayat minimal dua hari untuk membaca tren."
+      "previousAverage": 15233.333333333334,
+      "changePercent": 0.0,
+      "signal": "MURAH",
+      "reason": "Harga dekat titik terendah pada riwayat yang tersimpan."
     },
     {
       "area": "gresik",
@@ -2072,10 +2072,10 @@
       "commodity": "Beras medium",
       "unit": "kg",
       "latestPrice": 12600.0,
-      "previousAverage": null,
-      "changePercent": null,
-      "signal": "BASELINE",
-      "reason": "Belum ada riwayat minimal dua hari untuk membaca tren."
+      "previousAverage": 12600.0,
+      "changePercent": 0.0,
+      "signal": "MURAH",
+      "reason": "Harga dekat titik terendah pada riwayat yang tersimpan."
     },
     {
       "area": "gresik",
@@ -2083,10 +2083,10 @@
       "commodity": "Gula kristal putih",
       "unit": "kg",
       "latestPrice": 17333.333333333332,
-      "previousAverage": null,
-      "changePercent": null,
-      "signal": "BASELINE",
-      "reason": "Belum ada riwayat minimal dua hari untuk membaca tren."
+      "previousAverage": 17333.333333333332,
+      "changePercent": 0.0,
+      "signal": "MURAH",
+      "reason": "Harga dekat titik terendah pada riwayat yang tersimpan."
     },
     {
       "area": "gresik",
@@ -2094,10 +2094,10 @@
       "commodity": "Minyak goreng curah",
       "unit": "kg",
       "latestPrice": 18000.0,
-      "previousAverage": null,
-      "changePercent": null,
-      "signal": "BASELINE",
-      "reason": "Belum ada riwayat minimal dua hari untuk membaca tren."
+      "previousAverage": 18000.0,
+      "changePercent": 0.0,
+      "signal": "MURAH",
+      "reason": "Harga dekat titik terendah pada riwayat yang tersimpan."
     },
     {
       "area": "gresik",
@@ -2105,10 +2105,10 @@
       "commodity": "Minyakita",
       "unit": "liter",
       "latestPrice": 15700.0,
-      "previousAverage": null,
-      "changePercent": null,
-      "signal": "BASELINE",
-      "reason": "Belum ada riwayat minimal dua hari untuk membaca tren."
+      "previousAverage": 15700.0,
+      "changePercent": 0.0,
+      "signal": "MURAH",
+      "reason": "Harga dekat titik terendah pada riwayat yang tersimpan."
     },
     {
       "area": "gresik",
@@ -2116,10 +2116,10 @@
       "commodity": "Daging ayam ras",
       "unit": "kg",
       "latestPrice": 40666.666666666664,
-      "previousAverage": null,
-      "changePercent": null,
-      "signal": "BASELINE",
-      "reason": "Belum ada riwayat minimal dua hari untuk membaca tren."
+      "previousAverage": 40666.666666666664,
+      "changePercent": 0.0,
+      "signal": "MURAH",
+      "reason": "Harga dekat titik terendah pada riwayat yang tersimpan."
     },
     {
       "area": "gresik",
@@ -2127,10 +2127,10 @@
       "commodity": "Telur ayam ras",
       "unit": "kg",
       "latestPrice": 24666.666666666668,
-      "previousAverage": null,
-      "changePercent": null,
-      "signal": "BASELINE",
-      "reason": "Belum ada riwayat minimal dua hari untuk membaca tren."
+      "previousAverage": 24666.666666666668,
+      "changePercent": 0.0,
+      "signal": "MURAH",
+      "reason": "Harga dekat titik terendah pada riwayat yang tersimpan."
     },
     {
       "area": "gresik",
@@ -2138,10 +2138,10 @@
       "commodity": "Daging sapi paha belakang",
       "unit": "kg",
       "latestPrice": 125000.0,
-      "previousAverage": null,
-      "changePercent": null,
-      "signal": "BASELINE",
-      "reason": "Belum ada riwayat minimal dua hari untuk membaca tren."
+      "previousAverage": 125000.0,
+      "changePercent": 0.0,
+      "signal": "MURAH",
+      "reason": "Harga dekat titik terendah pada riwayat yang tersimpan."
     },
     {
       "area": "gresik",
@@ -2149,10 +2149,10 @@
       "commodity": "Cabai merah keriting",
       "unit": "kg",
       "latestPrice": 46333.333333333336,
-      "previousAverage": null,
-      "changePercent": null,
-      "signal": "BASELINE",
-      "reason": "Belum ada riwayat minimal dua hari untuk membaca tren."
+      "previousAverage": 46333.333333333336,
+      "changePercent": 0.0,
+      "signal": "MURAH",
+      "reason": "Harga dekat titik terendah pada riwayat yang tersimpan."
     },
     {
       "area": "gresik",
@@ -2160,10 +2160,10 @@
       "commodity": "Cabai merah besar",
       "unit": "kg",
       "latestPrice": 33666.666666666664,
-      "previousAverage": null,
-      "changePercent": null,
-      "signal": "BASELINE",
-      "reason": "Belum ada riwayat minimal dua hari untuk membaca tren."
+      "previousAverage": 33666.666666666664,
+      "changePercent": 0.0,
+      "signal": "MURAH",
+      "reason": "Harga dekat titik terendah pada riwayat yang tersimpan."
     },
     {
       "area": "gresik",
@@ -2171,10 +2171,10 @@
       "commodity": "Cabai rawit merah",
       "unit": "kg",
       "latestPrice": 67333.33333333333,
-      "previousAverage": null,
-      "changePercent": null,
-      "signal": "BASELINE",
-      "reason": "Belum ada riwayat minimal dua hari untuk membaca tren."
+      "previousAverage": 67333.33333333333,
+      "changePercent": 0.0,
+      "signal": "MURAH",
+      "reason": "Harga dekat titik terendah pada riwayat yang tersimpan."
     },
     {
       "area": "gresik",
@@ -2182,10 +2182,10 @@
       "commodity": "Bawang merah",
       "unit": "kg",
       "latestPrice": 28000.0,
-      "previousAverage": null,
-      "changePercent": null,
-      "signal": "BASELINE",
-      "reason": "Belum ada riwayat minimal dua hari untuk membaca tren."
+      "previousAverage": 28000.0,
+      "changePercent": 0.0,
+      "signal": "MURAH",
+      "reason": "Harga dekat titik terendah pada riwayat yang tersimpan."
     },
     {
       "area": "gresik",
@@ -2193,10 +2193,10 @@
       "commodity": "Bawang putih",
       "unit": "kg",
       "latestPrice": 30333.333333333332,
-      "previousAverage": null,
-      "changePercent": null,
-      "signal": "BASELINE",
-      "reason": "Belum ada riwayat minimal dua hari untuk membaca tren."
+      "previousAverage": 30333.333333333332,
+      "changePercent": 0.0,
+      "signal": "MURAH",
+      "reason": "Harga dekat titik terendah pada riwayat yang tersimpan."
     },
     {
       "area": "gresik",
@@ -2204,10 +2204,10 @@
       "commodity": "LPG 3 kg",
       "unit": "tabung",
       "latestPrice": 20000.0,
-      "previousAverage": null,
-      "changePercent": null,
-      "signal": "BASELINE",
-      "reason": "Belum ada riwayat minimal dua hari untuk membaca tren."
+      "previousAverage": 20000.0,
+      "changePercent": 0.0,
+      "signal": "MURAH",
+      "reason": "Harga dekat titik terendah pada riwayat yang tersimpan."
     },
     {
       "area": "lamongan",
@@ -2215,10 +2215,10 @@
       "commodity": "Beras premium",
       "unit": "kg",
       "latestPrice": 14900.0,
-      "previousAverage": null,
-      "changePercent": null,
-      "signal": "BASELINE",
-      "reason": "Belum ada riwayat minimal dua hari untuk membaca tren."
+      "previousAverage": 14900.0,
+      "changePercent": 0.0,
+      "signal": "MURAH",
+      "reason": "Harga dekat titik terendah pada riwayat yang tersimpan."
     },
     {
       "area": "lamongan",
@@ -2226,10 +2226,10 @@
       "commodity": "Beras medium",
       "unit": "kg",
       "latestPrice": 13000.0,
-      "previousAverage": null,
-      "changePercent": null,
-      "signal": "BASELINE",
-      "reason": "Belum ada riwayat minimal dua hari untuk membaca tren."
+      "previousAverage": 13000.0,
+      "changePercent": 0.0,
+      "signal": "MURAH",
+      "reason": "Harga dekat titik terendah pada riwayat yang tersimpan."
     },
     {
       "area": "lamongan",
@@ -2237,10 +2237,10 @@
       "commodity": "Gula kristal putih",
       "unit": "kg",
       "latestPrice": 17875.0,
-      "previousAverage": null,
-      "changePercent": null,
-      "signal": "BASELINE",
-      "reason": "Belum ada riwayat minimal dua hari untuk membaca tren."
+      "previousAverage": 17875.0,
+      "changePercent": 0.0,
+      "signal": "MURAH",
+      "reason": "Harga dekat titik terendah pada riwayat yang tersimpan."
     },
     {
       "area": "lamongan",
@@ -2248,10 +2248,10 @@
       "commodity": "Minyak goreng curah",
       "unit": "kg",
       "latestPrice": 21000.0,
-      "previousAverage": null,
-      "changePercent": null,
-      "signal": "BASELINE",
-      "reason": "Belum ada riwayat minimal dua hari untuk membaca tren."
+      "previousAverage": 21000.0,
+      "changePercent": 0.0,
+      "signal": "MURAH",
+      "reason": "Harga dekat titik terendah pada riwayat yang tersimpan."
     },
     {
       "area": "lamongan",
@@ -2259,10 +2259,10 @@
       "commodity": "Minyakita",
       "unit": "liter",
       "latestPrice": 16600.0,
-      "previousAverage": null,
-      "changePercent": null,
-      "signal": "BASELINE",
-      "reason": "Belum ada riwayat minimal dua hari untuk membaca tren."
+      "previousAverage": 16600.0,
+      "changePercent": 0.0,
+      "signal": "MURAH",
+      "reason": "Harga dekat titik terendah pada riwayat yang tersimpan."
     },
     {
       "area": "lamongan",
@@ -2270,10 +2270,10 @@
       "commodity": "Daging ayam ras",
       "unit": "kg",
       "latestPrice": 39000.0,
-      "previousAverage": null,
-      "changePercent": null,
-      "signal": "BASELINE",
-      "reason": "Belum ada riwayat minimal dua hari untuk membaca tren."
+      "previousAverage": 39000.0,
+      "changePercent": 0.0,
+      "signal": "MURAH",
+      "reason": "Harga dekat titik terendah pada riwayat yang tersimpan."
     },
     {
       "area": "lamongan",
@@ -2281,10 +2281,10 @@
       "commodity": "Telur ayam ras",
       "unit": "kg",
       "latestPrice": 25250.0,
-      "previousAverage": null,
-      "changePercent": null,
-      "signal": "BASELINE",
-      "reason": "Belum ada riwayat minimal dua hari untuk membaca tren."
+      "previousAverage": 25250.0,
+      "changePercent": 0.0,
+      "signal": "MURAH",
+      "reason": "Harga dekat titik terendah pada riwayat yang tersimpan."
     },
     {
       "area": "lamongan",
@@ -2292,10 +2292,10 @@
       "commodity": "Daging sapi paha belakang",
       "unit": "kg",
       "latestPrice": 126250.0,
-      "previousAverage": null,
-      "changePercent": null,
-      "signal": "BASELINE",
-      "reason": "Belum ada riwayat minimal dua hari untuk membaca tren."
+      "previousAverage": 126250.0,
+      "changePercent": 0.0,
+      "signal": "MURAH",
+      "reason": "Harga dekat titik terendah pada riwayat yang tersimpan."
     },
     {
       "area": "lamongan",
@@ -2303,10 +2303,10 @@
       "commodity": "Cabai merah keriting",
       "unit": "kg",
       "latestPrice": 38750.0,
-      "previousAverage": null,
-      "changePercent": null,
-      "signal": "BASELINE",
-      "reason": "Belum ada riwayat minimal dua hari untuk membaca tren."
+      "previousAverage": 38750.0,
+      "changePercent": 0.0,
+      "signal": "MURAH",
+      "reason": "Harga dekat titik terendah pada riwayat yang tersimpan."
     },
     {
       "area": "lamongan",
@@ -2314,10 +2314,10 @@
       "commodity": "Cabai merah besar",
       "unit": "kg",
       "latestPrice": 35250.0,
-      "previousAverage": null,
-      "changePercent": null,
-      "signal": "BASELINE",
-      "reason": "Belum ada riwayat minimal dua hari untuk membaca tren."
+      "previousAverage": 35250.0,
+      "changePercent": 0.0,
+      "signal": "MURAH",
+      "reason": "Harga dekat titik terendah pada riwayat yang tersimpan."
     },
     {
       "area": "lamongan",
@@ -2325,10 +2325,10 @@
       "commodity": "Cabai rawit merah",
       "unit": "kg",
       "latestPrice": 67500.0,
-      "previousAverage": null,
-      "changePercent": null,
-      "signal": "BASELINE",
-      "reason": "Belum ada riwayat minimal dua hari untuk membaca tren."
+      "previousAverage": 67500.0,
+      "changePercent": 0.0,
+      "signal": "MURAH",
+      "reason": "Harga dekat titik terendah pada riwayat yang tersimpan."
     },
     {
       "area": "lamongan",
@@ -2336,10 +2336,10 @@
       "commodity": "Bawang merah",
       "unit": "kg",
       "latestPrice": 26250.0,
-      "previousAverage": null,
-      "changePercent": null,
-      "signal": "BASELINE",
-      "reason": "Belum ada riwayat minimal dua hari untuk membaca tren."
+      "previousAverage": 26250.0,
+      "changePercent": 0.0,
+      "signal": "MURAH",
+      "reason": "Harga dekat titik terendah pada riwayat yang tersimpan."
     },
     {
       "area": "lamongan",
@@ -2347,10 +2347,10 @@
       "commodity": "Bawang putih",
       "unit": "kg",
       "latestPrice": 29500.0,
-      "previousAverage": null,
-      "changePercent": null,
-      "signal": "BASELINE",
-      "reason": "Belum ada riwayat minimal dua hari untuk membaca tren."
+      "previousAverage": 29500.0,
+      "changePercent": 0.0,
+      "signal": "MURAH",
+      "reason": "Harga dekat titik terendah pada riwayat yang tersimpan."
     },
     {
       "area": "lamongan",
@@ -2358,10 +2358,10 @@
       "commodity": "LPG 3 kg",
       "unit": "tabung",
       "latestPrice": 20000.0,
-      "previousAverage": null,
-      "changePercent": null,
-      "signal": "BASELINE",
-      "reason": "Belum ada riwayat minimal dua hari untuk membaca tren."
+      "previousAverage": 20000.0,
+      "changePercent": 0.0,
+      "signal": "MURAH",
+      "reason": "Harga dekat titik terendah pada riwayat yang tersimpan."
     }
   ],
   "errors": [],
