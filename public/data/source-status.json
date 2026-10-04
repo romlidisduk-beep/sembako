@@ -1,0 +1,47 @@
+{
+  "generatedAt": "2026-10-03T20:59:54.481813+07:00",
+  "items": [
+    {
+      "status": "pemeliharaan",
+      "id": "bapanas-panel",
+      "nama": "Panel Harga Badan Pangan",
+      "url": "https://panelharga.badanpangan.go.id/beranda"
+    },
+    {
+      "status": "aktif",
+      "id": "bapanas-data",
+      "nama": "Data Pangan Bapanas",
+      "url": "https://data.badanpangan.go.id/"
+    },
+    {
+      "status": "aktif",
+      "id": "pihps",
+      "nama": "PIHPS Bank Indonesia",
+      "url": "https://www.bi.go.id/hargapangan/TabelHarga/ProdusenDaerah"
+    },
+    {
+      "status": "blokir-otomatis",
+      "id": "siskaperbapo",
+      "nama": "SISKAPERBAPO Jawa Timur",
+      "url": "https://siskaperbapo.jatimprov.go.id/"
+    },
+    {
+      "status": "blokir-otomatis",
+      "id": "simharga",
+      "nama": "SIMHARGA Kementan",
+      "url": "https://bdsp2.pertanian.go.id/simharga/index_harga.php"
+    },
+    {
+      "status": "blokir-otomatis",
+      "id": "sijagung",
+      "nama": "SIJAGUNG Kementan",
+      "url": "https://simpakan.ditjenpkh.pertanian.go.id/sijagung/backend/web/site/data-pembelian"
+    },
+    {
+      "status": "blokir-otomatis",
+      "id": "bps-jatim",
+      "nama": "BPS Jawa Timur",
+      "url": "https://jatim.bps.go.id/id/statistics-table?subject=536"
+    }
+  ]
+}

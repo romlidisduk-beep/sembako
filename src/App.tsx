@@ -11,6 +11,7 @@ import { loadPriceData, summarizePanen, type OfficialPriceRecord, type PanenReco
 import { fieldSources, googleSheetFormula, officialSources, referencePrices, verificationContacts, ADMIN_DISPLAY } from './sources';
 import { AdminContact } from '@/components/admin-contact';
 import { PotensiKenaikan } from '@/components/potensi-kenaikan';
+import ChatWidget from '@/components/chat-widget';
 
 const queryClient = new QueryClient();
 const money = (value: number) => `Rp${value.toLocaleString('id-ID')}`;
@@ -368,6 +369,7 @@ function Home() {
        <PotensiKenaikan />
        <footer className="mt-14 flex flex-col gap-2 border-t border-[#ddd2c0] pt-5 text-[11px] text-[#899088] sm:flex-row sm:items-center sm:justify-between"><span>Pelacak Harga · dibuat untuk warga dan pedagang kecil · Admin: {ADMIN_DISPLAY}</span><span className="flex items-center gap-1 font-data uppercase tracking-wider"><Database size={12} />{data?.marketSource ?? 'Snapshot lokal'} <ArrowUpRight size={12} /></span></footer>
     </div></main>
+  <ChatWidget />
   </div>;
 }
 
