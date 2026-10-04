@@ -14,7 +14,7 @@ export default function ChatWidget() {
             <span className="text-sm font-semibold">Chat AI — Nana</span>
             <button onClick={() => setOpen(false)} aria-label="Tutup chat" className="rounded-full p-1 hover:bg-white/10"><X size={18} /></button>
           </div>
-          <iframe src="https://romlidisduk-beep.github.io/chat-ai/" title="Chat AI Nana" className="h-[calc(80dvh-40px)] w-full sm:h-[calc(70dvh-40px)]" />
+          <iframe src="https://romlidisduk-beep.github.io/nana/" title="Chat AI Nana" className="h-[calc(80dvh-40px)] w-full sm:h-[calc(70dvh-40px)]" />
         </div>
       ) : (
         <button onClick={() => setOpen(true)} aria-label="Buka chat AI" className="fixed bottom-5 right-5 z-[9999] flex items-center gap-2 rounded-full bg-[#244a40] px-4 py-3 text-sm font-semibold text-white shadow-xl transition hover:bg-[#1d3a33]">
