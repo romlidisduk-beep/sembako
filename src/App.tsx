@@ -3,7 +3,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ErrorBoundary } from '@/components/error-boundary';
 import { Toaster } from '@/components/ui/toaster';
 import { TooltipProvider } from '@/components/ui/tooltip';
-import { ArrowUpRight, ChevronDown, ChevronUp, CircleHelp, Database, Layers3, MapPin, Search, Share2, SlidersHorizontal, Sprout, Store, Wheat, Wifi, X } from 'lucide-react';
+import { CloudSun, ArrowUpRight, ChevronDown, ChevronUp, CircleHelp, Database, Layers3, MapPin, Search, Share2, SlidersHorizontal, Sprout, Store, Wheat, Wifi, X } from 'lucide-react';
 import { Route, Switch, Link, useLocation, useRoute, Router as WouterRouter } from 'wouter';
 import { CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import NotFound from '@/pages/not-found';
@@ -53,10 +53,11 @@ function StatusBand({ count, panenCount, origin, officialStatus, officialCount, 
   </div>;
 }
 
-function SegmentedTabs({ mode, setMode }: { mode: 'sembako' | 'panen'; setMode: (mode: 'sembako' | 'panen') => void }) {
+function SegmentedTabs({ mode, setMode }: { mode: 'sembako' | 'panen' | 'cuaca'; setMode: (mode: 'sembako' | 'panen' | 'cuaca') => void }) {
   return <div className="inline-flex rounded-[14px] border border-[#d7cdbd] bg-[#eee7d9] p-1" role="tablist" aria-label="Pilih jenis harga">
     <button data-testid="tab-sembako" role="tab" aria-selected={mode === 'sembako'} onClick={() => setMode('sembako')} className={`flex items-center gap-2 rounded-[10px] px-4 py-2 text-sm font-semibold transition-all ${mode === 'sembako' ? 'bg-[#fffaf1] text-[#254c42] shadow-sm' : 'text-[#7b796d] hover:text-[#254c42]'}`}><Store size={15} /> Sembako</button>
     <button data-testid="tab-panen" role="tab" aria-selected={mode === 'panen'} onClick={() => setMode('panen')} className={`flex items-center gap-2 rounded-[10px] px-4 py-2 text-sm font-semibold transition-all ${mode === 'panen' ? 'bg-[#fffaf1] text-[#254c42] shadow-sm' : 'text-[#7b796d] hover:text-[#254c42]'}`}><Sprout size={15} /> Harga Panen</button>
+    <button data-testid="tab-cuaca" role="tab" aria-selected={mode === 'cuaca'} onClick={() => setMode('cuaca')} className={`flex items-center gap-2 rounded-[10px] px-4 py-2 text-sm font-semibold transition-all ${mode === 'cuaca' ? 'bg-[#fffaf1] text-[#254c42] shadow-sm' : 'text-[#7b796d] hover:text-[#254c42]'}`}><CloudSun size={15} /> Cuaca</button>
   </div>;
 }
 
@@ -356,7 +357,7 @@ function Home() {
   const [category, setCategory] = useState<CategoryKey>('semua');
   const [detailView, setDetailView] = useState(false);
   const panenSummary = useMemo(() => data ? summarizePanen(data.panen) : [], [data]);
-  const setProductMode = (next: 'sembako' | 'panen') => { setMode(next); if (next === 'panen') window.setTimeout(() => document.getElementById('harga-panen')?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50); };
+  const setProductMode = (next: 'sembako' | 'panen' | 'cuaca') => { setMode(next); if (next === 'panen') window.setTimeout(() => document.getElementById('harga-panen')?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50); };
   return <div className="grain flex min-h-[100dvh] market-shell text-[#29463e]">
     <aside className="hidden min-h-[100dvh] w-[238px] shrink-0 flex-col justify-between bg-[#1d403a] px-5 py-6 lg:flex"><div><AppMark /><div className="mt-14"><span className="font-data text-[10px] uppercase tracking-[.16em] text-[#88a79b]">Navigasi</span><nav className="mt-3 space-y-1"><button data-testid="nav-overview" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="flex w-full items-center gap-3 rounded-[11px] bg-[#31574e] px-3 py-2.5 text-left text-sm font-semibold text-[#f6eddb]"><Layers3 size={16} /> Ringkasan harga</button><button data-testid="nav-panen" onClick={() => setProductMode('panen')} className="flex w-full items-center gap-3 rounded-[11px] px-3 py-2.5 text-left text-sm text-[#bdd0c5] transition hover:bg-[#294d46] hover:text-[#f6eddb]"><Sprout size={16} /> Pantau harga panen</button></nav></div></div><div className="rounded-[14px] border border-[#49665d] bg-[#294d46] p-3 text-xs leading-relaxed text-[#b8cdc2]"><CircleHelp size={15} className="mb-2 text-[#e8b84d]" /><strong className="block text-[#f3ead9]">Butuh konteks?</strong>Harga terbaik berarti harga per satuan yang paling rendah dari sumber yang tersedia.</div></aside>
     <main className="min-w-0 flex-1"><header className="flex items-center justify-between border-b border-[#ddd2c0] bg-[#f5eddf]/90 px-5 py-4 backdrop-blur sm:px-8 lg:hidden"><AppMark /><button data-testid="mobile-nav-panen" onClick={() => setProductMode('panen')} className="rounded-[9px] border border-[#d5c7b3] bg-[#fffaf1] p-2 text-[#527064]" aria-label="Buka harga panen"><Sprout size={17} /></button></header><div className="mx-auto max-w-[1180px] px-5 pb-16 pt-7 sm:px-8 lg:px-12 lg:pt-10">
@@ -364,13 +365,19 @@ function Home() {
        <div className="mt-8"><StatusBand count={data?.sembako.length ?? 0} panenCount={panenSummary.length} origin={data?.origin ?? 'demo'} officialStatus={data?.officialStatus ?? 'unavailable'} officialCount={data?.official.length ?? 0} reportDate={data?.reportDate ?? null} source={data?.marketSource ?? 'SISKAPERBAPO Jawa Timur'} /></div>
        {data && <OverviewStats data={data} />}
       <div className="mt-8 flex flex-col gap-4 border-b border-[#ddd2c0] pb-4 sm:flex-row sm:items-center sm:justify-between"><SegmentedTabs mode={mode} setMode={setProductMode} /><div className="flex flex-col gap-2 sm:flex-row"><SearchBox value={search} onChange={setSearch} /><AreaFilter value={area} onChange={setArea} /></div></div>
-       <div className="mt-7">{!data ? <SkeletonCards /> : mode === 'sembako' ? <><CategoryNav records={data.sembako} value={category} onChange={setCategory} /><div className="mt-7"><SembakoPanel records={data.sembako} trends={data.trends} search={search} area={area} category={category} reportDate={data.reportDate} detailView={detailView} setDetailView={setDetailView} /></div></> : <PanenPanel rows={data.panen} official={data.official} officialStatus={data.officialStatus} active={mode === 'panen'} />}</div>
+       <div className="mt-7">{mode === 'cuaca' ? <CuacaPanel /> : !data ? <SkeletonCards /> : mode === 'sembako' ? <><CategoryNav records={data.sembako} value={category} onChange={setCategory} /><div className="mt-7"><SembakoPanel records={data.sembako} trends={data.trends} search={search} area={area} category={category} reportDate={data.reportDate} detailView={detailView} setDetailView={setDetailView} /></div></> : <PanenPanel rows={data.panen} official={data.official} officialStatus={data.officialStatus} active={mode === 'panen'} />}</div>
        <div className="mt-12 grid gap-4 sm:grid-cols-2"><AdminContact /><div className="rounded-[14px] border border-[#e1d5c3] bg-[#fdf7ec] px-4 py-3 text-sm text-[#687a70]"><strong className="block text-[#244a40]">Konfirmasi langsung</strong>{verificationContacts.map((source) => <div key={source}>• {source}</div>)}</div></div>
        <PotensiKenaikan />
        <footer className="mt-14 flex flex-col gap-2 border-t border-[#ddd2c0] pt-5 text-[11px] text-[#899088] sm:flex-row sm:items-center sm:justify-between"><span>Pelacak Harga · dibuat untuk warga dan pedagang kecil · Admin: {ADMIN_DISPLAY}</span><span className="flex items-center gap-1 font-data uppercase tracking-wider"><Database size={12} />{data?.marketSource ?? 'Snapshot lokal'} <ArrowUpRight size={12} /></span></footer>
     </div></main>
   <ChatWidget />
   </div>;
+}
+
+function CuacaPanel() {
+  return <section className="rounded-[16px] border border-[#d7cdbd] bg-[#0f172a] overflow-hidden" aria-label="Panel cuaca">
+    <iframe src="https://romlidisduk-beep.github.io/cuaca/" title="Cuaca Gresik & Lamongan" className="h-[75dvh] w-full border-0" loading="lazy" />
+  </section>;
 }
 
 function Router() {
