@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-05T00:07:28.694431+07:00",
+  "generatedAt": "2026-10-05T14:22:26.347631+07:00",
   "tanggalAnalisis": "2026-10-05",
   "periode": "14 hari terakhir",
   "metodologi": "Momentum harga produsen 14 hari (BI PIHPS) diproyeksikan konservatif 7 hari (setengah kekuatan momentum). Bukan jaminan — harga konsumen mengikuti dengan jeda 1-2 minggu.",
@@ -8,41 +8,41 @@
   "items": [
     {
       "komoditas": "Cabai Merah Besar",
-      "hargaProdusen": 35100,
-      "perubahan14HariPct": 39.01,
+      "hargaProdusen": 37450,
+      "perubahan14HariPct": 48.32,
       "naikTigaHari": false,
-      "proyeksi7Hari": 41946,
-      "proyeksiPct": 19.5,
-      "sinyal": "WASPADA NAIK",
-      "sumber": "BI PIHPS - Harga Produsen Jawa Timur"
-    },
-    {
-      "komoditas": "Cabai Rawit Merah",
-      "hargaProdusen": 70200,
-      "perubahan14HariPct": 12.5,
-      "naikTigaHari": false,
-      "proyeksi7Hari": 74588,
-      "proyeksiPct": 6.25,
+      "proyeksi7Hari": 46497,
+      "proyeksiPct": 24.16,
       "sinyal": "WASPADA NAIK",
       "sumber": "BI PIHPS - Harga Produsen Jawa Timur"
     },
     {
       "komoditas": "Cabai Merah Keriting",
-      "hargaProdusen": 44800,
-      "perubahan14HariPct": 11.72,
+      "hargaProdusen": 50450,
+      "perubahan14HariPct": 25.81,
       "naikTigaHari": true,
-      "proyeksi7Hari": 47425,
-      "proyeksiPct": 5.86,
+      "proyeksi7Hari": 56961,
+      "proyeksiPct": 12.91,
+      "sinyal": "WASPADA NAIK",
+      "sumber": "BI PIHPS - Harga Produsen Jawa Timur"
+    },
+    {
+      "komoditas": "Cabai Rawit Merah",
+      "hargaProdusen": 69050,
+      "perubahan14HariPct": 10.66,
+      "naikTigaHari": false,
+      "proyeksi7Hari": 72729,
+      "proyeksiPct": 5.33,
       "sinyal": "WASPADA NAIK",
       "sumber": "BI PIHPS - Harga Produsen Jawa Timur"
     },
     {
       "komoditas": "Cabai Rawit Hijau",
-      "hargaProdusen": 35950,
-      "perubahan14HariPct": 2.28,
+      "hargaProdusen": 36300,
+      "perubahan14HariPct": 3.27,
       "naikTigaHari": false,
-      "proyeksi7Hari": 36359,
-      "proyeksiPct": 1.14,
+      "proyeksi7Hari": 36894,
+      "proyeksiPct": 1.64,
       "sinyal": "WASPADA NAIK",
       "sumber": "BI PIHPS - Harga Produsen Jawa Timur"
     },
@@ -57,12 +57,12 @@
       "sumber": "BI PIHPS - Harga Produsen Jawa Timur"
     },
     {
-      "komoditas": "Bawang Putih Ukuran Sedang",
-      "hargaProdusen": 29300,
-      "perubahan14HariPct": 1.21,
+      "komoditas": "Beras Kualitas Bawah I",
+      "hargaProdusen": 14450,
+      "perubahan14HariPct": 1.05,
       "naikTigaHari": false,
-      "proyeksi7Hari": 29477,
-      "proyeksiPct": 0.6,
+      "proyeksi7Hari": 14526,
+      "proyeksiPct": 0.52,
       "sinyal": "WASPADA NAIK",
       "sumber": "BI PIHPS - Harga Produsen Jawa Timur"
     },
@@ -77,6 +77,36 @@
       "sumber": "BI PIHPS - Harga Produsen Jawa Timur"
     },
     {
+      "komoditas": "Beras Kualitas Medium I",
+      "hargaProdusen": 15250,
+      "perubahan14HariPct": 0.66,
+      "naikTigaHari": false,
+      "proyeksi7Hari": 15300,
+      "proyeksiPct": 0.33,
+      "sinyal": "PANTAU",
+      "sumber": "BI PIHPS - Harga Produsen Jawa Timur"
+    },
+    {
+      "komoditas": "Beras Kualitas Super II",
+      "hargaProdusen": 16050,
+      "perubahan14HariPct": 0.63,
+      "naikTigaHari": false,
+      "proyeksi7Hari": 16100,
+      "proyeksiPct": 0.31,
+      "sinyal": "PANTAU",
+      "sumber": "BI PIHPS - Harga Produsen Jawa Timur"
+    },
+    {
+      "komoditas": "Bawang Putih Ukuran Sedang",
+      "hargaProdusen": 29100,
+      "perubahan14HariPct": 0.52,
+      "naikTigaHari": false,
+      "proyeksi7Hari": 29175,
+      "proyeksiPct": 0.26,
+      "sinyal": "PANTAU",
+      "sumber": "BI PIHPS - Harga Produsen Jawa Timur"
+    },
+    {
       "komoditas": "Minyak Goreng Kemasan Bermerk 2",
       "hargaProdusen": 22250,
       "perubahan14HariPct": 0.45,
@@ -87,22 +117,32 @@
       "sumber": "BI PIHPS - Harga Produsen Jawa Timur"
     },
     {
-      "komoditas": "Beras Kualitas Bawah I",
-      "hargaProdusen": 14350,
-      "perubahan14HariPct": 0.35,
+      "komoditas": "Beras Kualitas Medium II",
+      "hargaProdusen": 14750,
+      "perubahan14HariPct": 0.34,
       "naikTigaHari": false,
-      "proyeksi7Hari": 14375,
+      "proyeksi7Hari": 14775,
       "proyeksiPct": 0.17,
       "sinyal": "PANTAU",
       "sumber": "BI PIHPS - Harga Produsen Jawa Timur"
     },
     {
-      "komoditas": "Beras Kualitas Medium I",
-      "hargaProdusen": 15200,
-      "perubahan14HariPct": 0.33,
+      "komoditas": "Beras Kualitas Super I",
+      "hargaProdusen": 16400,
+      "perubahan14HariPct": 0.31,
       "naikTigaHari": false,
-      "proyeksi7Hari": 15225,
-      "proyeksiPct": 0.17,
+      "proyeksi7Hari": 16425,
+      "proyeksiPct": 0.15,
+      "sinyal": "PANTAU",
+      "sumber": "BI PIHPS - Harga Produsen Jawa Timur"
+    },
+    {
+      "komoditas": "Gula Pasir Lokal",
+      "hargaProdusen": 17500,
+      "perubahan14HariPct": 0.29,
+      "naikTigaHari": false,
+      "proyeksi7Hari": 17525,
+      "proyeksiPct": 0.14,
       "sinyal": "PANTAU",
       "sumber": "BI PIHPS - Harga Produsen Jawa Timur"
     },
@@ -127,61 +167,11 @@
       "sumber": "BI PIHPS - Harga Produsen Jawa Timur"
     },
     {
-      "komoditas": "Beras Kualitas Medium II",
-      "hargaProdusen": 14700,
-      "perubahan14HariPct": 0.0,
-      "naikTigaHari": false,
-      "proyeksi7Hari": 14700,
-      "proyeksiPct": 0.0,
-      "sinyal": "STABIL",
-      "sumber": "BI PIHPS - Harga Produsen Jawa Timur"
-    },
-    {
-      "komoditas": "Beras Kualitas Super I",
-      "hargaProdusen": 16350,
-      "perubahan14HariPct": 0.0,
-      "naikTigaHari": false,
-      "proyeksi7Hari": 16350,
-      "proyeksiPct": 0.0,
-      "sinyal": "STABIL",
-      "sumber": "BI PIHPS - Harga Produsen Jawa Timur"
-    },
-    {
-      "komoditas": "Beras Kualitas Super II",
-      "hargaProdusen": 15950,
-      "perubahan14HariPct": 0.0,
-      "naikTigaHari": false,
-      "proyeksi7Hari": 15950,
-      "proyeksiPct": 0.0,
-      "sinyal": "STABIL",
-      "sumber": "BI PIHPS - Harga Produsen Jawa Timur"
-    },
-    {
       "komoditas": "Minyak Goreng Kemasan Bermerk 1",
       "hargaProdusen": 22850,
       "perubahan14HariPct": 0.0,
       "naikTigaHari": false,
       "proyeksi7Hari": 22850,
-      "proyeksiPct": 0.0,
-      "sinyal": "STABIL",
-      "sumber": "BI PIHPS - Harga Produsen Jawa Timur"
-    },
-    {
-      "komoditas": "Gula Pasir Kualitas Premium",
-      "hargaProdusen": 18650,
-      "perubahan14HariPct": 0.0,
-      "naikTigaHari": false,
-      "proyeksi7Hari": 18650,
-      "proyeksiPct": 0.0,
-      "sinyal": "STABIL",
-      "sumber": "BI PIHPS - Harga Produsen Jawa Timur"
-    },
-    {
-      "komoditas": "Gula Pasir Lokal",
-      "hargaProdusen": 17450,
-      "perubahan14HariPct": 0.0,
-      "naikTigaHari": false,
-      "proyeksi7Hari": 17450,
       "proyeksiPct": 0.0,
       "sinyal": "STABIL",
       "sumber": "BI PIHPS - Harga Produsen Jawa Timur"
@@ -197,22 +187,32 @@
       "sumber": "BI PIHPS - Harga Produsen Jawa Timur"
     },
     {
-      "komoditas": "Telur Ayam Ras Segar",
-      "hargaProdusen": 24850,
-      "perubahan14HariPct": -0.8,
+      "komoditas": "Gula Pasir Kualitas Premium",
+      "hargaProdusen": 18600,
+      "perubahan14HariPct": -0.27,
       "naikTigaHari": false,
-      "proyeksi7Hari": 24751,
-      "proyeksiPct": -0.4,
+      "proyeksi7Hari": 18575,
+      "proyeksiPct": -0.13,
+      "sinyal": "STABIL",
+      "sumber": "BI PIHPS - Harga Produsen Jawa Timur"
+    },
+    {
+      "komoditas": "Telur Ayam Ras Segar",
+      "hargaProdusen": 24600,
+      "perubahan14HariPct": -1.8,
+      "naikTigaHari": false,
+      "proyeksi7Hari": 24379,
+      "proyeksiPct": -0.9,
       "sinyal": "STABIL",
       "sumber": "BI PIHPS - Harga Produsen Jawa Timur"
     },
     {
       "komoditas": "Daging Ayam Ras Segar",
-      "hargaProdusen": 39800,
-      "perubahan14HariPct": -1.49,
+      "hargaProdusen": 39100,
+      "perubahan14HariPct": -3.22,
       "naikTigaHari": false,
-      "proyeksi7Hari": 39504,
-      "proyeksiPct": -0.74,
+      "proyeksi7Hari": 38471,
+      "proyeksiPct": -1.61,
       "sinyal": "STABIL",
       "sumber": "BI PIHPS - Harga Produsen Jawa Timur"
     }
