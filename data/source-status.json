@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-16T14:37:55.605860+07:00",
+  "generatedAt": "2026-10-17T14:33:43.486476+07:00",
   "items": [
     {
       "status": "pemeliharaan",
@@ -14,7 +14,7 @@
       "url": "https://data.badanpangan.go.id/"
     },
     {
-      "status": "aktif",
+      "status": "tidak-dijangkau",
       "id": "pihps",
       "nama": "PIHPS Bank Indonesia",
       "url": "https://www.bi.go.id/hargapangan/TabelHarga/ProdusenDaerah"
