@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-10-28T20:56:53.990574+07:00",
+  "generatedAt": "2026-10-29T21:06:00.609542+07:00",
   "records": [
     {
-      "tanggal": "2026-10-28",
+      "tanggal": "2026-10-29",
       "kabupaten": "Gresik",
       "kecamatan": "-",
       "desaKelurahan": "-",
@@ -13,7 +13,7 @@
       "catatan": "Harga Pembelian Pemerintah dari Bapanas/KDMP, bukan hasil transaksi harian di lapangan. Nilainya tetap sampai ada Perbadan/SK baru."
     },
     {
-      "tanggal": "2026-10-28",
+      "tanggal": "2026-10-29",
       "kabupaten": "Lamongan",
       "kecamatan": "-",
       "desaKelurahan": "-",
@@ -24,7 +24,7 @@
       "catatan": "Harga Pembelian Pemerintah dari Bapanas/KDMP, bukan hasil transaksi harian di lapangan. Nilainya tetap sampai ada Perbadan/SK baru."
     },
     {
-      "tanggal": "2026-10-28",
+      "tanggal": "2026-10-29",
       "kabupaten": "Jawa Timur (tingkat produsen)",
       "kecamatan": "-",
       "desaKelurahan": "-",
@@ -43,7 +43,7 @@
     },
     {
       "sumber": "PIHPS / Bank Indonesia",
-      "status": "0,0,0,150,0",
+      "status": "0,0,0,100,0",
       "ok": true
     },
     {
