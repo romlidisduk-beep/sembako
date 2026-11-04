@@ -1,28 +1,18 @@
 {
-  "generatedAt": "2026-11-03T21:58:54.754418+07:00",
-  "tanggalAnalisis": "2026-11-03",
+  "generatedAt": "2026-11-04T22:20:07.431828+07:00",
+  "tanggalAnalisis": "2026-11-04",
   "periode": "14 hari terakhir",
   "metodologi": "Momentum harga produsen 14 hari (BI PIHPS) diproyeksikan konservatif 7 hari (setengah kekuatan momentum). Bukan jaminan — harga konsumen mengikuti dengan jeda 1-2 minggu.",
   "totalDipantau": 21,
   "totalWaspadaNaik": 3,
   "items": [
     {
-      "komoditas": "Daging Sapi Kualitas 2",
-      "hargaProdusen": 134100,
-      "perubahan14HariPct": 1.06,
+      "komoditas": "Beras Kualitas Super I",
+      "hargaProdusen": 16450,
+      "perubahan14HariPct": 0.61,
       "naikTigaHari": false,
-      "proyeksi7Hari": 134807,
-      "proyeksiPct": 0.53,
-      "sinyal": "WASPADA NAIK",
-      "sumber": "BI PIHPS - Harga Produsen Jawa Timur"
-    },
-    {
-      "komoditas": "Daging Sapi Kualitas 1",
-      "hargaProdusen": 147000,
-      "perubahan14HariPct": 0.93,
-      "naikTigaHari": false,
-      "proyeksi7Hari": 147681,
-      "proyeksiPct": 0.46,
+      "proyeksi7Hari": 16500,
+      "proyeksiPct": 0.31,
       "sinyal": "PANTAU",
       "sumber": "BI PIHPS - Harga Produsen Jawa Timur"
     },
@@ -33,16 +23,6 @@
       "naikTigaHari": false,
       "proyeksi7Hari": 18100,
       "proyeksiPct": 0.28,
-      "sinyal": "PANTAU",
-      "sumber": "BI PIHPS - Harga Produsen Jawa Timur"
-    },
-    {
-      "komoditas": "Beras Kualitas Super I",
-      "hargaProdusen": 16450,
-      "perubahan14HariPct": 0.3,
-      "naikTigaHari": false,
-      "proyeksi7Hari": 16475,
-      "proyeksiPct": 0.15,
       "sinyal": "PANTAU",
       "sumber": "BI PIHPS - Harga Produsen Jawa Timur"
     },
@@ -107,6 +87,26 @@
       "sumber": "BI PIHPS - Harga Produsen Jawa Timur"
     },
     {
+      "komoditas": "Daging Sapi Kualitas 2",
+      "hargaProdusen": 134100,
+      "perubahan14HariPct": 0.0,
+      "naikTigaHari": false,
+      "proyeksi7Hari": 134100,
+      "proyeksiPct": 0.0,
+      "sinyal": "STABIL",
+      "sumber": "BI PIHPS - Harga Produsen Jawa Timur"
+    },
+    {
+      "komoditas": "Bawang Merah Ukuran Sedang",
+      "hargaProdusen": 30250,
+      "perubahan14HariPct": 0.0,
+      "naikTigaHari": false,
+      "proyeksi7Hari": 30250,
+      "proyeksiPct": 0.0,
+      "sinyal": "STABIL",
+      "sumber": "BI PIHPS - Harga Produsen Jawa Timur"
+    },
+    {
       "komoditas": "Minyak Goreng Kemasan Bermerk 2",
       "hargaProdusen": 22300,
       "perubahan14HariPct": 0.0,
@@ -117,12 +117,12 @@
       "sumber": "BI PIHPS - Harga Produsen Jawa Timur"
     },
     {
-      "komoditas": "Bawang Merah Ukuran Sedang",
-      "hargaProdusen": 30150,
-      "perubahan14HariPct": -0.17,
+      "komoditas": "Daging Sapi Kualitas 1",
+      "hargaProdusen": 147000,
+      "perubahan14HariPct": -0.03,
       "naikTigaHari": false,
-      "proyeksi7Hari": 30125,
-      "proyeksiPct": -0.08,
+      "proyeksi7Hari": 146975,
+      "proyeksiPct": -0.02,
       "sinyal": "STABIL",
       "sumber": "BI PIHPS - Harga Produsen Jawa Timur"
     },
@@ -149,71 +149,71 @@
     {
       "komoditas": "Bawang Putih Ukuran Sedang",
       "hargaProdusen": 28500,
-      "perubahan14HariPct": -2.73,
+      "perubahan14HariPct": -3.55,
       "naikTigaHari": false,
-      "proyeksi7Hari": 28111,
-      "proyeksiPct": -1.37,
+      "proyeksi7Hari": 27994,
+      "proyeksiPct": -1.78,
       "sinyal": "STABIL",
       "sumber": "BI PIHPS - Harga Produsen Jawa Timur"
     },
     {
       "komoditas": "Cabai Rawit Hijau",
-      "hargaProdusen": 39600,
-      "perubahan14HariPct": -4.58,
+      "hargaProdusen": 40650,
+      "perubahan14HariPct": -4.24,
       "naikTigaHari": false,
-      "proyeksi7Hari": 38693,
-      "proyeksiPct": -2.29,
+      "proyeksi7Hari": 39788,
+      "proyeksiPct": -2.12,
       "sinyal": "STABIL",
       "sumber": "BI PIHPS - Harga Produsen Jawa Timur"
     },
     {
       "komoditas": "Telur Ayam Ras Segar",
-      "hargaProdusen": 23200,
-      "perubahan14HariPct": -4.92,
+      "hargaProdusen": 23250,
+      "perubahan14HariPct": -4.71,
       "naikTigaHari": false,
-      "proyeksi7Hari": 22630,
-      "proyeksiPct": -2.46,
+      "proyeksi7Hari": 22702,
+      "proyeksiPct": -2.36,
       "sinyal": "STABIL",
       "sumber": "BI PIHPS - Harga Produsen Jawa Timur"
     },
     {
       "komoditas": "Daging Ayam Ras Segar",
-      "hargaProdusen": 34650,
-      "perubahan14HariPct": -7.35,
+      "hargaProdusen": 34600,
+      "perubahan14HariPct": -7.36,
       "naikTigaHari": false,
-      "proyeksi7Hari": 33376,
+      "proyeksi7Hari": 33326,
       "proyeksiPct": -3.68,
       "sinyal": "STABIL",
       "sumber": "BI PIHPS - Harga Produsen Jawa Timur"
     },
     {
       "komoditas": "Cabai Merah Keriting",
-      "hargaProdusen": 49000,
-      "perubahan14HariPct": -12.11,
+      "hargaProdusen": 51300,
+      "perubahan14HariPct": -8.72,
       "naikTigaHari": true,
-      "proyeksi7Hari": 46034,
-      "proyeksiPct": -6.05,
+      "proyeksi7Hari": 49064,
+      "proyeksiPct": -4.36,
       "sinyal": "WASPADA NAIK",
       "sumber": "BI PIHPS - Harga Produsen Jawa Timur"
     },
     {
       "komoditas": "Cabai Rawit Merah",
-      "hargaProdusen": 55050,
-      "perubahan14HariPct": -12.62,
+      "hargaProdusen": 55700,
+      "perubahan14HariPct": -13.1,
       "naikTigaHari": true,
-      "proyeksi7Hari": 51577,
-      "proyeksiPct": -6.31,
+      "proyeksi7Hari": 52050,
+      "proyeksiPct": -6.55,
       "sinyal": "WASPADA NAIK",
       "sumber": "BI PIHPS - Harga Produsen Jawa Timur"
     },
     {
       "komoditas": "Cabai Merah Besar",
-      "hargaProdusen": 33600,
-      "perubahan14HariPct": -23.98,
-      "naikTigaHari": false,
-      "proyeksi7Hari": 29571,
-      "proyeksiPct": -11.99,
-      "sinyal": "STABIL",
+      "hargaProdusen": 35350,
+      "perubahan14HariPct": -20.2,
+      "naikTigaHari": true,
+      "proyeksi7Hari": 31779,
+      "proyeksiPct": -10.1,
+      "sinyal": "WASPADA NAIK",
       "sumber": "BI PIHPS - Harga Produsen Jawa Timur"
     }
   ]
