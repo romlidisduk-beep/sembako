@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-11-08T21:14:01.190888+07:00",
+  "generatedAt": "2026-11-10T00:24:09.484369+07:00",
   "items": [
     {
-      "status": "aktif",
+      "status": "tidak-dijangkau",
       "id": "bapanas-panel",
       "nama": "Panel Harga Badan Pangan",
       "url": "https://panelharga.badanpangan.go.id/beranda"
