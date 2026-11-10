@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-10T00:23:22.012993+07:00",
+  "generatedAt": "2026-11-10T22:31:43.611758+07:00",
   "records": [
     {
       "tanggal": "2026-11-10",
@@ -24,14 +24,14 @@
       "catatan": "Harga Pembelian Pemerintah dari Bapanas/KDMP, bukan hasil transaksi harian di lapangan. Nilainya tetap sampai ada Perbadan/SK baru."
     },
     {
-      "tanggal": "2026-11-09",
+      "tanggal": "2026-11-10",
       "kabupaten": "Jawa Timur (tingkat produsen)",
       "kecamatan": "-",
       "desaKelurahan": "-",
       "lokasi": "BI PIHPS - Harga Produsen",
       "komoditas": "Beras Kualitas Bawah I",
       "kualitas": "produsen",
-      "hargaPerKg": 14450.0,
+      "hargaPerKg": 14300.0,
       "catatan": "Harga indikatif tingkat produsen dari PIHPS Bank Indonesia (sumber resmi, bukan transaksi pasar/kios). Dipublikasi harian."
     }
   ],
@@ -43,7 +43,7 @@
     },
     {
       "sumber": "PIHPS / Bank Indonesia",
-      "status": "0,0,0,50,0",
+      "status": "0,0,0,0,150",
       "ok": true
     },
     {
