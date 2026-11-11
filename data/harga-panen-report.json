@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-11-10T22:31:43.611758+07:00",
+  "generatedAt": "2026-11-11T22:03:05.652352+07:00",
   "records": [
     {
-      "tanggal": "2026-11-10",
+      "tanggal": "2026-11-11",
       "kabupaten": "Gresik",
       "kecamatan": "-",
       "desaKelurahan": "-",
@@ -13,7 +13,7 @@
       "catatan": "Harga Pembelian Pemerintah dari Bapanas/KDMP, bukan hasil transaksi harian di lapangan. Nilainya tetap sampai ada Perbadan/SK baru."
     },
     {
-      "tanggal": "2026-11-10",
+      "tanggal": "2026-11-11",
       "kabupaten": "Lamongan",
       "kecamatan": "-",
       "desaKelurahan": "-",
@@ -24,14 +24,14 @@
       "catatan": "Harga Pembelian Pemerintah dari Bapanas/KDMP, bukan hasil transaksi harian di lapangan. Nilainya tetap sampai ada Perbadan/SK baru."
     },
     {
-      "tanggal": "2026-11-10",
+      "tanggal": "2026-11-11",
       "kabupaten": "Jawa Timur (tingkat produsen)",
       "kecamatan": "-",
       "desaKelurahan": "-",
       "lokasi": "BI PIHPS - Harga Produsen",
       "komoditas": "Beras Kualitas Bawah I",
       "kualitas": "produsen",
-      "hargaPerKg": 14300.0,
+      "hargaPerKg": 14450.0,
       "catatan": "Harga indikatif tingkat produsen dari PIHPS Bank Indonesia (sumber resmi, bukan transaksi pasar/kios). Dipublikasi harian."
     }
   ],
@@ -43,7 +43,7 @@
     },
     {
       "sumber": "PIHPS / Bank Indonesia",
-      "status": "0,0,0,0,150",
+      "status": "0,0,0,0,150 (data 2026-11-10, menunggu update otomatis)",
       "ok": true
     },
     {
