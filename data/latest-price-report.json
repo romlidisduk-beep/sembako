@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-11-24T02:09:41.050873+07:00",
-  "date": "2026-11-24",
+  "generatedAt": "2026-11-25T01:48:09.316648+07:00",
+  "date": "2026-11-25",
   "areas": [
     "gresik",
     "lamongan"
@@ -17,7 +17,7 @@
   },
   "records": [
     {
-      "date": "2026-11-24",
+      "date": "2026-11-25",
       "area": "gresik",
       "marketId": "45",
       "location": "Pasar Baru",
@@ -32,13 +32,13 @@
       "priceType": "survei",
       "stockStatus": "terpantau",
       "confidence": "resmi-pasar",
-      "observedAt": "2026-11-24",
+      "observedAt": "2026-11-25",
       "address": "Pasar Baru, Kabupaten Gresik",
-      "sourceUrl": "https://siskaperbapo.indagjatim.com/display/show/?tanggal=2026-11-24&kabkota=gresikkab&pasar=45",
+      "sourceUrl": "https://siskaperbapo.indagjatim.com/display/show/?tanggal=2026-11-25&kabkota=gresikkab&pasar=45",
       "unitPrice": 23000.0
     },
     {
-      "date": "2026-11-24",
+      "date": "2026-11-25",
       "area": "gresik",
       "marketId": "46",
       "location": "Pasar Kota",
@@ -53,13 +53,13 @@
       "priceType": "survei",
       "stockStatus": "terpantau",
       "confidence": "resmi-pasar",
-      "observedAt": "2026-11-24",
+      "observedAt": "2026-11-25",
       "address": "Pasar Kota, Kabupaten Gresik",
-      "sourceUrl": "https://siskaperbapo.indagjatim.com/display/show/?tanggal=2026-11-24&kabkota=gresikkab&pasar=46",
+      "sourceUrl": "https://siskaperbapo.indagjatim.com/display/show/?tanggal=2026-11-25&kabkota=gresikkab&pasar=46",
       "unitPrice": 23000.0
     },
     {
-      "date": "2026-11-24",
+      "date": "2026-11-25",
       "area": "gresik",
       "marketId": "123",
       "location": "Pasar Sidomoro",
@@ -74,13 +74,13 @@
       "priceType": "survei",
       "stockStatus": "terpantau",
       "confidence": "resmi-pasar",
-      "observedAt": "2026-11-24",
+      "observedAt": "2026-11-25",
       "address": "Pasar Sidomoro, Kabupaten Gresik",
-      "sourceUrl": "https://siskaperbapo.indagjatim.com/display/show/?tanggal=2026-11-24&kabkota=gresikkab&pasar=123",
+      "sourceUrl": "https://siskaperbapo.indagjatim.com/display/show/?tanggal=2026-11-25&kabkota=gresikkab&pasar=123",
       "unitPrice": 23000.0
     },
     {
-      "date": "2026-11-24",
+      "date": "2026-11-25",
       "area": "lamongan",
       "marketId": "53",
       "location": "Pasar Sidoharjo",
@@ -95,13 +95,13 @@
       "priceType": "survei",
       "stockStatus": "terpantau",
       "confidence": "resmi-pasar",
-      "observedAt": "2026-11-24",
+      "observedAt": "2026-11-25",
       "address": "Pasar Sidoharjo, Kabupaten Lamongan",
-      "sourceUrl": "https://siskaperbapo.indagjatim.com/display/show/?tanggal=2026-11-24&kabkota=lamongankab&pasar=53",
+      "sourceUrl": "https://siskaperbapo.indagjatim.com/display/show/?tanggal=2026-11-25&kabkota=lamongankab&pasar=53",
       "unitPrice": 23000.0
     },
     {
-      "date": "2026-11-24",
+      "date": "2026-11-25",
       "area": "lamongan",
       "marketId": "54",
       "location": "Pasar Babat",
@@ -116,13 +116,13 @@
       "priceType": "survei",
       "stockStatus": "terpantau",
       "confidence": "resmi-pasar",
-      "observedAt": "2026-11-24",
+      "observedAt": "2026-11-25",
       "address": "Pasar Babat, Kabupaten Lamongan",
-      "sourceUrl": "https://siskaperbapo.indagjatim.com/display/show/?tanggal=2026-11-24&kabkota=lamongankab&pasar=54",
+      "sourceUrl": "https://siskaperbapo.indagjatim.com/display/show/?tanggal=2026-11-25&kabkota=lamongankab&pasar=54",
       "unitPrice": 23000.0
     },
     {
-      "date": "2026-11-24",
+      "date": "2026-11-25",
       "area": "lamongan",
       "marketId": "55",
       "location": "Pasar Blimbing",
@@ -137,13 +137,13 @@
       "priceType": "survei",
       "stockStatus": "terpantau",
       "confidence": "resmi-pasar",
-      "observedAt": "2026-11-24",
+      "observedAt": "2026-11-25",
       "address": "Pasar Blimbing, Kabupaten Lamongan",
-      "sourceUrl": "https://siskaperbapo.indagjatim.com/display/show/?tanggal=2026-11-24&kabkota=lamongankab&pasar=55",
+      "sourceUrl": "https://siskaperbapo.indagjatim.com/display/show/?tanggal=2026-11-25&kabkota=lamongankab&pasar=55",
       "unitPrice": 23000.0
     },
     {
-      "date": "2026-11-24",
+      "date": "2026-11-25",
       "area": "lamongan",
       "marketId": "121",
       "location": "Pasar Mantup",
@@ -158,9 +158,9 @@
       "priceType": "survei",
       "stockStatus": "terpantau",
       "confidence": "resmi-pasar",
-      "observedAt": "2026-11-24",
+      "observedAt": "2026-11-25",
       "address": "Pasar Mantup, Kabupaten Lamongan",
-      "sourceUrl": "https://siskaperbapo.indagjatim.com/display/show/?tanggal=2026-11-24&kabkota=lamongankab&pasar=121",
+      "sourceUrl": "https://siskaperbapo.indagjatim.com/display/show/?tanggal=2026-11-25&kabkota=lamongankab&pasar=121",
       "unitPrice": 23000.0
     }
   ],
@@ -292,8 +292,8 @@
       "commodity": "Bawang merah",
       "unit": "kg",
       "latestPrice": 23000.0,
-      "previousAverage": 31619.047619047622,
-      "changePercent": -27.259036144578317,
+      "previousAverage": 30428.571428571428,
+      "changePercent": -24.4131455399061,
       "signal": "TURUN",
       "reason": "Harga terbaru minimal 2% di bawah rata-rata tujuh hari."
     },
@@ -446,8 +446,8 @@
       "commodity": "Bawang merah",
       "unit": "kg",
       "latestPrice": 23000.0,
-      "previousAverage": 29535.714285714286,
-      "changePercent": -22.128174123337367,
+      "previousAverage": 28678.571428571428,
+      "changePercent": -19.800747198007468,
       "signal": "TURUN",
       "reason": "Harga terbaru minimal 2% di bawah rata-rata tujuh hari."
     },
@@ -476,9 +476,9 @@
   ],
   "errors": [],
   "nationalReferences": {
-    "date": "2026-11-24",
+    "date": "2026-11-25",
     "panelBapanas": "Belum pernah berhasil diambil otomatis — cek manual",
-    "pihps": "0,0,0,50,50 (data 2026-11-22, menunggu update otomatis)",
+    "pihps": "50,0,0,0,0",
     "bpsGresik": "Belum pernah berhasil diambil otomatis — cek manual",
     "bpsLamongan": "Belum pernah berhasil diambil otomatis — cek manual",
     "hppKdmp": 6500,

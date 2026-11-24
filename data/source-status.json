@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-24T02:11:45.218191+07:00",
+  "generatedAt": "2026-11-25T01:50:29.865646+07:00",
   "items": [
     {
       "status": "tidak-dijangkau",
@@ -32,7 +32,7 @@
       "url": "https://bdsp2.pertanian.go.id/simharga/index_harga.php"
     },
     {
-      "status": "blokir-otomatis",
+      "status": "tidak-dijangkau",
       "id": "sijagung",
       "nama": "SIJAGUNG Kementan",
       "url": "https://simpakan.ditjenpkh.pertanian.go.id/sijagung/backend/web/site/data-pembelian"
