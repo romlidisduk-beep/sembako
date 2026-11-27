@@ -1,18 +1,28 @@
 {
-  "generatedAt": "2026-11-27T00:41:08.938245+07:00",
-  "tanggalAnalisis": "2026-11-27",
+  "generatedAt": "2026-11-28T00:24:34.307429+07:00",
+  "tanggalAnalisis": "2026-11-28",
   "periode": "14 hari terakhir",
   "metodologi": "Momentum harga produsen 14 hari (BI PIHPS) diproyeksikan konservatif 7 hari (setengah kekuatan momentum). Bukan jaminan — harga konsumen mengikuti dengan jeda 1-2 minggu.",
   "totalDipantau": 21,
-  "totalWaspadaNaik": 4,
+  "totalWaspadaNaik": 3,
   "items": [
     {
       "komoditas": "Bawang Merah Ukuran Sedang",
-      "hargaProdusen": 32150,
-      "perubahan14HariPct": 4.05,
-      "naikTigaHari": false,
-      "proyeksi7Hari": 32800,
-      "proyeksiPct": 2.02,
+      "hargaProdusen": 32350,
+      "perubahan14HariPct": 3.85,
+      "naikTigaHari": true,
+      "proyeksi7Hari": 32973,
+      "proyeksiPct": 1.93,
+      "sinyal": "WASPADA NAIK",
+      "sumber": "BI PIHPS - Harga Produsen Jawa Timur"
+    },
+    {
+      "komoditas": "Telur Ayam Ras Segar",
+      "hargaProdusen": 23450,
+      "perubahan14HariPct": 1.08,
+      "naikTigaHari": true,
+      "proyeksi7Hari": 23576,
+      "proyeksiPct": 0.54,
       "sinyal": "WASPADA NAIK",
       "sumber": "BI PIHPS - Harga Produsen Jawa Timur"
     },
@@ -27,12 +37,22 @@
       "sumber": "BI PIHPS - Harga Produsen Jawa Timur"
     },
     {
-      "komoditas": "Cabai Rawit Hijau",
-      "hargaProdusen": 41550,
-      "perubahan14HariPct": 0.24,
+      "komoditas": "Daging Sapi Kualitas 2",
+      "hargaProdusen": 134200,
+      "perubahan14HariPct": 0.07,
       "naikTigaHari": false,
-      "proyeksi7Hari": 41600,
-      "proyeksiPct": 0.12,
+      "proyeksi7Hari": 134250,
+      "proyeksiPct": 0.04,
+      "sinyal": "PANTAU",
+      "sumber": "BI PIHPS - Harga Produsen Jawa Timur"
+    },
+    {
+      "komoditas": "Daging Sapi Kualitas 1",
+      "hargaProdusen": 147050,
+      "perubahan14HariPct": 0.03,
+      "naikTigaHari": false,
+      "proyeksi7Hari": 147075,
+      "proyeksiPct": 0.02,
       "sinyal": "PANTAU",
       "sumber": "BI PIHPS - Harga Produsen Jawa Timur"
     },
@@ -77,21 +97,11 @@
       "sumber": "BI PIHPS - Harga Produsen Jawa Timur"
     },
     {
-      "komoditas": "Daging Sapi Kualitas 1",
-      "hargaProdusen": 147000,
+      "komoditas": "Minyak Goreng Curah",
+      "hargaProdusen": 21050,
       "perubahan14HariPct": 0.0,
       "naikTigaHari": false,
-      "proyeksi7Hari": 147000,
-      "proyeksiPct": 0.0,
-      "sinyal": "STABIL",
-      "sumber": "BI PIHPS - Harga Produsen Jawa Timur"
-    },
-    {
-      "komoditas": "Daging Sapi Kualitas 2",
-      "hargaProdusen": 134100,
-      "perubahan14HariPct": 0.0,
-      "naikTigaHari": false,
-      "proyeksi7Hari": 134100,
+      "proyeksi7Hari": 21050,
       "proyeksiPct": 0.0,
       "sinyal": "STABIL",
       "sumber": "BI PIHPS - Harga Produsen Jawa Timur"
@@ -118,21 +128,11 @@
     },
     {
       "komoditas": "Gula Pasir Lokal",
-      "hargaProdusen": 18100,
+      "hargaProdusen": 18150,
       "perubahan14HariPct": 0.0,
       "naikTigaHari": false,
-      "proyeksi7Hari": 18100,
+      "proyeksi7Hari": 18150,
       "proyeksiPct": 0.0,
-      "sinyal": "STABIL",
-      "sumber": "BI PIHPS - Harga Produsen Jawa Timur"
-    },
-    {
-      "komoditas": "Minyak Goreng Curah",
-      "hargaProdusen": 21050,
-      "perubahan14HariPct": -0.24,
-      "naikTigaHari": false,
-      "proyeksi7Hari": 21025,
-      "proyeksiPct": -0.12,
       "sinyal": "STABIL",
       "sumber": "BI PIHPS - Harga Produsen Jawa Timur"
     },
@@ -147,22 +147,12 @@
       "sumber": "BI PIHPS - Harga Produsen Jawa Timur"
     },
     {
-      "komoditas": "Telur Ayam Ras Segar",
-      "hargaProdusen": 23350,
-      "perubahan14HariPct": -0.43,
-      "naikTigaHari": true,
-      "proyeksi7Hari": 23300,
-      "proyeksiPct": -0.21,
-      "sinyal": "WASPADA NAIK",
-      "sumber": "BI PIHPS - Harga Produsen Jawa Timur"
-    },
-    {
       "komoditas": "Bawang Putih Ukuran Sedang",
-      "hargaProdusen": 28200,
-      "perubahan14HariPct": -0.53,
+      "hargaProdusen": 28250,
+      "perubahan14HariPct": -0.35,
       "naikTigaHari": false,
-      "proyeksi7Hari": 28125,
-      "proyeksiPct": -0.26,
+      "proyeksi7Hari": 28200,
+      "proyeksiPct": -0.18,
       "sinyal": "STABIL",
       "sumber": "BI PIHPS - Harga Produsen Jawa Timur"
     },
@@ -178,42 +168,52 @@
     },
     {
       "komoditas": "Cabai Merah Keriting",
-      "hargaProdusen": 50950,
-      "perubahan14HariPct": -5.3,
+      "hargaProdusen": 50150,
+      "perubahan14HariPct": -2.15,
       "naikTigaHari": false,
-      "proyeksi7Hari": 49600,
-      "proyeksiPct": -2.65,
+      "proyeksi7Hari": 49612,
+      "proyeksiPct": -1.07,
       "sinyal": "STABIL",
       "sumber": "BI PIHPS - Harga Produsen Jawa Timur"
     },
     {
       "komoditas": "Cabai Merah Besar",
-      "hargaProdusen": 34350,
-      "perubahan14HariPct": -6.15,
-      "naikTigaHari": true,
-      "proyeksi7Hari": 33294,
-      "proyeksiPct": -3.07,
-      "sinyal": "WASPADA NAIK",
+      "hargaProdusen": 33800,
+      "perubahan14HariPct": -4.92,
+      "naikTigaHari": false,
+      "proyeksi7Hari": 32968,
+      "proyeksiPct": -2.46,
+      "sinyal": "STABIL",
       "sumber": "BI PIHPS - Harga Produsen Jawa Timur"
     },
     {
-      "komoditas": "Cabai Rawit Merah",
-      "hargaProdusen": 56550,
-      "perubahan14HariPct": -8.5,
+      "komoditas": "Cabai Rawit Hijau",
+      "hargaProdusen": 41400,
+      "perubahan14HariPct": -8.41,
       "naikTigaHari": false,
-      "proyeksi7Hari": 54148,
-      "proyeksiPct": -4.25,
+      "proyeksi7Hari": 39660,
+      "proyeksiPct": -4.2,
       "sinyal": "STABIL",
       "sumber": "BI PIHPS - Harga Produsen Jawa Timur"
     },
     {
       "komoditas": "Daging Ayam Ras Segar",
-      "hargaProdusen": 32100,
-      "perubahan14HariPct": -9.58,
+      "hargaProdusen": 32500,
+      "perubahan14HariPct": -8.96,
       "naikTigaHari": true,
-      "proyeksi7Hari": 30563,
-      "proyeksiPct": -4.79,
+      "proyeksi7Hari": 31043,
+      "proyeksiPct": -4.48,
       "sinyal": "WASPADA NAIK",
+      "sumber": "BI PIHPS - Harga Produsen Jawa Timur"
+    },
+    {
+      "komoditas": "Cabai Rawit Merah",
+      "hargaProdusen": 55650,
+      "perubahan14HariPct": -13.11,
+      "naikTigaHari": false,
+      "proyeksi7Hari": 52001,
+      "proyeksiPct": -6.56,
+      "sinyal": "STABIL",
       "sumber": "BI PIHPS - Harga Produsen Jawa Timur"
     }
   ]
